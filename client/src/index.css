@@ -2,7 +2,7 @@
   --clr-slateBlue: 216 92% 14%;
   --clr-slateGrey: 205 92% 19%;
   --clr-seaGreen: 149 44% 36%;
-  --clr-bulrywood: 218 183% 133%;
+  --clr-bulrywood: 35 53% 69%;
   --clr-darksalmon: 15 55% 64%;
   --clr-white: 0 0% 100%;
 
@@ -33,7 +33,7 @@ body {
   font-size: var(--fs-600);
   line-height: 1.5;
   font-weight: 400;
-  background-color: hsl(var(--clr-bulrywood));
+  background-color: hsl(var(--clr-white));
 }
 .sr-only {
   position: absolute;
@@ -60,9 +60,10 @@ img {
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 3em;
   line-height: 1.1;
   margin-top: 0;
+  margin-bottom: 2rem;
 }
 .container {
   padding-inline: 2em;
@@ -73,6 +74,9 @@ h1 {
   background-color: hsl(var(--clr-slateBlue));
   color: hsl(var(--clr-white));
   padding: var(--fs-500);
+}
+.accent-color {
+  color: hsl(var(--clr-bulrywood));
 }
 
 .nav {
@@ -104,6 +108,7 @@ h1 {
   font-size: 1em;
   font-weight: 500;
   background-color: hsl(var(--clr-seaGreen));
+  color: hsl(var(--clr-white));
   transition: border-color 0.25s;
 }
 
@@ -113,6 +118,27 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+.hero {
+  background-color: hsl(var(--clr-slateGrey));
+  min-height: 80dvh;
+  padding-top: 3.8rem;
+}
+.hero-info {
+  width: 50%;
+  color: hsl(var(--clr-white));
+}
+.hero-info > p {
+  font-size: var(--fs-700);
+  font-weight: 500;
+  font-style: italic;
+  margin-bottom: 2rem;
+}
+.hero--img {
+  width: 50%;
+}
+.hero-img {
+  width: 40rem;
 }
 
 @media (prefers-color-scheme: light) {
