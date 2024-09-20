@@ -5,10 +5,11 @@ import Cta from "../components/Cta";
 const Home = () => {
   return (
     <main>
-      <h1>Home component</h1>
       <Navbar />
-      <Hero />
-      <Cta />
+      <div className='container'>
+        <Hero />
+        <Cta />
+      </div>
     </main>
   );
 };
