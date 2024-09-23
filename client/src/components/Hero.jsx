@@ -1,4 +1,4 @@
-import heroImg from "../assets/payment.svg";
+import heroImg from "../assets/images/payment.svg";
 import { Link } from "react-router-dom";
 
 const Hero = () => {
