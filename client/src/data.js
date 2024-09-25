@@ -11,36 +11,40 @@ const facts = [
     title: "Give Every Dollar a Job",
     icon: jobImg,
     backgroundColor: "bg-salmon",
+    bgColor: "hsl(var(--clr-darksalmon)",
     color: "text-blue",
     description:
-      "By determining where your money will go before you actually spend it, you gain control over your financial choices. Treating every dollar equally, regardless of whether you plan to use it now or in the future.",
+      "Decide where your money will go before you spend it. This helps you make smart choices. Treat all your money equally, whether you spend it now or save it for later.",
   },
   {
     id: 2,
     title: "Embrace Your True Expenses",
     icon: expensesImg,
     backgroundColor: "bg-green",
+    bgColor: "hsl(var(--clr-seaGreen)",
     color: "text-blue",
     description:
-      "Beyond regular bills, consider 'true expenses' like car insurance or holiday shopping. By including these in your budget, you'll be better prepared for unexpected costs, avoid stress, and stay focused on your financial goals.",
+      "Plan for unexpected costs. Include extra costs like car insurance or holiday shopping. This will help you stay calm and focused on your money goals.",
   },
   {
     id: 3,
     title: "Roll With the Punches",
     icon: punchImg,
     backgroundColor: "bg-accent",
+    bgColor: "hsl(var(--clr-bulrywood)",
     color: "text-blue",
     description:
       "Life throws curveballs! Stay flexible, adjust your budget, and avoid financial panic. By anticipating and adapting, you'll maintain your financial plan and weather any storm.",
   },
   {
     id: 4,
-    title: "Age Your Money",
+    title: "Age Your   Money",
     icon: ageImg,
     backgroundColor: "bg-grey",
+    bgColor: "hsl(var(--clr-slateBlue)",
     color: "text-white",
     description:
-      "Stop spending paycheck-to-paycheck. Let your money 'age' by saving it. Watch your savings grow and reduce financial stress. By aging your money, you gain peace of mind and take control of your finances.",
+      "Stop spending paycheck-to-paycheck. Save some and watch it grow. By aging your money, you gain peace of mind and take control of your finances.",
   },
 ];
 
