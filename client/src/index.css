@@ -123,6 +123,19 @@ select {
     scroll-behavior: auto !important;
   }
 }
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
 /* utility classes */
 /* general */
 .flex {
@@ -441,15 +454,35 @@ https://www.youtube.com/watch?v=hEtZ040fsD8&t=2118s https://codepen.io/elliempat
   font-weight: 500;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+.cta-section {
+  min-height: 70dvh;
+  padding-top: 7rem;
+  background-color: hsl(var(--clr-slateBlue) / 0.9);
+  color: hsl(var(--clr-white));
+}
+.cta-container {
+  flex-direction: column;
+  --gap: 2.5rem;
+}
+.cta-img > img {
+  width: 48rem;
+}
+.cta-info {
+  text-align: center;
+}
+
+.cta-info > h1 {
+  font-weight: 600;
+}
+
+@media (min-width: 45em) {
+  .cta-container {
+    flex-direction: row;
   }
-  a:hover {
-    color: #747bff;
+  .cta-img {
+    width: 58%;
   }
-  button {
-    background-color: #f9f9f9;
+  .cta-info {
+    width: 42%;
   }
 }
