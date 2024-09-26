@@ -1,9 +1,12 @@
 import React from "react";
-
 import jobImg from "./assets/icons/job.png";
 import ageImg from "./assets/icons/age.png";
 import expensesImg from "./assets/icons/expenses.png";
 import punchImg from "./assets/icons/punch.png";
+
+import avatar1 from "./assets/avatars/avatar-1.png";
+import avatar2 from "./assets/avatars/avatar-2.png";
+import avatar3 from "./assets/avatars/avatar-3.png";
 
 const facts = [
   {
@@ -48,6 +51,31 @@ const facts = [
   },
 ];
 
-const testimonials = [{}];
+export const testimonials = [
+  {
+    id: "khaxbcla",
+    name: "Michael Lee",
+    backgroundColor: "bg-salmon",
+    img: avatar1,
+    testimonial:
+      "Before Coin-Wise, I was constantly stressed about money. Now, thanks to their intuitive tracking and budgeting tools, I can see exactly where my money goes and make informed spending decisions. I finally feel confident about my financial future.",
+  },
+  {
+    id: "mpklnola",
+    name: "Olivia Fatuh",
+    backgroundColor: "bg-accent",
+    img: avatar2,
+    testimonial:
+      "As a freelancer, my income can be unpredictable. Coin-Wise has been a game-changer! It helps me plan for slow months and avoid overspending during busy periods. I highly recommend it to anyone who wants to take control of their finances.",
+  },
+  {
+    id: "qdqplkla",
+    name: "Noah Brown",
+    backgroundColor: "bg-salmon",
+    img: avatar3,
+    testimonial:
+      "I used to be a budgeting skeptic, but Coin-Wise has definitely changed my mind. Their user-friendly app makes budgeting easy and enjoyable. I've not only saved money, but I've also learned valuable financial habits that will benefit me for years to come.",
+  },
+];
 
 export default facts;

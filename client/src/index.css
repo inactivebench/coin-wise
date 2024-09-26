@@ -406,7 +406,7 @@ https://www.youtube.com/watch?v=hEtZ040fsD8&t=2118s https://codepen.io/elliempat
   height: 20rem;
   border-radius: 0.8rem;
   text-align: center;
-  background-color: hsl(var(--clr-white));
+  background-color: hsl(var(--clr-white) / 0.9);
   position: relative;
   transform-style: preserve-3d;
   transition: -webkit-transform ease 500ms;
@@ -478,9 +478,68 @@ https://www.youtube.com/watch?v=hEtZ040fsD8&t=2118s https://codepen.io/elliempat
   }
 }
 
-@media (min-width: 25em) and (max-width: 39em) {
+@media (min-width: 25em) and (max-width: 39.8125em) {
   .card {
     width: 22rem;
+    margin: 0 auto;
+  }
+}
+/* testimonial  */
+.testimonial-section {
+  background-color: hsl(var(--clr-darksalmon) / 0.6);
+  padding: 4rem 0;
+  min-height: 60dvh;
+}
+.testimonial-container {
+  gap: 3rem;
+}
+.testimonial-header {
+  text-align: center;
+}
+.testimonial-header > h1 {
+  font-weight: 700;
+}
+
+.testimonial-header > p {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.testimonial-card {
+  height: 25rem;
+  background-color: hsl(var(--clr-white) / 0.8);
+  padding: 1.5em;
+  border-radius: 8px;
+  position: relative;
+}
+.speech {
+  position: absolute;
+  width: 3rem;
+  top: -1.4rem;
+  left: 8px;
+}
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+  gap: 1.4rem;
+  align-items: center;
+}
+.avatar-container {
+  justify-content: space-between;
+}
+.avatar-container > h3 {
+  font-weight: 500;
+}
+.avatar-img {
+  border-radius: 5px;
+  background-color: hsl(var(--clr-bulrywood) / 0.5);
+}
+.avatar {
+  width: 5rem;
+}
+@media (min-width: 25em) and (max-width: 50.5625em) {
+  .testimonial-card {
+    width: 23rem;
     margin: 0 auto;
   }
 }

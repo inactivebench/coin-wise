@@ -15,12 +15,6 @@ const Flashcard = ({ flashcard }) => {
       onClick={() => {
         setFlip(!flip);
       }}
-      // onMouseEnter={() => {
-      //   setFlip(!flip);
-      // }}
-      // onMouseLeave={() => {
-      //   setFlip(!flip);
-      // }}
     >
       <div className='grid front ff-montserrat'>
         <div className={`${backgroundColor} ${color} card-title  `}>

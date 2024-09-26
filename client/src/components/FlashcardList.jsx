@@ -17,7 +17,7 @@ const FlashcardList = () => {
             transformative guidelines. The magic is in the approach.
           </p>
         </article>
-        <article className=' card-grid '>
+        <article className=' card-grid card-grid-container '>
           {flashcards.map((flashcard) => {
             return <Flashcard flashcard={flashcard} key={flashcard.id} />;
           })}
