@@ -578,3 +578,34 @@ https://www.youtube.com/watch?v=hEtZ040fsD8&t=2118s https://codepen.io/elliempat
     width: 42%;
   }
 }
+
+/* How it works  */
+.step-section {
+  min-height: 65dvh;
+  padding: 4rem;
+}
+.step-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+  gap: 3rem;
+  align-items: center;
+}
+.step-container {
+  text-align: center;
+  gap: 3rem;
+}
+.step-header > h2 {
+  font-weight: 600;
+}
+
+.step-img {
+  width: 4rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 25em) and (max-width: 50.5625em) {
+  .step-card {
+    width: 23rem;
+    margin: 0 auto;
+  }
+}

@@ -8,6 +8,10 @@ import avatar1 from "./assets/avatars/avatar-1.png";
 import avatar2 from "./assets/avatars/avatar-2.png";
 import avatar3 from "./assets/avatars/avatar-3.png";
 
+import comfort from "./assets/icons/comfort.png";
+import burning from "./assets/icons/burning.png";
+import inscription from "./assets/icons/inscription.png";
+
 const facts = [
   {
     id: 1,
@@ -75,6 +79,30 @@ export const testimonials = [
     img: avatar3,
     testimonial:
       "I used to be a budgeting skeptic, but Coin-Wise has definitely changed my mind. Their user-friendly app makes budgeting easy and enjoyable. I've not only saved money, but I've also learned valuable financial habits that will benefit me for years to come.",
+  },
+];
+
+export const howItWorks = [
+  {
+    id: "mjhsw",
+    name: "Sign up for free",
+    img: inscription,
+    description:
+      "Ready to take control of your finances? Start your journey by signing up to coin-wise",
+  },
+  {
+    id: "manhd",
+    name: "Rack your spending",
+    img: burning,
+    description:
+      "Add your expenses, savings targets and discover hidden spending habits and unlock financial freedom",
+  },
+  {
+    id: "poirh",
+    name: "Achieve Peace of Mind",
+    img: comfort,
+    description:
+      "Say goodbye to financial stress and hello to a brighter future. Watch your financial goals become a reality",
   },
 ];
 
