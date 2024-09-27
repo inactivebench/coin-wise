@@ -4,6 +4,7 @@ import Cta from "../components/Cta";
 import FlashcardList from "../components/FlashcardList";
 import TestimonialList from "../components/TestimonialList";
 import StepList from "../components/StepList";
+import Footer from "../components/Footer";
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
       <TestimonialList />
       <StepList />
       <Cta />
+      <Footer />
     </main>
   );
 };

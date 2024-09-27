@@ -2,6 +2,8 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Bellefair&family=Knewave&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Iceberg&family=Keania+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Oxanium:wght@200..800&display=swap");
 
 /*custom properties*/
 
@@ -30,6 +32,10 @@
   --ff-serif: "Bellefair", serif;
   --ff-knewave: "Knewave", system-ui;
   --ff-playwrite: "Playwrite DE Grund", cursive;
+  --ff-iceberg: "Iceberg", system-ui;
+  --ff-keania: "Keania One", sans-serif;
+  --ff-orbitron: "Orbitron", sans-serif;
+  --ff-oxanium: "Oxanium", system-ui;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -141,7 +147,6 @@ select {
 .flex {
   display: flex;
   gap: var(--gap, 1rem);
-  align-items: center;
 }
 .grid {
   display: grid;
@@ -220,6 +225,18 @@ select {
 .ff-playwrite {
   font-family: var(--ff-playwrite);
 }
+.ff-iceberg {
+  font-family: var(--ff-iceberg);
+}
+.ff-keania {
+  font-family: var(--ff-keania);
+}
+.ff-orbiton {
+  font-family: var(--ff-orbiton);
+}
+.ff-oxanium {
+  font-family: var(--ff-oxanium);
+}
 .letter-spacing-1 {
   letter-spacing: 4.75px;
 }
@@ -288,9 +305,12 @@ select {
 }
 
 .header {
-  background-color: hsl(var(--clr-slateBlue));
+  background-color: hsl(var(--clr-slateBlue) / 0.8);
   color: hsl(var(--clr-white));
   padding: var(--fs-300);
+  /* position: fixed;
+  z-index: 1;
+  width: 100%; */
 }
 
 .nav {
@@ -306,6 +326,7 @@ select {
 }
 
 .link {
+  align-self: center;
   color: hsl(var(--clr-white));
   text-decoration: none;
   margin: 0;
@@ -543,12 +564,43 @@ https://www.youtube.com/watch?v=hEtZ040fsD8&t=2118s https://codepen.io/elliempat
     margin: 0 auto;
   }
 }
+/* How it works  */
+.step-section {
+  min-height: 65dvh;
+  padding: 4rem;
+  background-color: hsl(var(--clr-white) / 0.6);
+}
+.step-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+  gap: 3rem;
+  align-items: center;
+}
+.step-container {
+  text-align: center;
+  gap: 3rem;
+}
+.step-header > h2 {
+  font-weight: 600;
+}
+
+.step-img {
+  width: 4rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 25em) and (max-width: 50.5625em) {
+  .step-card {
+    width: 23rem;
+    margin: 0 auto;
+  }
+}
 
 /* CTA  */
 
 .cta-section {
   min-height: 70dvh;
-  padding-top: 7rem;
+  padding: 6rem 0;
   background-color: hsl(var(--clr-slateBlue) / 0.9);
   color: hsl(var(--clr-white));
 }
@@ -579,33 +631,77 @@ https://www.youtube.com/watch?v=hEtZ040fsD8&t=2118s https://codepen.io/elliempat
   }
 }
 
-/* How it works  */
-.step-section {
-  min-height: 65dvh;
-  padding: 4rem;
+/* footer  */
+.footer-section {
+  background-color: hsl(var(--clr-slateGrey) / 0.9);
+  color: hsl(var(--clr-white));
+  min-height: 60dvh;
+  padding: 5rem 0;
 }
-.step-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+.footer-container {
   gap: 3rem;
+}
+.footer-info {
+  flex-direction: column;
   align-items: center;
-}
-.step-container {
-  text-align: center;
   gap: 3rem;
 }
-.step-header > h2 {
-  font-weight: 600;
-}
 
-.step-img {
-  width: 4rem;
+.footer-info,
+.footer-copy {
+  justify-content: space-between;
+}
+.footer-cta {
+  text-align: center;
+}
+.footer-cta > p {
   margin: 0 auto;
+  margin-bottom: 2rem;
+}
+.footer-links {
+  gap: 3rem;
+}
+.page-links,
+.social-links {
+  margin: 0;
+  padding: 0;
+}
+.page-links > li,
+.social-links > li {
+  list-style: none;
+}
+.page-links > li > a,
+.social-links > li > a {
+  color: hsl(var(--clr-white));
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.footer-logo > h1 {
+  font-weight: 800;
+  text-align: center;
+  font-size: var(--fs-900);
+}
+.footer-copy {
+  color: hsl(var(--clr-white) / 0.6);
 }
 
-@media (min-width: 25em) and (max-width: 50.5625em) {
-  .step-card {
-    width: 23rem;
-    margin: 0 auto;
+@media (min-width: 45em) {
+  .footer-container {
+    gap: 5rem;
+  }
+  .footer-info {
+    flex-direction: row;
+  }
+  .footer-cta {
+    text-align: left;
+  }
+  .footer-cta > p {
+    width: 70%;
+    margin: 0 0 2rem 0;
+  }
+  .footer-logo > h1 {
+    letter-spacing: 2.75rem;
   }
 }
