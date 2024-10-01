@@ -21,6 +21,10 @@ app.use((req, res, next) => {
   next();
 });
 
+//routes
+// users middleware
+app.use("/users", require("./routes/userRoutes"));
+
 app.get("/api", (req, res) => {
   console.log("Received /api request...");
   res.send({ message: "Hello from server" });

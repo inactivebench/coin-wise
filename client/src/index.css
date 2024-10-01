@@ -342,6 +342,7 @@ select {
   background-color: hsl(var(--clr-seaGreen));
   color: hsl(var(--clr-white));
   transition: border-color 0.25s;
+  cursor: pointer;
 }
 
 button:hover {
