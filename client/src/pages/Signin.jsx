@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import logo from "../assets/images/coin.svg";
 
 const Signin = () => {
   const emailRef = useRef();
@@ -21,9 +22,12 @@ const Signin = () => {
     e.preventDefault();
   };
   return (
-    <div className='signup-section-container'>
-      <Link to='/' className='logo  sign-logo'>
+    <div className='sign-section-container'>
+      {/* <Link to='/' className='logo  sign-logo'>
         coin-wise
+      </Link> */}
+      <Link to='/' className='logo  sign-logo'>
+        <img src={logo} alt='coin wise logo' />
       </Link>
       <div className='form-container flex'>
         <div>
@@ -36,7 +40,7 @@ const Signin = () => {
             {errMsg}
           </p>
         </div>
-        <form className='flex form' onSubmit={handleSubmit}>
+        <form className='flex form ' onSubmit={handleSubmit}>
           <label htmlFor='email' className=' label'>
             Email Address
           </label>

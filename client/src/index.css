@@ -12,7 +12,7 @@
   --clr-slateBlue: 216 92% 14%;
   --clr-slateGrey: 205 92% 19%;
   --clr-seaGreen: 149 44% 36%;
-  --clr-bulrywood: 35 53% 69%;
+  --clr-burlywood: 35 53% 69%;
   --clr-darksalmon: 15 55% 64%;
   --clr-white: 0 0% 100%;
 
@@ -178,7 +178,7 @@ select {
   background-color: hsl(var(--clr-slateGrey));
 }
 .bg-accent {
-  background-color: hsl(var(--clr-bulrywood));
+  background-color: hsl(var(--clr-burlywood));
 }
 .bg-green {
   background-color: hsl(var(--clr-seaGreen));
@@ -197,7 +197,7 @@ select {
   color: hsl(var(--clr-slateGrey));
 }
 .text-accent {
-  color: hsl(var(--clr-bulrywood));
+  color: hsl(var(--clr-burlywood));
 }
 .text-green {
   color: hsl(var(--clr-seaGreen));
@@ -298,7 +298,7 @@ select {
 }
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
-  color: hsl(var(--clr-bulrywood));
+  color: hsl(var(--clr-burlywood));
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
@@ -407,7 +407,7 @@ https://www.youtube.com/watch?v=hEtZ040fsD8&t=2118s https://codepen.io/elliempat
   text-align: center;
   padding-top: 10rem;
   padding-bottom: 10rem;
-  background-color: hsl(var(--clr-bulrywood) / 0.5);
+  background-color: hsl(var(--clr-burlywood) / 0.5);
 }
 .card-container {
   display: grid;
@@ -553,7 +553,7 @@ https://www.youtube.com/watch?v=hEtZ040fsD8&t=2118s https://codepen.io/elliempat
 }
 .avatar-img {
   border-radius: 5px;
-  background-color: hsl(var(--clr-bulrywood) / 0.5);
+  background-color: hsl(var(--clr-burlywood) / 0.5);
 }
 .avatar {
   width: 5rem;
@@ -707,7 +707,7 @@ https://www.youtube.com/watch?v=hEtZ040fsD8&t=2118s https://codepen.io/elliempat
 }
 
 /* form  */
-.signup-section-container {
+.sign-section-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -718,6 +718,7 @@ https://www.youtube.com/watch?v=hEtZ040fsD8&t=2118s https://codepen.io/elliempat
   position: absolute;
   color: hsl(var(--clr-slateBlue) / 0.9);
   font-size: var(--fs-700);
+  width: 4.5rem;
   top: 2rem;
   left: 3rem;
 }
@@ -725,7 +726,7 @@ https://www.youtube.com/watch?v=hEtZ040fsD8&t=2118s https://codepen.io/elliempat
 .form-header {
   text-align: center;
   font-weight: 600;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .form-container {
@@ -739,9 +740,12 @@ https://www.youtube.com/watch?v=hEtZ040fsD8&t=2118s https://codepen.io/elliempat
   width: 24%;
   padding: 2.5rem 1.5rem;
 }
-.form {
+form {
+  display: flex;
   flex-direction: column;
-  --gap: 1.5rem;
+  justify-content: space-evenly;
+  flex-grow: 1;
+  --gap: 0.8rem;
 }
 
 .label {
@@ -774,4 +778,54 @@ https://www.youtube.com/watch?v=hEtZ040fsD8&t=2118s https://codepen.io/elliempat
 .link-span > a {
   text-decoration: none;
   color: hsl(240, 100%, 50%/0.5);
+}
+
+input[type="text"],
+input[type="password"],
+button,
+textarea {
+  font-family: "Nunito", sans-serif;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+}
+
+.instructions {
+  font-size: 0.75rem;
+  border-radius: 0.5rem;
+  background: #000;
+  color: #fff;
+  padding: 0.25rem;
+  position: relative;
+  bottom: -10px;
+}
+
+.instructions > svg {
+  margin-right: 0.25rem;
+}
+
+.offscreen {
+  position: absolute;
+  left: -9999px;
+}
+
+.hide {
+  display: none;
+}
+
+.valid {
+  color: limegreen;
+  margin-left: 0.25rem;
+}
+
+.invalid {
+  color: red;
+  margin-left: 0.25rem;
+}
+
+.errmsg {
+  background-color: lightpink;
+  color: firebrick;
+  font-weight: bold;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
 }

@@ -5,8 +5,6 @@ import Flashcard from "./Flashcard";
 const FlashcardList = () => {
   const [flashcards, setFlashcards] = useState(facts);
 
-  console.log(flashcards);
-
   return (
     <section className='card-section'>
       <div className='container grid card-container  '>
