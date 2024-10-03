@@ -103,9 +103,6 @@ const Signup = () => {
         }, 1000)
       ) : (
         <div className='sign-section-container'>
-          {/* <Link to='/' className='logo  sign-logo'>
-        coin-wise
-      </Link> */}
           <Link to='/' className='logo  sign-logo'>
             <img src={logo} alt='coin wise logo' />
           </Link>
