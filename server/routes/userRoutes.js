@@ -42,13 +42,14 @@ router.post("/adduser", async (req, res) => {
 });
 
 // ********log in***********
-router.get("/user", authenticateToken, (req, res) => {
+router.get("/auth", authenticateToken, (req, res) => {
   const sql = " SELECT * FROM users WHERE user_id = ? ";
   db.query(sql, req.user.user, (err, result) => {
     if (err) {
       return res.status(400).send({ message: err });
     }
-    res.json({ result });
+    console.log("You are authenticated");
+    res.status(200).json({ auth: true, result: result[0], message: "success" });
   });
 });
 router.post("/login", async (req, res) => {
@@ -63,17 +64,16 @@ router.post("/login", async (req, res) => {
       if (!result.length) {
         return res.status(400).send({ message: "Invalid email or password" });
       }
-      console.log(result[0]);
       const check = await bcrypt.compare(password, result[0]?.password);
       if (check) {
         const user = result[0].user_id;
         const accessToken = jwt.sign({ user }, process.env.ACCESS_TOKEN_SECRET);
-        res.json({ accessToken: accessToken, user: user });
-        // res.status(201).send(result);
-
-        // res.send("Success");
+        res
+          .status(200)
+          .json({ login: true, accessToken: accessToken, result: result[0] });
+        console.log(result[0]);
       } else {
-        return res.status(400).send({ message: "Invalid email or password" });
+        res.status(400).send({ message: "Invalid email or password" });
       }
     });
   } catch (error) {

@@ -5,6 +5,7 @@ import axios from "axios";
 
 const Signin = () => {
   const SIGNIN_URL = "http://localhost:5000/users/login";
+  const AUTH_URL = "http://localhost:5000/users/auth";
 
   const emailRef = useRef();
   const errRef = useRef();
@@ -23,31 +24,42 @@ const Signin = () => {
     setErrMsg("");
   }, [email, pwd]);
 
+  const handleAuth = async () => {
+    try {
+      const response = await axios
+        .get(AUTH_URL, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        })
+        .then((response) => {
+          if (!response.data.auth) {
+            navigate("/");
+            throw err;
+          } else {
+            console.log(response.data.message);
+          }
+        });
+    } catch (error) {}
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const response = await axios
-        .post(
-          SIGNIN_URL,
-          JSON.stringify({ email: email, password: pwd })
-          // , {
-          //   headers: { "Content-Type": "application/json" },
-          //   withCredentials: true,
-          // }
-        )
+        .post(SIGNIN_URL, JSON.stringify({ email: email, password: pwd }), {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        })
         .then((response) => {
-          if (!response.data.auth) {
+          if (!response.data.login) {
             throw err;
           } else {
-            console.log(response.data);
-            localStorage.setItem("accessToken", response.data.token);
+            localStorage.setItem("accessToken", response?.data?.accessToken);
           }
         });
-      // console.log(JSON.stringify(response?.data));
-      // const accessToken = response?.data?.accessToken;
-      // const roles = response?.data?.roles;
-      // setAuth({ email, pwd, roles, accessToken });
+
       console.log(email, pwd);
       setEmail("");
       setPwd("");
@@ -69,7 +81,8 @@ const Signin = () => {
     <>
       {success ? (
         setTimeout(() => {
-          navigate("/");
+          handleAuth();
+          navigate("/home");
         }, 1000)
       ) : (
         <div className='sign-section-container'>
