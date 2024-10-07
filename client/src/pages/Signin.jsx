@@ -4,7 +4,7 @@ import logo from "../assets/images/coin.svg";
 import axios from "axios";
 
 const Signin = () => {
-  const SIGNIN_URL = "http://localhost:5000/users/login";
+  const SIGNIN_URL = "http://localhost:5000/auth/login";
 
   const emailRef = useRef();
   const errRef = useRef();

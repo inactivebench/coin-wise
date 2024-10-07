@@ -3,7 +3,7 @@ import axios from "axios";
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
-  const AUTH_URL = "http://localhost:5000/users/auth";
+  const AUTH_URL = "http://localhost:5000/auth/userAuth";
 
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useState("");

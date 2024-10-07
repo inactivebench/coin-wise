@@ -24,6 +24,7 @@ app.use((req, res, next) => {
 //routes
 // users middleware
 app.use("/users", require("./routes/userRoutes"));
+app.use("/auth", require("./routes/authRoutes"));
 
 app.get("/api", (req, res) => {
   console.log("Received /api request...");
