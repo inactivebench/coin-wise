@@ -5,7 +5,6 @@ import axios from "axios";
 
 const Signin = () => {
   const SIGNIN_URL = "http://localhost:5000/users/login";
-  const AUTH_URL = "http://localhost:5000/users/auth";
 
   const emailRef = useRef();
   const errRef = useRef();
@@ -24,25 +23,6 @@ const Signin = () => {
     setErrMsg("");
   }, [email, pwd]);
 
-  const handleAuth = async () => {
-    try {
-      const response = await axios
-        .get(AUTH_URL, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        })
-        .then((response) => {
-          if (!response.data.auth) {
-            navigate("/");
-            throw err;
-          } else {
-            console.log(response.data.message);
-          }
-        });
-    } catch (error) {}
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -56,11 +36,14 @@ const Signin = () => {
           if (!response.data.login) {
             throw err;
           } else {
-            localStorage.setItem("accessToken", response?.data?.accessToken);
+            localStorage.setItem(
+              "accessToken",
+              response?.data?.accessToken || ""
+            );
           }
         });
 
-      console.log(email, pwd);
+      console.log(email);
       setEmail("");
       setPwd("");
       setSuccess(true);
@@ -81,7 +64,6 @@ const Signin = () => {
     <>
       {success ? (
         setTimeout(() => {
-          handleAuth();
           navigate("/home");
         }, 1000)
       ) : (
