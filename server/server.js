@@ -1,13 +1,16 @@
 const express = require("express");
 const db = require("./config/db");
-
 const dotenv = require("dotenv");
+const cookieParser = require("cookie-parser");
 dotenv.config();
 
 const app = express();
 
 // Middleware to parse JSON bodies
 app.use(express.json());
+
+// middleware for cookies
+app.use(cookieParser());
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "http://localhost:5173");
@@ -22,9 +25,10 @@ app.use((req, res, next) => {
 });
 
 //routes
-// users middleware
+app.use("/register", require("./routes/registerRoute"));
 app.use("/users", require("./routes/userRoutes"));
 app.use("/auth", require("./routes/authRoutes"));
+app.use("/refresh", require("./routes/refreshRoute"));
 
 app.get("/api", (req, res) => {
   console.log("Received /api request...");
