@@ -6,7 +6,6 @@ import { useEffect } from "react";
 const Home = () => {
   const { loading, auth, setLoading } = useGlobalContext();
   const navigate = useNavigate();
-  const refresh = useRefreshToken();
 
   return <div>Home</div>;
 };

@@ -39,10 +39,6 @@ const Signin = () => {
           } else {
             const accessToken = response?.data?.accessToken;
             setAuth({ email, pwd, accessToken });
-            localStorage.setItem(
-              "accessToken",
-              response?.data?.accessToken || ""
-            );
           }
         });
 
