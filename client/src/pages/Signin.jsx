@@ -1,11 +1,12 @@
 import { useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../context";
 import logo from "../assets/images/coin.svg";
-import axios from "axios";
+import axios from "../api/axios";
 
 const Signin = () => {
-  const SIGNIN_URL = "http://localhost:5000/auth/login";
-
+  const SIGNIN_URL = "/auth/login";
+  const { auth, setAuth } = useGlobalContext();
   const emailRef = useRef();
   const errRef = useRef();
   const [email, setEmail] = useState("");
@@ -36,6 +37,8 @@ const Signin = () => {
           if (!response.data.login) {
             throw err;
           } else {
+            const accessToken = response?.data?.accessToken;
+            setAuth({ email, pwd, accessToken });
             localStorage.setItem(
               "accessToken",
               response?.data?.accessToken || ""

@@ -7,7 +7,7 @@ const AppProvider = ({ children }) => {
 
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useState("");
-  const [isAuth, setIsAuth] = useState(false);
+  const [auth, setAuth] = useState({});
 
   const handleAuth = async () => {
     try {
@@ -19,11 +19,11 @@ const AppProvider = ({ children }) => {
         })
         .then((response) => {
           if (!response.data.auth) {
-            setIsAuth(false);
+            setAuth(false);
             throw err;
           } else {
             setLoading(false);
-            setIsAuth(true);
+            setAuth(true);
             console.log(response.data.message);
           }
         });
@@ -39,12 +39,9 @@ const AppProvider = ({ children }) => {
       }
     }
   };
-  useEffect(() => {
-    const storedToken = localStorage.getItem("accessToken");
-    setToken(storedToken);
-  }, []);
+
   return (
-    <AppContext.Provider value={{ loading, token, isAuth, handleAuth }}>
+    <AppContext.Provider value={{ loading, token, auth, setAuth }}>
       {children}
     </AppContext.Provider>
   );

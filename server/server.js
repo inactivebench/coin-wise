@@ -2,6 +2,7 @@ const express = require("express");
 const db = require("./config/db");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
+const verifyJWT = require("./middleware/verifyJWT");
 dotenv.config();
 
 const app = express();
@@ -26,9 +27,10 @@ app.use((req, res, next) => {
 
 //routes
 app.use("/register", require("./routes/registerRoute"));
-app.use("/users", require("./routes/userRoutes"));
 app.use("/auth", require("./routes/authRoutes"));
 app.use("/refresh", require("./routes/refreshRoute"));
+app.use(verifyJWT);
+app.use("/users", require("./routes/userRoutes"));
 
 app.get("/api", (req, res) => {
   console.log("Received /api request...");

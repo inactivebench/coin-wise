@@ -2,13 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaCheck } from "react-icons/fa6";
 import { FaTimes, FaInfoCircle } from "react-icons/fa";
-import axios from "axios";
+import axios from "../api/axios";
 import logo from "../assets/images/coin.svg";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const SIGNUP_URL = "http://localhost:5000/users/register";
+const SIGNUP_URL = "/register";
 
 const Signup = () => {
   const usernameRef = useRef();
