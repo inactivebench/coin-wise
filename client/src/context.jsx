@@ -5,7 +5,7 @@ const AppContext = createContext();
 const AppProvider = ({ children }) => {
   const AUTH_URL = "http://localhost:5000/auth/userAuth";
 
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [token, setToken] = useState("");
   const [auth, setAuth] = useState({});
 
@@ -22,7 +22,7 @@ const AppProvider = ({ children }) => {
             setAuth(false);
             throw err;
           } else {
-            setLoading(false);
+            setIsLoading(false);
             setAuth(true);
             console.log(response.data.message);
           }
@@ -41,7 +41,9 @@ const AppProvider = ({ children }) => {
   };
 
   return (
-    <AppContext.Provider value={{ loading, token, auth, setAuth }}>
+    <AppContext.Provider
+      value={{ isLoading, token, auth, setAuth, setIsLoading }}
+    >
       {children}
     </AppContext.Provider>
   );

@@ -1,6 +1,8 @@
 const express = require("express");
-const db = require("../config/db");
 const router = express.Router();
-const jwt = require("jsonwebtoken");
+
+const showUserController = require("../controllers/userController");
+
+router.get("/", showUserController.handleShowUsers);
 
 module.exports = router;

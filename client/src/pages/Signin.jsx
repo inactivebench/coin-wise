@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../context";
 import logo from "../assets/images/coin.svg";
 import axios from "../api/axios";
@@ -15,6 +15,8 @@ const Signin = () => {
   const [success, setSuccess] = useState(false);
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/home";
 
   useEffect(() => {
     emailRef.current.focus();
@@ -46,6 +48,7 @@ const Signin = () => {
       setEmail("");
       setPwd("");
       setSuccess(true);
+      navigate(from, { replace: true });
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");

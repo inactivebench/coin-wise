@@ -30,7 +30,7 @@ app.use("/register", require("./routes/registerRoute"));
 app.use("/auth", require("./routes/authRoutes"));
 app.use("/logout", require("./routes/logoutRoute"));
 app.use("/refresh", require("./routes/refreshRoute"));
-app.use(verifyJWT);
+// app.use(verifyJWT);
 app.use("/users", require("./routes/userRoutes"));
 
 app.get("/api", (req, res) => {

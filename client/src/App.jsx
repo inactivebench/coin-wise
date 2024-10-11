@@ -6,16 +6,22 @@ import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Error from "./pages/Error";
 import Home from "./pages/Home";
+import PersistLogin from "./components/PersistLogin";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Landing />} />
-        <Route path='/home' element={<Home />} />
+        {/* Public routes */}
+        <Route path='*' element={<Error />} />
         <Route path='/signin' element={<Signin />} />
         <Route path='/signup' element={<Signup />} />
-        <Route path='*' element={<Error />} />
+
+        {/* Protected routes */}
+        <Route element={<PersistLogin />}>
+          <Route path='/home' element={<Home />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
