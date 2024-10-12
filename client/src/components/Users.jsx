@@ -17,7 +17,7 @@ const Users = () => {
         setUsers(data);
       } catch (err) {
         console.error(err);
-        navigate("/login", { state: { from: location }, replace: true });
+        navigate("/signin ", { state: { from: location }, replace: true });
       }
     };
     getUsers();
