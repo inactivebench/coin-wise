@@ -13,7 +13,7 @@ const handleRefreshToken = (req, res) => {
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
       if (err) return res.sendStatus(403);
       const accessToken = jwt.sign({ user }, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: "10s",
+        expiresIn: "2h",
       });
       console.log(user);
       res.json({ accessToken: accessToken });
