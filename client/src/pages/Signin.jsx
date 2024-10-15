@@ -1,13 +1,12 @@
 import { useRef, useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-// import { useGlobalContext } from "../context";
 import useAuth from "../hook/useAuth";
 import logo from "../assets/images/coin.svg";
 import axios from "../api/axios";
 
 const Signin = () => {
   const SIGNIN_URL = "/auth/login";
-  const { auth, setAuth } = useAuth();
+  const { setAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/home";
@@ -45,7 +44,6 @@ const Signin = () => {
           }
         });
 
-      console.log(email);
       setEmail("");
       setPwd("");
       navigate(from, { replace: true });

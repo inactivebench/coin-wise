@@ -5,7 +5,7 @@ const handleShowUsers = (req, res) => {
     const sql = "SELECT * FROM users";
     const query = db.query(sql, (err, result) => {
       if (err) throw err;
-      console.log(result);
+      // console.log(result);
 
       res.status(201).send(result);
     });

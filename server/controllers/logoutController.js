@@ -2,7 +2,6 @@ const db = require("../config/db");
 
 const handleLogout = (req, res) => {
   //On client also delete accessToken
-
   const cookies = req.cookies;
   if (!cookies?.jwt) {
     return res.sendStatus(201); //No content
