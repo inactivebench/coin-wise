@@ -55,7 +55,7 @@ const handleLogin = async (req, res) => {
           accessToken: accessToken,
           result: result[0],
         });
-        console.log(result[0]);
+        // console.log(result[0]);
       } else {
         res.status(400).send({ message: "Invalid email or password" });
       }

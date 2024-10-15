@@ -4,8 +4,8 @@ import useAuth from "../hook/useAuth";
 import logo from "../assets/images/coin.svg";
 import axios from "../api/axios";
 
-const Signin = () => {
-  const SIGNIN_URL = "/auth/login";
+const Login = () => {
+  const LOGIN_URL = "/auth/login";
   const { setAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -31,7 +31,7 @@ const Signin = () => {
 
     try {
       const response = await axios
-        .post(SIGNIN_URL, JSON.stringify({ email: email, password: pwd }), {
+        .post(LOGIN_URL, JSON.stringify({ email: email, password: pwd }), {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         })
@@ -117,4 +117,4 @@ const Signin = () => {
     </>
   );
 };
-export default Signin;
+export default Login;

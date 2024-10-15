@@ -14,8 +14,8 @@ const Navbar = () => {
           </ul>
         </nav>
         <div className='flex'>
-          <Link to='/signin' className='link capitalize'>
-            sing in
+          <Link to='/login' className='link capitalize'>
+            log in
           </Link>
           <Link to='/signup' className='btn link capitalize'>
             start your free trial
