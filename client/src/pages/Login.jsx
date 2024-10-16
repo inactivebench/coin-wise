@@ -3,6 +3,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hook/useAuth";
 import logo from "../assets/images/coin.svg";
 import axios from "../api/axios";
+import useLocalStorage from "../hook/useLocalStorage";
+import useInput from "../hook/useInput";
 
 const Login = () => {
   const LOGIN_URL = "/auth/login";
@@ -14,7 +16,9 @@ const Login = () => {
   const emailRef = useRef();
   const errRef = useRef();
 
-  const [email, setEmail] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [email, setEmail] = useLocalStorage("email", "");
+  const [email, resetUser, userAttributes] = useInput("user", "");
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
 
@@ -44,7 +48,8 @@ const Login = () => {
           }
         });
 
-      setEmail("");
+      // setEmail("");
+      resetUser("");
       setPwd("");
       navigate(from, { replace: true });
     } catch (err) {
@@ -82,13 +87,14 @@ const Login = () => {
               Email Address
             </label>
             <input
+              className='input'
               type='email'
               id='email'
               ref={emailRef}
               autoComplete='off'
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              className='input'
+              // onChange={(e) => setEmail(e.target.value)}
+              // value={email}
+              {...userAttributes}
               required
             />
 
