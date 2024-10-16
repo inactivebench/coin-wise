@@ -99,7 +99,7 @@ const Signup = () => {
     <>
       {success ? (
         setTimeout(() => {
-          navigate("/signin");
+          navigate("/login");
         }, 1000)
       ) : (
         <div className='sign-section-container'>
@@ -255,7 +255,7 @@ const Signup = () => {
             <p className='link-p '>
               Have an account?
               <span className='link-span'>
-                <Link to='/signin'>Log in</Link>
+                <Link to='/login'>Log in</Link>
               </span>
             </p>
           </div>

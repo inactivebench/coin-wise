@@ -714,6 +714,7 @@ https://www.youtube.com/watch?v=hEtZ040fsD8&t=2118s https://codepen.io/elliempat
   justify-content: center;
   min-height: 100dvh;
   position: relative;
+  padding: 0.8em;
 }
 .sign-logo {
   position: absolute;
@@ -731,6 +732,9 @@ https://www.youtube.com/watch?v=hEtZ040fsD8&t=2118s https://codepen.io/elliempat
 }
 
 .form-container {
+  width: 100%;
+  max-width: 27rem;
+  /* min-width: 25rem; */
   margin-top: 2.5rem;
   padding: 3rem;
   background-color: hsl(var(--clr-white) / 0.9);
@@ -828,14 +832,4 @@ textarea {
   font-weight: bold;
   padding: 0.5rem;
   margin-bottom: 0.5rem;
-}
-@media (min-width: 35em) {
-  .form-container {
-    width: 60%;
-  }
-}
-@media (min-width: 60em) {
-  .form-container {
-    width: 25%;
-  }
 }
