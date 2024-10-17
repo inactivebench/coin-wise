@@ -13,15 +13,14 @@ const handleLogin = async (req, res) => {
       if (!result.length) {
         return res.status(400).send({ message: "Invalid email or password" });
       }
-      const check = await bcrypt.compare(password, result[0]?.password);
-      if (check) {
+      const match = await bcrypt.compare(password, result[0]?.password);
+      if (match) {
         // create jwt
-        // const user = result[0].user_id;
-
         const accessToken = jwt.sign(
           {
             userInfo: {
               user: result[0].username,
+              roles: result[0].roles,
             },
           },
           process.env.ACCESS_TOKEN_SECRET,
@@ -33,6 +32,7 @@ const handleLogin = async (req, res) => {
           {
             userInfo: {
               user: result[0].username,
+              roles: result[0].roles,
             },
           },
           process.env.REFRESH_TOKEN_SECRET,

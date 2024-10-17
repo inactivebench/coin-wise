@@ -9,6 +9,7 @@ const handleNewUser = async (req, res) => {
       username: req.body.username,
       email: req.body.email,
       password: hashedPassword,
+      roles: 2001,
     };
 
     let sql = " INSERT INTO users SET ? ";
