@@ -3,7 +3,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hook/useAuth";
 import logo from "../assets/images/coin.svg";
 import axios from "../api/axios";
-import useLocalStorage from "../hook/useLocalStorage";
 import useInput from "../hook/useInput";
 
 const Login = () => {
@@ -16,8 +15,6 @@ const Login = () => {
   const emailRef = useRef();
   const errRef = useRef();
 
-  // const [email, setEmail] = useState("");
-  // const [email, setEmail] = useLocalStorage("email", "");
   const [email, resetUser, userAttributes] = useInput("user", "");
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
@@ -40,15 +37,14 @@ const Login = () => {
           withCredentials: true,
         })
         .then((response) => {
-          if (!response.data.login) {
+          if (!response?.data?.login) {
             throw err;
           } else {
             const accessToken = response?.data?.accessToken;
-            setAuth({ email, pwd, accessToken });
+            setAuth({ email, accessToken });
           }
         });
 
-      // setEmail("");
       resetUser("");
       setPwd("");
       navigate(from, { replace: true });
@@ -92,8 +88,6 @@ const Login = () => {
               id='email'
               ref={emailRef}
               autoComplete='off'
-              // onChange={(e) => setEmail(e.target.value)}
-              // value={email}
               {...userAttributes}
               required
             />

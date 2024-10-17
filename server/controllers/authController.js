@@ -16,16 +16,25 @@ const handleLogin = async (req, res) => {
       const check = await bcrypt.compare(password, result[0]?.password);
       if (check) {
         // create jwt
-        const user = result[0].user_id;
+        // const user = result[0].user_id;
+
         const accessToken = jwt.sign(
-          { user },
+          {
+            userInfo: {
+              user: result[0].username,
+            },
+          },
           process.env.ACCESS_TOKEN_SECRET,
           {
             expiresIn: "15m",
           }
         );
         const refreshToken = jwt.sign(
-          { user },
+          {
+            userInfo: {
+              user: result[0].username,
+            },
+          },
           process.env.REFRESH_TOKEN_SECRET,
           {
             expiresIn: "2h",
@@ -53,9 +62,7 @@ const handleLogin = async (req, res) => {
         res.status(200).json({
           login: true,
           accessToken: accessToken,
-          result: result[0],
         });
-        // console.log(result[0]);
       } else {
         res.status(400).send({ message: "Invalid email or password" });
       }
@@ -66,8 +73,8 @@ const handleLogin = async (req, res) => {
 };
 
 const authenticateUser = (req, res) => {
-  const sql = " SELECT * FROM users WHERE user_id = ? ";
-  db.query(sql, req.user.user, (err, result) => {
+  const sql = " SELECT * FROM users WHERE username = ? ";
+  db.query(sql, req.user, (err, result) => {
     if (err) {
       return res.status(400).send({ message: err });
     }

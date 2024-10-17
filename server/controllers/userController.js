@@ -2,10 +2,9 @@ const db = require("../config/db");
 
 const handleShowUsers = (req, res) => {
   try {
-    const sql = "SELECT * FROM users";
+    const sql = "SELECT user_id,username FROM users";
     const query = db.query(sql, (err, result) => {
       if (err) throw err;
-      // console.log(result);
 
       res.status(201).send(result);
     });
