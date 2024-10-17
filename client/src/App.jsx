@@ -7,7 +7,12 @@ import Error from "./pages/Error";
 import Home from "./pages/Home";
 import PersistLogin from "./components/PersistLogin";
 import RequireAuth from "./components/RequireAuth";
+import Unauthorized from "./components/Unauthorized";
 
+const ROLES = {
+  User: 2001,
+  Admin: 5150,
+};
 function App() {
   return (
     <BrowserRouter>
@@ -16,10 +21,12 @@ function App() {
         <Route path='/' element={<Landing />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
-
+        <Route path='/unauthorized' element={<Unauthorized />} />
         {/* Protected routes */}
         <Route element={<PersistLogin />}>
-          <Route element={<RequireAuth />}>
+          <Route
+            element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}
+          >
             <Route path='/home' element={<Home />} />
           </Route>
         </Route>
