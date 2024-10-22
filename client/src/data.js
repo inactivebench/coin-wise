@@ -1,4 +1,3 @@
-import React from "react";
 import jobImg from "./assets/icons/job.png";
 import ageImg from "./assets/icons/age.png";
 import expensesImg from "./assets/icons/expenses.png";
@@ -11,6 +10,11 @@ import avatar3 from "./assets/avatars/avatar-3.png";
 import comfort from "./assets/icons/comfort.png";
 import burning from "./assets/icons/burning.png";
 import inscription from "./assets/icons/inscription.png";
+
+import chart from "./assets/icons/Chart.png";
+import calendar from "./assets/icons/Calendar.png";
+import setting from "./assets/icons/Setting.png";
+import chartFill from "./assets/icons/Chart_fill.png";
 
 const facts = [
   {
@@ -53,6 +57,13 @@ const facts = [
     description:
       "Stop spending paycheck-to-paycheck. Save some and watch it grow. By aging your money, you gain peace of mind and take control of your finances.",
   },
+];
+
+export const sidebarMenuList = [
+  { title: "home", icon: calendar, link: "" },
+  { title: "dashboard", icon: chartFill, link: "" },
+  { title: "analytics", icon: chart, link: "" },
+  { title: "setting", icon: setting, link: "" },
 ];
 
 export const testimonials = [
