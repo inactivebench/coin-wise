@@ -861,7 +861,10 @@ textarea {
   border: 3px solid hsl(var(--clr-slateGrey));
   cursor: pointer;
 }
-.sidebar-toggle.rotate {
+.sidebar-toggle.open {
+  transition: rotate 1s ease-in-out;
+}
+.sidebar-toggle.close {
   rotate: 180deg;
   transition: rotate 1s ease-in-out;
 }
@@ -889,15 +892,20 @@ textarea {
   transform: scaleX(0) scaleY(0);
 }
 .sidebar-menu {
-  padding: 0.5rem;
+  position: relative;
+  padding: 0.5rem 0.2rem;
   column-gap: 1rem;
-  align-items: center;
   border-radius: 0.375rem;
   cursor: pointer;
+  align-items: center;
+}
+.sidebar-menu.hidden {
+  width: 2.5rem;
 }
 .sidebar-menu > img {
   width: 2rem;
 }
+
 .sidebar-menu > span {
   transition-duration: 200ms;
   transform-origin: left;
@@ -907,4 +915,26 @@ textarea {
 }
 .sidebar-menu:hover {
   background-color: hsl(var(--clr-white) / 0.2);
+}
+.sidebar-menu.hidden:before {
+  content: attr(data-hover);
+  visibility: hidden;
+  opacity: 0;
+  width: max-content;
+  background-color: hsl(var(--clr-white) / 0.9);
+  border: 2px solid hsl(var(--clr-slateGrey) / 0.9);
+  text-align: center;
+  color: black;
+  border-radius: 5px;
+  padding: 0.2rem 0.5rem;
+  font-size: var(--fs-300);
+  transition: opacity 1s ease-in-out;
+
+  position: absolute;
+  z-index: 1;
+  left: 3rem;
+}
+.sidebar-menu.hidden:hover:before {
+  opacity: 1;
+  visibility: visible;
 }
