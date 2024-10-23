@@ -5,19 +5,26 @@ import SidebarMenu from "./SidebarMenu";
 import { sidebarMenuList } from "../data";
 import control from "../assets/icons/control.png";
 import logo from "../assets/images/coin.svg";
-import profile from "../assets/icons/User.png";
 import { TbLogout2 } from "react-icons/tb";
 import { FaRegUser } from "react-icons/fa";
+import Modal from "./Modal";
 const Sidebar = () => {
   const navigate = useNavigate();
   const logout = useLogout();
   const [isOpen, setIsOpen] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
     navigate("/");
   };
 
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
   return (
     <aside
       className={`sidebar bg-grey  ${isOpen ? "open" : "close "} fs-400`}
@@ -25,7 +32,6 @@ const Sidebar = () => {
     >
       <img
         src={control}
-        // className={`sidebar-toggle  ${!isOpen && "rotate"}`}
         className={`sidebar-toggle  ${isOpen ? "open" : "close "}`}
         onClick={() => setIsOpen(!isOpen)}
       />
@@ -55,12 +61,25 @@ const Sidebar = () => {
             !isOpen && "hidden"
           }`}
           data-hover='sign out'
-          onClick={handleLogout}
+          onClick={openModal}
         >
           <TbLogout2 size={28} />
           <span className={` ${!isOpen && "hidden"}`}>sign out</span>
         </li>
       </div>
+      <Modal isOpen={modalOpen} onClose={closeModal} modalTitle={"Sign out ?"}>
+        <div className='flex modal-body'>
+          <h2>Do you want to want to sign out ?</h2>
+        </div>
+        <div className='flex modal-btn'>
+          <button className='capitalize cancel' onClick={closeModal}>
+            cancel
+          </button>
+          <button className='capitalize signout' onClick={handleLogout}>
+            sign out
+          </button>
+        </div>
+      </Modal>
     </aside>
   );
 };
