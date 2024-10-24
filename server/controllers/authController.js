@@ -16,6 +16,7 @@ const handleLogin = async (req, res) => {
       const match = await bcrypt.compare(password, result[0]?.password);
       if (match) {
         // create jwt
+
         const accessToken = jwt.sign(
           {
             userInfo: {
@@ -28,6 +29,7 @@ const handleLogin = async (req, res) => {
             expiresIn: "15m",
           }
         );
+
         const refreshToken = jwt.sign(
           {
             userInfo: {

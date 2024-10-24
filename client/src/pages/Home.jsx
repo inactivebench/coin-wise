@@ -1,15 +1,11 @@
-import { useNavigate } from "react-router-dom";
 import Users from "../components/Users";
 import Sidebar from "../components/Sidebar";
 
 const Home = () => {
-  const navigate = useNavigate();
-
   return (
-    <div className='flex'>
-      <Sidebar />
-      <div style={{ flexDirection: "column " }}>
-        <h1>Home</h1>
+    <div className=' grid-container'>
+      <Sidebar pageTitle={"home"} />
+      <div className='flex main-content' style={{ flexDirection: "column " }}>
         <Users />
       </div>
     </div>

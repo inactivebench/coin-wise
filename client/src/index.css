@@ -152,7 +152,15 @@ select {
   display: grid;
   gap: var(--gap, 1rem);
 }
-
+/* grid layout */
+.grid-container {
+  display: grid;
+  grid-template-rows: 4rem auto;
+  grid-template-columns: minmax(6rem, 16rem) auto;
+  grid-template-areas:
+    "sidebar header"
+    "sidebar main";
+}
 .container {
   padding-inline: 2em;
   margin-inline: auto;
@@ -325,7 +333,8 @@ select {
   padding: 0;
 }
 
-.link {
+.link,
+.sidebar-link {
   align-self: center;
   color: hsl(var(--clr-white));
   text-decoration: none;
@@ -842,12 +851,13 @@ textarea {
   padding-top: 2rem;
   height: 100vh;
   transition-duration: 300ms;
+  grid-area: sidebar;
 }
 .sidebar.close {
   width: 6rem;
 }
 .sidebar.open {
-  width: 18rem;
+  width: 16rem;
 }
 .sidebar > ul {
   padding-left: 0;
@@ -910,11 +920,16 @@ textarea {
   transition-duration: 200ms;
   transform-origin: left;
 }
-.sidebar-menu > span.hidden {
+.sidebar-menu > span.hidden,
+.sidebar-menu > a > span.hidden {
   display: none;
 }
 .sidebar-menu:hover {
   background-color: hsl(var(--clr-white) / 0.2);
+}
+
+.sidebar-link {
+  width: 100%;
 }
 .sidebar-menu.hidden:before {
   content: attr(data-hover);
@@ -995,4 +1010,22 @@ textarea {
 }
 .signout:hover {
   opacity: 0.8;
+}
+
+/* header  */
+.main-content {
+  grid-area: main;
+}
+
+.header-main {
+  grid-area: header;
+  padding: 1rem 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  background-color: hsl(0, 0%, 94%);
+}
+
+.header-info {
+  align-items: center;
+  --gap: 1.5rem;
 }

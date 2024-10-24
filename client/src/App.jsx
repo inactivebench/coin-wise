@@ -8,6 +8,9 @@ import Home from "./pages/Home";
 import PersistLogin from "./components/PersistLogin";
 import RequireAuth from "./components/RequireAuth";
 import Unauthorized from "./components/Unauthorized";
+import Dashboard from "./pages/Dashboard";
+import Setting from "./pages/Setting";
+import Profile from "./pages/Profile";
 
 const ROLES = {
   User: 2001,
@@ -28,6 +31,30 @@ function App() {
             element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}
           >
             <Route path='/home' element={<Home />} />
+          </Route>
+        </Route>
+
+        <Route element={<PersistLogin />}>
+          <Route
+            element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}
+          >
+            <Route path='/dashboard' element={<Dashboard />} />
+          </Route>
+        </Route>
+
+        <Route element={<PersistLogin />}>
+          <Route
+            element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}
+          >
+            <Route path='/setting' element={<Setting />} />
+          </Route>
+        </Route>
+
+        <Route element={<PersistLogin />}>
+          <Route
+            element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}
+          >
+            <Route path='/profile' element={<Profile />} />
           </Route>
         </Route>
 

@@ -1,7 +1,8 @@
-import { MdDashboardCustomize } from "react-icons/md";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const SidebarMenu = ({ menu, isOpen }) => {
-  const { title, icon, link } = menu;
+  const { title, icon, path } = menu;
 
   return (
     <li
@@ -10,8 +11,10 @@ const SidebarMenu = ({ menu, isOpen }) => {
       } `}
       data-hover={title}
     >
-      <img src={icon} alt={`${title} icon`} />
-      <span className={`${!isOpen && "hidden"}`}>{title}</span>
+      <Link to={path} className='flex link sidebar-link'>
+        {icon}
+        <span className={`${!isOpen && "hidden"}`}>{title}</span>
+      </Link>
     </li>
   );
 };
