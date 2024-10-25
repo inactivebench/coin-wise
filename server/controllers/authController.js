@@ -48,12 +48,16 @@ const handleLogin = async (req, res) => {
           username: result[0].username,
           refresh_token: refreshToken,
         };
-        let sql = " INSERT INTO refresh_tokens SET ? ";
+        let sql = `INSERT INTO refresh_tokens (username, refresh_token) VALUES (?, ?) ON DUPLICATE KEY UPDATE refresh_token = VALUES(refresh_token);`;
 
-        let query = db.query(sql, refreshData, (err, result) => {
-          if (err) throw err;
-          console.log("Refresh token stored for user");
-        });
+        let query = db.query(
+          sql,
+          [refreshData.username, refreshData.refresh_token],
+          (err, result) => {
+            if (err) throw err;
+            console.log("Refresh token stored for user");
+          }
+        );
         //send to client
         res.cookie("jwt", refreshToken, {
           httpOnly: true,

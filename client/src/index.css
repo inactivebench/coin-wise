@@ -157,6 +157,7 @@ select {
   display: grid;
   grid-template-rows: 4rem auto;
   grid-template-columns: minmax(6rem, 16rem) auto;
+
   grid-template-areas:
     "sidebar header"
     "sidebar main";
@@ -316,9 +317,6 @@ select {
   background-color: hsl(var(--clr-slateBlue) / 0.8);
   color: hsl(var(--clr-white));
   padding: var(--fs-300);
-  /* position: fixed;
-  z-index: 1;
-  width: 100%; */
 }
 
 .nav {
