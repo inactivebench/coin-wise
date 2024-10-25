@@ -12,7 +12,6 @@ const verifyJWT = (req, res, next) => {
     if (err) return res.sendStatus(403);
     req.user = decoded.userInfo.user;
     req.roles = decoded.userInfo.roles;
-    console.log(req.roles);
 
     next();
   });

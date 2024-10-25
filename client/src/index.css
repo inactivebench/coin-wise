@@ -953,10 +953,10 @@ textarea {
   visibility: visible;
 }
 .sidebar-menu.active {
-  background-color: white;
+  background-color: hsl(var(--clr-white) / 0.9);
 }
 .sidebar-menu.active > a {
-  color: #000;
+  color: hsl(var(--clr-slateBlue) / 0.9);
 }
 
 /* Modal  */
