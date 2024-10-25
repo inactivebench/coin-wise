@@ -944,7 +944,6 @@ textarea {
   padding: 0.2rem 0.5rem;
   font-size: var(--fs-300);
   transition: opacity 1s ease-in-out;
-
   position: absolute;
   z-index: 1;
   left: 3rem;
@@ -952,6 +951,12 @@ textarea {
 .sidebar-menu.hidden:hover:before {
   opacity: 1;
   visibility: visible;
+}
+.sidebar-menu.active {
+  background-color: white;
+}
+.sidebar-menu.active > a {
+  color: #000;
 }
 
 /* Modal  */

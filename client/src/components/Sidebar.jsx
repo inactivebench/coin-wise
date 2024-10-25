@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import useLogout from "../hook/useLogout";
 import SidebarMenu from "./SidebarMenu";
 import control from "../assets/icons/control.png";
@@ -25,6 +25,7 @@ const sidebarMenuList = [
 ];
 const Sidebar = ({ pageTitle }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const logout = useLogout();
   const [isOpen, setIsOpen] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
@@ -68,7 +69,7 @@ const Sidebar = ({ pageTitle }) => {
           <li
             className={`flex capitalize text-white sidebar-menu ${
               !isOpen && "hidden"
-            }`}
+            } ${location.pathname === "/profile" && "active"}`}
             data-hover='profile'
           >
             <Link to='/profile' className='flex link'>
