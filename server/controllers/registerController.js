@@ -14,9 +14,8 @@ const handleNewUser = async (req, res) => {
 
     let sql = " INSERT INTO users SET ? ";
     let query = db.query(sql, user, (err, result) => {
-      if (err) {
-        throw err;
-      }
+      if (err) res.status(400).send({ message: err });
+
       console.log("user created ");
       res.status(201).send(result);
     });
