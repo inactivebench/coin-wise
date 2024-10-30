@@ -15,9 +15,9 @@ const sidebarMenuList = [
     path: "/dashboard",
   },
   {
-    title: "setting",
+    title: "transaction",
     icon: <IoIcons.IoMdSettings size={28} />,
-    path: "/setting",
+    path: "/transaction",
   },
 ];
 const Sidebar = ({ pageTitle }) => {

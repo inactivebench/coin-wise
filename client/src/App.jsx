@@ -9,8 +9,8 @@ import PersistLogin from "./components/PersistLogin";
 import RequireAuth from "./components/RequireAuth";
 import Unauthorized from "./components/Unauthorized";
 import Dashboard from "./pages/Dashboard";
-import Setting from "./pages/Setting";
 import Profile from "./pages/Profile";
+import Transaction from "./pages/Transaction";
 
 const ROLES = {
   User: 2001,
@@ -46,7 +46,7 @@ function App() {
           <Route
             element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}
           >
-            <Route path='/setting' element={<Setting />} />
+            <Route path='/transaction' element={<Transaction />} />
           </Route>
         </Route>
 

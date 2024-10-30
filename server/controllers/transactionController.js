@@ -1,4 +1,6 @@
 const db = require("../config/db");
+const jwt = require("jsonwebtoken");
+
 const { faker } = require("@faker-js/faker");
 
 const users = [26, 27, 28];
@@ -130,14 +132,24 @@ const insertTransaction = (allTransactions, res) => {
 // insertTransaction(allTransactions);
 
 const getTransactions = (req, res) => {
-  const id = req.body.id;
+  const authHeader =
+    req.headers["authorization"] || req.headers["Authorization"];
+  if (!authHeader?.startsWith("Bearer ")) return res.sendStatus(401);
+  const token = authHeader && authHeader.split(" ")[1]; // Bearer token
+
   try {
-    const sql = "SELECT * FROM transactions WHERE user_id = ? ";
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+      if (err) return res.sendStatus(403);
+      req.userId = decoded.userInfo.userId;
+      console.log(req.userId);
 
-    let query = db.query(sql, id, (err, result) => {
-      if (err) res.status(400).send({ message: err });
+      const sql = "SELECT * FROM transactions WHERE user_id = ? ";
 
-      res.status(200).send(result);
+      let query = db.query(sql, req.userId, (err, result) => {
+        if (err) res.status(400).send({ message: err });
+
+        res.status(201).send(result);
+      });
     });
   } catch (error) {
     res.status(500).send();
@@ -166,4 +178,4 @@ const addTransaction = (req, res) => {
   }
 };
 
-module.exports = { insertTransaction, getTransactions, addTransaction };
+module.exports = { getTransactions, addTransaction };
