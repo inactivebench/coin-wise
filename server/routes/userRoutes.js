@@ -12,7 +12,12 @@ router.get(
   verifyRoles(ROLES_LIST.Admin, ROLES_LIST.user),
   showUserController.handleShowUsers
 );
-router.get("/transaction", transactions.getTransactions);
+router.get(
+  "/transaction",
+  verifyJWT,
+  verifyRoles(ROLES_LIST.Admin, ROLES_LIST.user),
+  transactions.getTransactions
+);
 router.post("/add/transaction", transactions.addTransaction);
 
 module.exports = router;

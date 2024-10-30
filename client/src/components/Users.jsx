@@ -21,7 +21,7 @@ const Users = () => {
       setUsers(response?.data);
     } catch (err) {
       console.error(err);
-      navigate("/signin ", { state: { from: location }, replace: true });
+      navigate("/login ", { state: { from: location }, replace: true });
     }
   };
   useEffect(() => {

@@ -1,56 +1,22 @@
-import { useEffect, useState } from "react";
-import useAxiosPrivate from "../hook/useAxiosPrivate";
-import useAuth from "../hook/useAuth";
-
-const Table = () => {
-  const URL = "/users/transaction";
-  const [tableData, setTableData] = useState([]);
-  const { auth } = useAuth();
-  const axiosPrivate = useAxiosPrivate();
-
-  const fetchData = async () => {
-    try {
-      const response = await axiosPrivate
-        .get(URL, {
-          headers: {
-            Authorization: `Bearer ${auth?.accessToken}`,
-          },
-        })
-        .then((response) => {
-          console.log(response.data);
-
-          if (!response?.data) {
-            throw err;
-          } else {
-            setTableData(response.data);
-          }
-        });
-    } catch (err) {
-      console.error(err);
-    }
-  };
-  useEffect(() => {
-    fetchData();
-  }, []);
-
+const Table = ({ tableData }) => {
   return (
     <div className=' table-container '>
       <table className='table'>
         <thead>
           <tr>
-            <th className='table-header'>
+            <th className='table-header capitalize'>
               <p>transaction</p>
             </th>
-            <th className='table-header'>
+            <th className='table-header capitalize'>
               <p>amount</p>
             </th>
-            <th className='table-header'>
+            <th className='table-header capitalize'>
               <p>transaction cost</p>
             </th>
-            <th className='table-header'>
+            <th className='table-header capitalize'>
               <p>date</p>
             </th>
-            <th className='table-header'>
+            <th className='table-header capitalize'>
               <p>category</p>
             </th>
           </tr>
