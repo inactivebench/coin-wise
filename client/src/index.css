@@ -356,7 +356,7 @@ select {
 }
 
 button:hover {
-  border-color: #646cff;
+  border-color: hsl(var(--clr-slateBlue));
 }
 button:focus,
 button:focus-visible {
@@ -1209,8 +1209,24 @@ textarea {
 .btn.new-transaction {
   background-color: hsl(var(--clr-darksalmon));
 }
-.btn.filter {
+.btn.filter,
+.btn.cancel-btn {
   background-color: hsl(var(--clr-white) / 0.9);
   color: hsl(var(--clr-slateGrey) / 0.9);
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+/* add transaction form  */
+.add-transaction-form {
+  font-size: var(--fs-300);
+  flex-direction: column;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.btn-add-container {
+  justify-content: flex-end;
+}
+.btn.cancel-btn,
+.btn.submit-btn {
+  padding: 0.6rem 1rem;
 }

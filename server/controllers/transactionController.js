@@ -141,7 +141,6 @@ const getTransactions = (req, res) => {
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
       if (err) return res.sendStatus(403);
       req.userId = decoded.userInfo.userId;
-      console.log(req.userId);
 
       const sql = "SELECT * FROM transactions WHERE user_id = ? ";
 
@@ -158,12 +157,12 @@ const getTransactions = (req, res) => {
 
 const addTransaction = (req, res) => {
   const transaction = {
-    user_id: req.body.user_id,
-    transaction_description: req.body.transaction_description,
-    amount_spent: req.body.amount_spent,
-    transaction_cost: req.body.transaction_cost,
-    datetime: new Date(req.body.datetime),
-    category: req.body.category,
+    user_id: req.body.newData.userId,
+    transaction_description: req.body.newData.transaction,
+    amount_spent: req.body.newData.amount,
+    transaction_cost: req.body.newData.cost,
+    datetime: new Date(req.body.newData.dateTime),
+    category: req.body.newData.category,
   };
   try {
     const sql = "INSERT INTO transactions SET ?";

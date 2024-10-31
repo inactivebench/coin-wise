@@ -105,4 +105,16 @@ export const howItWorks = [
   },
 ];
 
+export const categories = [
+  "Food",
+  "Entertainment",
+  "Shopping",
+  "Travel",
+  "Bills & Utilities",
+  "Groceries",
+  "Restaurants",
+  "Utilities",
+  "Rent",
+  "Subscriptions",
+];
 export default facts;
