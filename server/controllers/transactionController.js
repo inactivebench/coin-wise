@@ -169,7 +169,7 @@ const addTransaction = (req, res) => {
     let query = db.query(sql, transaction, (err, result) => {
       if (err) res.status(400).send({ message: err });
 
-      res.status(201);
+      res.sendStatus(201);
       console.log("transaction logged");
     });
   } catch (error) {

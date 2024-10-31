@@ -5,7 +5,9 @@ import Table from "../components/Table";
 import useAxiosPrivate from "../hook/useAxiosPrivate";
 import useAuth from "../hook/useAuth";
 import { jwtDecode } from "jwt-decode";
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaCheckCircle } from "react-icons/fa";
+import { MdClose } from "react-icons/md";
+
 import { IoFilterSharp } from "react-icons/io5";
 import useInput from "../hook/useInput";
 import { categories } from "../data";
@@ -20,12 +22,15 @@ const Transaction = () => {
 
   const [tableData, setTableData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+
   const [transaction, setTransaction] = useState("");
   const [amount, setAmount] = useState("");
   const [cost, setCost] = useState("");
   const [date, setDate] = useState(new Date());
   const [category, setCategory] = useState("");
+
   const [isOpen, setIsOpen] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const { auth } = useAuth();
   const axiosPrivate = useAxiosPrivate();
@@ -33,6 +38,9 @@ const Transaction = () => {
     "search",
     ""
   );
+  const onClose = () => {
+    setSuccess(false);
+  };
   const fetchTableData = async () => {
     try {
       const response = await axiosPrivate
@@ -64,7 +72,7 @@ const Transaction = () => {
       amount,
       cost,
       dateTime,
-      category,
+      category: category || "Food",
     };
     try {
       const response = await axiosPrivate.post(
@@ -74,10 +82,18 @@ const Transaction = () => {
           headers: { "Content-Type": "application/json" },
         }
       );
-      setTransaction("");
-      setAmount("");
-      setCost("");
-      setDate(new Date());
+      if (response?.status === 201) {
+        setTransaction("");
+        setAmount("");
+        setCost("");
+        setDate(new Date());
+        setIsOpen(false);
+        setSuccess(true);
+
+        setTimeout(() => {
+          setSuccess(false);
+        }, 3800);
+      }
     } catch (err) {
       console.log(err);
       throw err;
@@ -126,7 +142,7 @@ const Transaction = () => {
           </div>
           {/* add transaction form  */}
           <form
-            className={`add-transaction-form ${!isOpen ? "hide" : ""} flex`}
+            className={`add-transaction-form ${!isOpen ? "hide" : "show"} flex`}
             onSubmit={handleSubmit}
           >
             <h2 className='capitalize'>add new transaction</h2>
@@ -191,6 +207,13 @@ const Transaction = () => {
               <button className='btn submit-btn capitalize'>submit</button>
             </div>
           </form>
+          <div className={`alert-card flex ${success ? "show" : ""} success `}>
+            <FaCheckCircle size={80} />
+            <p>You successfully added a new transaction</p>
+            <span onClick={onClose}>
+              <MdClose size={28} />
+            </span>
+          </div>
           <Table tableData={currentTableData} />
           <Pagination
             className='pagination-bar'

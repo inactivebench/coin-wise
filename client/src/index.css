@@ -1019,6 +1019,7 @@ textarea {
 /* header  */
 .main-content {
   grid-area: main;
+  position: relative;
 }
 
 .header-main {
@@ -1222,6 +1223,22 @@ textarea {
   border-radius: 6px;
   padding: 0.5rem 1rem;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out;
+}
+.add-transaction-form.hide {
+  opacity: 0;
+}
+.add-transaction-form.show {
+  opacity: 1;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 .btn-add-container {
   justify-content: flex-end;
@@ -1229,4 +1246,42 @@ textarea {
 .btn.cancel-btn,
 .btn.submit-btn {
   padding: 0.6rem 1rem;
+}
+
+.alert-card {
+  position: absolute;
+  background-color: hsl(var(--clr-white));
+  color: hsl(var(--clr-slateBlue));
+  font-size: var(--fs-300);
+  font-weight: 600;
+  align-items: center;
+  padding: 0.5rem 0.6rem;
+  max-width: 25rem;
+  width: 100%;
+  border-radius: 1rem;
+  border: 2px solid hsl(var(--clr-slateBlue));
+  top: 2rem;
+  right: 3rem;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 0.5s ease-in-out;
+  z-index: 2;
+}
+.alert-card.success {
+  background-color: rgba(62, 189, 97, 0.9);
+  border: 2px solid #3ebd61;
+  color: hsl(var(--clr-white));
+}
+.alert-card p {
+  font-size: var(--fs-400);
+}
+
+.alert-card.success.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+.alert-card.hidden {
+  opacity: 0;
+  transform: translateX(100%);
+  transition-delay: 500ms;
 }
