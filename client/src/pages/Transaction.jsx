@@ -7,7 +7,6 @@ import useAuth from "../hook/useAuth";
 import { jwtDecode } from "jwt-decode";
 import { FaPlus, FaCheckCircle } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
-
 import { IoFilterSharp } from "react-icons/io5";
 import { categories } from "../data";
 import DatePicker from "react-datepicker";
@@ -17,7 +16,8 @@ let PageSize = 10;
 
 const Transaction = () => {
   const URL = "/users/transaction";
-  const NEW_URL = "/users/add/transaction";
+  const TRANSACTION_URL = "/users/add/transaction";
+  const FILTER_URL = "/users/add/transaction";
 
   const [tableData, setTableData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,8 +27,10 @@ const Transaction = () => {
   const [cost, setCost] = useState("");
   const [date, setDate] = useState(new Date());
   const [category, setCategory] = useState("");
+  const [order, setOrder] = useState("");
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [success, setSuccess] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredTransactions, setFilteredTransactions] = useState([]);
@@ -72,7 +74,7 @@ const Transaction = () => {
       throw err;
     }
   };
-  const handleSubmit = async (e) => {
+  const submitTransaction = async (e) => {
     e.preventDefault();
     const decoded = auth?.accessToken ? jwtDecode(auth.accessToken) : undefined;
     const userId = decoded.userInfo.userId;
@@ -87,8 +89,46 @@ const Transaction = () => {
     };
     try {
       const response = await axiosPrivate.post(
-        NEW_URL,
+        TRANSACTION_URL,
         { newData },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      if (response?.status === 201) {
+        setTransaction("");
+        setAmount("");
+        setCost("");
+        setDate(new Date());
+        setIsOpen(false);
+        setSuccess(true);
+
+        setTimeout(() => {
+          setSuccess(false);
+        }, 3800);
+      }
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  };
+  const submitFilter = async (e) => {
+    e.preventDefault();
+    const decoded = auth?.accessToken ? jwtDecode(auth.accessToken) : undefined;
+    const userId = decoded.userInfo.userId;
+    const dateTime = date.toISOString();
+    const filterData = {
+      userId,
+      amount: amount || "",
+      cost: cost || "",
+      dateTime: dateTime || "",
+      category: category || "",
+      order: order || "DESC",
+    };
+    try {
+      const response = await axiosPrivate.post(
+        FILTER_URL,
+        { filterData },
         {
           headers: { "Content-Type": "application/json" },
         }
@@ -134,7 +174,7 @@ const Transaction = () => {
               autoComplete='off'
               value={searchTerm}
               onChange={handleSearchInputChange}
-              placeholder='search...'
+              placeholder='Search by Transaction...'
             />
             <div className='flex'>
               <button
@@ -146,7 +186,12 @@ const Transaction = () => {
                 <FaPlus />
                 <span>new</span>
               </button>
-              <button className='btn filter flex capitalize'>
+              <button
+                className='btn filter flex capitalize'
+                onClick={() => {
+                  setIsFilterOpen(!isFilterOpen);
+                }}
+              >
                 <IoFilterSharp />
                 <span>filter</span>
               </button>
@@ -155,7 +200,7 @@ const Transaction = () => {
           {/* add transaction form  */}
           <form
             className={`add-transaction-form ${!isOpen ? "hide" : "show"} flex`}
-            onSubmit={handleSubmit}
+            onSubmit={submitTransaction}
           >
             <h2 className='capitalize'>add new transaction</h2>
             <div className='flex'>
@@ -217,6 +262,75 @@ const Transaction = () => {
                 cancel
               </button>
               <button className='btn submit-btn capitalize'>submit</button>
+            </div>
+          </form>
+          {/* {filter data form } */}
+          <form
+            className={`add-transaction-form ${
+              !isFilterOpen ? "hide" : "show"
+            } flex`}
+            onSubmit={submitFilter}
+          >
+            <h2 className='capitalize'>filter transactions</h2>
+            <div className='flex'>
+              <input
+                type='number'
+                id='amount'
+                onChange={(e) => setAmount(e.target.value)}
+                value={amount}
+                className='input'
+                placeholder='Amount spent'
+                required
+              />
+              <input
+                type='number'
+                id='transaction-cost'
+                onChange={(e) => setCost(e.target.value)}
+                value={cost}
+                className='input'
+                placeholder='Transaction cost'
+                required
+              />
+              <DatePicker
+                selected={date}
+                onChange={(date) => setDate(date)}
+                showTimeSelect
+                timeIntervals={5}
+                timeFormat='HH:mm'
+                dateFormat='MMMM d, yyyy h:mm aa'
+              />
+              <select
+                id='category'
+                className='input'
+                onChange={(e) => setCategory(e.target.value)}
+                required
+              >
+                {categories.map((category, index) => {
+                  return (
+                    <option value={category} key={index}>
+                      {category}
+                    </option>
+                  );
+                })}
+              </select>
+              <select
+                id='category'
+                className='input'
+                onChange={(e) => setOrder(e.target.value)}
+                required
+              >
+                <option value='DESC'>DESC</option>
+                <option value='ASC'>ASC</option>
+              </select>
+            </div>
+            <div className='flex btn-add-container'>
+              <button
+                className='btn cancel-btn capitalize'
+                onClick={() => setIsFilterOpen(false)}
+              >
+                cancel
+              </button>
+              <button className='btn submit-btn capitalize'>filter</button>
             </div>
           </form>
           <div className={`alert-card flex ${success ? "show" : ""} success `}>

@@ -1193,13 +1193,11 @@ textarea {
 .transaction-filter-container {
   justify-content: space-between;
 }
-.search-input {
-  display: block;
+input[type="text"].search-input {
+  font-size: var(--fs-300);
   border: 1.5px solid var(--tw-ring-color);
-  border-radius: 6px;
   width: 100%;
-  max-width: 25rem;
-  padding: 0.3rem 0.5rem;
+  max-width: 24rem;
   --tw-ring-color: hsl(var(--clr-slateBlue) / 0.6);
 }
 
