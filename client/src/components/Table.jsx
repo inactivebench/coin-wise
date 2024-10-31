@@ -21,27 +21,31 @@ const Table = ({ tableData }) => {
             </th>
           </tr>
         </thead>
-        <tbody>
-          {tableData.map((item, index) => (
-            <tr key={index} className=''>
-              <td className='table-data'>
-                <p>{item.transaction_description}</p>
-              </td>
-              <td className='table-data'>
-                <p>{item.amount_spent}</p>
-              </td>
-              <td className='table-data'>
-                <p>{item.transaction_cost}</p>
-              </td>
-              <td className='table-data'>
-                <p>{item.datetime}</p>
-              </td>
-              <td className='table-data'>
-                <p>{item.category}</p>
-              </td>
-            </tr>
-          ))}
-        </tbody>
+        {tableData.length === 0 ? (
+          <p>No Transactions found</p>
+        ) : (
+          <tbody>
+            {tableData.map((item, index) => (
+              <tr key={index} className=''>
+                <td className='table-data'>
+                  <p>{item.transaction_description}</p>
+                </td>
+                <td className='table-data'>
+                  <p>{item.amount_spent}</p>
+                </td>
+                <td className='table-data'>
+                  <p>{item.transaction_cost}</p>
+                </td>
+                <td className='table-data'>
+                  <p>{item.datetime}</p>
+                </td>
+                <td className='table-data'>
+                  <p>{item.category}</p>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        )}
       </table>
     </div>
   );

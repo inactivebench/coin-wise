@@ -1224,7 +1224,7 @@ textarea {
   padding: 0.5rem 1rem;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   opacity: 0;
-  animation: fadeIn 1s ease-in-out;
+  animation: fadeIn 0.5s ease-in-out;
 }
 .add-transaction-form.hide {
   opacity: 0;
@@ -1235,9 +1235,11 @@ textarea {
 @keyframes fadeIn {
   from {
     opacity: 0;
+    transform: translateY(-50%);
   }
   to {
     opacity: 1;
+    transform: translateY(0);
   }
 }
 .btn-add-container {

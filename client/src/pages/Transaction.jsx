@@ -9,7 +9,6 @@ import { FaPlus, FaCheckCircle } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 
 import { IoFilterSharp } from "react-icons/io5";
-import useInput from "../hook/useInput";
 import { categories } from "../data";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -31,15 +30,26 @@ const Transaction = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredTransactions, setFilteredTransactions] = useState([]);
 
   const { auth } = useAuth();
   const axiosPrivate = useAxiosPrivate();
-  const [searchTerm, resetSearchTerm, searchAttributes] = useInput(
-    "search",
-    ""
-  );
+
   const onClose = () => {
     setSuccess(false);
+  };
+  const handleSearchInputChange = (e) => {
+    const searchTerm = e.target.value;
+    setSearchTerm(searchTerm);
+
+    const filteredItems = tableData.filter((transaction) =>
+      transaction.transaction_description
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase())
+    );
+
+    setFilteredTransactions(filteredItems);
   };
   const fetchTableData = async () => {
     try {
@@ -54,6 +64,7 @@ const Transaction = () => {
             throw err;
           } else {
             setTableData(response.data);
+            setFilteredTransactions(response.data);
           }
         });
     } catch (err) {
@@ -106,8 +117,8 @@ const Transaction = () => {
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
-    return tableData.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage, tableData]);
+    return filteredTransactions.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, filteredTransactions]);
 
   return (
     <div className=' grid-container'>
@@ -121,7 +132,8 @@ const Transaction = () => {
               type='text'
               id='search'
               autoComplete='off'
-              {...searchAttributes}
+              value={searchTerm}
+              onChange={handleSearchInputChange}
               placeholder='search...'
             />
             <div className='flex'>
