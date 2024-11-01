@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import Pagination from "../components/Pagination";
 import Sidebar from "../components/Sidebar";
 import Table from "../components/Table";
@@ -29,6 +29,9 @@ const Transaction = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [category, setCategory] = useState("");
+
+  const transactionRef = useRef();
+  const amountRef = useRef();
 
   const [isOpen, setIsOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -167,6 +170,11 @@ const Transaction = () => {
     fetchTableData();
   }, []);
 
+  useEffect(() => {
+    isOpen && transactionRef.current.focus();
+    isFilterOpen && amountRef.current.focus();
+  }, [isOpen, isFilterOpen]);
+
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
@@ -219,6 +227,7 @@ const Transaction = () => {
             <div className='flex'>
               <input
                 type='text'
+                ref={transactionRef}
                 id='transaction'
                 onChange={(e) => setTransaction(e.target.value)}
                 value={transaction}
@@ -251,7 +260,7 @@ const Transaction = () => {
                 timeIntervals={5}
                 timeFormat='HH:mm'
                 dateFormat='MMMM d, yyyy h:mm aa'
-                placeholderText='Enter date and time'
+                placeholderText='Select date and time'
               />
               <select
                 id='category'
@@ -289,6 +298,7 @@ const Transaction = () => {
             <div className='flex'>
               <input
                 type='number'
+                ref={amountRef}
                 id='amount'
                 onChange={(e) => setAmount(e.target.value)}
                 value={amount}
@@ -310,7 +320,7 @@ const Transaction = () => {
                 timeIntervals={5}
                 timeFormat='HH:mm'
                 dateFormat='MMMM d, yyyy h:mm aa'
-                placeholderText='Enter start date'
+                placeholderText='Select start date'
               />
               <DatePicker
                 selected={endDate}
@@ -319,7 +329,7 @@ const Transaction = () => {
                 timeIntervals={5}
                 timeFormat='HH:mm'
                 dateFormat='MMMM d, yyyy h:mm aa'
-                placeholderText='Enter end date'
+                placeholderText='Select end date'
               />
               <select
                 id='category'
