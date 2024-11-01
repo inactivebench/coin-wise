@@ -21,11 +21,13 @@ const Table = ({ tableData }) => {
             </th>
           </tr>
         </thead>
-        {tableData.length === 0 ? (
-          <p>No Transactions found</p>
-        ) : (
-          <tbody>
-            {tableData.map((item, index) => (
+        <tbody>
+          {tableData.length === 0 ? (
+            <tr>
+              <td>No Transactions found</td>
+            </tr>
+          ) : (
+            tableData.map((item, index) => (
               <tr key={index} className=''>
                 <td className='table-data'>
                   <p>{item.transaction_description}</p>
@@ -43,9 +45,9 @@ const Table = ({ tableData }) => {
                   <p>{item.category}</p>
                 </td>
               </tr>
-            ))}
-          </tbody>
-        )}
+            ))
+          )}
+        </tbody>
       </table>
     </div>
   );

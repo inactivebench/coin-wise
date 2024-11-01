@@ -157,22 +157,15 @@ const getTransactions = (req, res) => {
 };
 
 const addTransaction = (req, res) => {
-  // const transaction = {
-  //   user_id: req.body.newData.userId,
-  //   transaction_description: req.body.newData.transaction,
-  //   amount_spent: req.body.newData.amount,
-  //   transaction_cost: req.body.newData.cost,
-  //   datetime: new Date(req.body.newData.dateTime),
-  //   category: req.body.newData.category,
-  // };
   const transaction = {
-    user_id: req.body.userId,
-    transaction_description: req.body.transaction,
-    amount_spent: req.body.amount,
-    transaction_cost: req.body.cost,
-    datetime: new Date(req.body.dateTime),
-    category: req.body.category,
+    user_id: req.body.newData.userId,
+    transaction_description: req.body.newData.transaction,
+    amount_spent: req.body.newData.amount,
+    transaction_cost: req.body.newData.cost,
+    datetime: new Date(req.body.newData.dateTime),
+    category: req.body.newData.category,
   };
+
   try {
     const sql = "INSERT INTO transactions SET ?";
     let query = db.query(sql, transaction, (err, result) => {
@@ -188,27 +181,27 @@ const addTransaction = (req, res) => {
 
 const filterTransaction = (req, res) => {
   const formattedStartDate =
-    req.body.startDateTime === ""
+    req.body.filterData.startDateTime === ""
       ? ""
-      : new Date(req.body.startDateTime)
+      : new Date(req.body.filterData.startDateTime)
           .toISOString()
           .slice(0, 19)
           .replace("T", " ");
   const formattedEndDate =
-    req.body.endDateTime === ""
+    req.body.filterData.endDateTime === ""
       ? ""
-      : new Date(req.body.endDateTime)
+      : new Date(req.body.filterData.endDateTime)
           .toISOString()
           .slice(0, 19)
           .replace("T", " ");
 
   const filterData = {
-    user_id: req.body.userId,
-    transaction_cost: req.body.cost,
-    amount_spent: req.body.amount,
+    user_id: req.body.filterData.userId,
+    amount_spent: req.body.filterData.amount,
+    transaction_cost: req.body.filterData.cost,
     startDateTime: formattedStartDate,
     endDateTime: formattedEndDate,
-    category: req.body.category,
+    category: req.body.filterData.category,
   };
 
   try {

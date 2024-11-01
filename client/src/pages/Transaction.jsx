@@ -15,9 +15,9 @@ import "react-datepicker/dist/react-datepicker.css";
 let PageSize = 10;
 
 const Transaction = () => {
-  const URL = "/users/transaction";
-  const TRANSACTION_URL = "/users/add/transaction";
-  const FILTER_URL = "/users/add/transaction";
+  const GET_URL = "/transaction";
+  const TRANSACTION_URL = "/transaction/add";
+  const FILTER_URL = "/transaction/filter";
 
   const [tableData, setTableData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -25,9 +25,10 @@ const Transaction = () => {
   const [transaction, setTransaction] = useState("");
   const [amount, setAmount] = useState("");
   const [cost, setCost] = useState("");
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [category, setCategory] = useState("");
-  const [order, setOrder] = useState("");
 
   const [isOpen, setIsOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -56,7 +57,7 @@ const Transaction = () => {
   const fetchTableData = async () => {
     try {
       const response = await axiosPrivate
-        .get(URL, {
+        .get(GET_URL, {
           headers: {
             Authorization: `Bearer ${auth?.accessToken}`,
           },
@@ -116,7 +117,11 @@ const Transaction = () => {
     e.preventDefault();
     const decoded = auth?.accessToken ? jwtDecode(auth.accessToken) : undefined;
     const userId = decoded.userInfo.userId;
-    const dateTime = new Date(date)
+    const startDateTime = new Date(startDate)
+      .toISOString()
+      .slice(0, 19)
+      .replace("T", " ");
+    const endDateTime = new Date(endDate)
       .toISOString()
       .slice(0, 19)
       .replace("T", " ");
@@ -124,25 +129,30 @@ const Transaction = () => {
       userId,
       amount: amount || "",
       cost: cost || "",
-      dateTime: dateTime || "",
+      startDateTime: startDateTime || "",
+      endDateTime: endDateTime || "",
       category: category || "",
-      order: order || "DESC",
     };
     try {
-      const response = await axiosPrivate.post(
-        FILTER_URL,
-        { filterData },
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      const response = await axiosPrivate
+        .post(
+          FILTER_URL,
+          { filterData },
+          {
+            headers: { "Content-Type": "application/json" },
+          }
+        )
+        .then((response) => {
+          if (!response?.data) throw err;
+          setTableData(response.data);
+          // setFilteredTransactions(response.data);
+        });
       if (response?.status === 201) {
-        setTransaction("");
         setAmount("");
         setCost("");
-        setDate(new Date());
-        setIsOpen(false);
-        setSuccess(true);
+        setStartDate(new Date());
+        setEndDate(new Date());
+        setIsFilterOpen(false);
 
         setTimeout(() => {
           setSuccess(false);
@@ -241,6 +251,7 @@ const Transaction = () => {
                 timeIntervals={5}
                 timeFormat='HH:mm'
                 dateFormat='MMMM d, yyyy h:mm aa'
+                placeholderText='Enter date and time'
               />
               <select
                 id='category'
@@ -283,7 +294,6 @@ const Transaction = () => {
                 value={amount}
                 className='input'
                 placeholder='Amount spent'
-                required
               />
               <input
                 type='number'
@@ -292,21 +302,29 @@ const Transaction = () => {
                 value={cost}
                 className='input'
                 placeholder='Transaction cost'
-                required
               />
               <DatePicker
-                selected={date}
-                onChange={(date) => setDate(date)}
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
                 showTimeSelect
                 timeIntervals={5}
                 timeFormat='HH:mm'
                 dateFormat='MMMM d, yyyy h:mm aa'
+                placeholderText='Enter start date'
+              />
+              <DatePicker
+                selected={endDate}
+                onChange={(date) => setEndDate(date)}
+                showTimeSelect
+                timeIntervals={5}
+                timeFormat='HH:mm'
+                dateFormat='MMMM d, yyyy h:mm aa'
+                placeholderText='Enter end date'
               />
               <select
                 id='category'
                 className='input'
                 onChange={(e) => setCategory(e.target.value)}
-                required
               >
                 {categories.map((category, index) => {
                   return (
@@ -315,15 +333,6 @@ const Transaction = () => {
                     </option>
                   );
                 })}
-              </select>
-              <select
-                id='category'
-                className='input'
-                onChange={(e) => setOrder(e.target.value)}
-                required
-              >
-                <option value='DESC'>DESC</option>
-                <option value='ASC'>ASC</option>
               </select>
             </div>
             <div className='flex btn-add-container'>
