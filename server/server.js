@@ -32,6 +32,7 @@ app.use("/logout", require("./routes/logoutRoute"));
 app.use("/refresh", require("./routes/refreshRoute"));
 // app.use(verifyJWT);
 app.use("/users", require("./routes/userRoutes"));
+app.use("/transaction", require("./routes/transactionRoutes"));
 
 app.get("/api", (req, res) => {
   console.log("Received /api request...");

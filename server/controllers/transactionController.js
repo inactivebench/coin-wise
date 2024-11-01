@@ -142,7 +142,8 @@ const getTransactions = (req, res) => {
       if (err) return res.sendStatus(403);
       req.userId = decoded.userInfo.userId;
 
-      const sql = "SELECT * FROM transactions WHERE user_id = ? ";
+      const sql =
+        "SELECT * FROM transactions WHERE user_id = ? ORDER BY dateTime DESC ";
 
       let query = db.query(sql, req.userId, (err, result) => {
         if (err) res.status(400).send({ message: err });
@@ -156,13 +157,21 @@ const getTransactions = (req, res) => {
 };
 
 const addTransaction = (req, res) => {
+  // const transaction = {
+  //   user_id: req.body.newData.userId,
+  //   transaction_description: req.body.newData.transaction,
+  //   amount_spent: req.body.newData.amount,
+  //   transaction_cost: req.body.newData.cost,
+  //   datetime: new Date(req.body.newData.dateTime),
+  //   category: req.body.newData.category,
+  // };
   const transaction = {
-    user_id: req.body.newData.userId,
-    transaction_description: req.body.newData.transaction,
-    amount_spent: req.body.newData.amount,
-    transaction_cost: req.body.newData.cost,
-    datetime: new Date(req.body.newData.dateTime),
-    category: req.body.newData.category,
+    user_id: req.body.userId,
+    transaction_description: req.body.transaction,
+    amount_spent: req.body.amount,
+    transaction_cost: req.body.cost,
+    datetime: new Date(req.body.dateTime),
+    category: req.body.category,
   };
   try {
     const sql = "INSERT INTO transactions SET ?";
@@ -177,4 +186,57 @@ const addTransaction = (req, res) => {
   }
 };
 
-module.exports = { getTransactions, addTransaction };
+const filterTransaction = (req, res) => {
+  const formattedStartDate =
+    req.body.startDateTime === ""
+      ? ""
+      : new Date(req.body.startDateTime)
+          .toISOString()
+          .slice(0, 19)
+          .replace("T", " ");
+  const formattedEndDate =
+    req.body.endDateTime === ""
+      ? ""
+      : new Date(req.body.endDateTime)
+          .toISOString()
+          .slice(0, 19)
+          .replace("T", " ");
+
+  const filterData = {
+    user_id: req.body.userId,
+    transaction_cost: req.body.cost,
+    amount_spent: req.body.amount,
+    startDateTime: formattedStartDate,
+    endDateTime: formattedEndDate,
+    category: req.body.category,
+  };
+
+  try {
+    let sql = `SELECT * FROM transactions WHERE user_id = ${filterData.user_id}`;
+
+    if (filterData.transaction_cost !== "") {
+      sql += ` AND transaction_cost = ${filterData.transaction_cost}`;
+    }
+    if (filterData.amount_spent !== "") {
+      sql += ` AND amount_spent = ${filterData.amount_spent}`;
+    }
+    if (filterData.category !== "") {
+      sql += ` AND category = '${filterData.category}'`;
+    }
+    if (filterData.startDateTime !== "" && filterData.endDateTime !== "") {
+      sql += ` AND datetime BETWEEN '${filterData.startDateTime}' AND '${filterData.endDateTime}' `;
+    }
+
+    sql += ` ORDER BY dateTime DESC`;
+
+    let query = db.query(sql, (err, result) => {
+      if (err) res.status(400).send({ message: err });
+
+      res.status(201).send(result);
+    });
+  } catch (error) {
+    res.status(500).send();
+  }
+};
+
+module.exports = { getTransactions, addTransaction, filterTransaction };

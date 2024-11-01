@@ -116,7 +116,10 @@ const Transaction = () => {
     e.preventDefault();
     const decoded = auth?.accessToken ? jwtDecode(auth.accessToken) : undefined;
     const userId = decoded.userInfo.userId;
-    const dateTime = date.toISOString();
+    const dateTime = new Date(date)
+      .toISOString()
+      .slice(0, 19)
+      .replace("T", " ");
     const filterData = {
       userId,
       amount: amount || "",
