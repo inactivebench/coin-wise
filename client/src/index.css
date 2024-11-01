@@ -158,12 +158,13 @@ select {
 /* grid layout */
 .grid-container {
   display: grid;
-  grid-template-rows: 4rem auto;
+  grid-template-rows: 4rem auto 6rem;
   grid-template-columns: minmax(6rem, 16rem) auto;
 
   grid-template-areas:
     "sidebar header"
-    "sidebar main";
+    "sidebar main"
+    "sidebar footer";
 }
 .container {
   padding-inline: 2em;
@@ -968,6 +969,7 @@ textarea {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 }
 
 .modal-content {
@@ -1020,6 +1022,10 @@ textarea {
 .main-content {
   grid-area: main;
   position: relative;
+  background-color: hsl(var(--clr-white) / 0.6);
+}
+.footer-main {
+  grid-area: footer;
 }
 
 .header-main {
@@ -1046,6 +1052,7 @@ textarea {
   background-color: hsl(var(--clr-slateGrey));
   padding: 0.5rem;
   border-radius: 0.5rem;
+  z-index: 1;
 }
 .dropdown-menu > ul {
   list-style: none;
@@ -1075,26 +1082,24 @@ textarea {
 }
 
 /* Table  */
-.table-container {
+
+.table {
   border-radius: 0.75rem;
   color: #000000;
-  background-clip: border-box;
   background-color: #ffffff;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-.table {
   width: 100%;
-  max-width: 80rem;
   min-width: min-content;
   text-align: left;
   table-layout: auto;
-  margin: 0 auto;
 }
-.table th,
-.table td {
+.table th {
   padding: 1rem;
   border-bottom: 1px solid #e0e0e0;
+}
+.table td {
+  padding: 1rem;
 }
 
 /* Table header styles */
@@ -1130,10 +1135,13 @@ textarea {
 .pagination-container {
   display: flex;
   list-style-type: none;
+  width: 100%;
+  max-width: 30rem;
+  margin: 0 auto;
 }
 .pagination-container .pagination-item {
-  padding: 0 12px;
-  height: 32px;
+  padding: 0 1rem;
+  height: 2rem;
   text-align: center;
   margin: auto 4px;
   color: rgba(0, 0, 0, 0.87);
@@ -1141,10 +1149,9 @@ textarea {
   box-sizing: border-box;
   align-items: center;
   letter-spacing: 0.01071em;
-  border-radius: 16px;
-  line-height: 1.43;
-  font-size: 13px;
-  min-width: 32px;
+  border-radius: 1rem;
+  font-size: var(--fs-400);
+  min-width: 2rem;
 }
 .pagination-container .pagination-item.dots:hover {
   background-color: transparent;
@@ -1159,9 +1166,7 @@ textarea {
 }
 .pagination-container .pagination-item .arrow::before {
   position: relative;
-  /* top: 3pt; Uncomment this to lower the icons as requested in comments*/
   content: "";
-  /* By using an em scale, the arrows will size with the font */
   display: inline-block;
   width: 0.4em;
   height: 0.4em;
@@ -1189,6 +1194,9 @@ textarea {
 /* transaction  */
 .transaction-container {
   flex-direction: column;
+  padding: 1em 2em;
+  margin-inline: auto;
+  max-width: 100rem;
 }
 .transaction-filter-container {
   justify-content: space-between;

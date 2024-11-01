@@ -1,8 +1,8 @@
 const Table = ({ tableData }) => {
   return (
     <div className=' table-container '>
-      <table className='table'>
-        <thead>
+      <table className='table '>
+        <thead className='ff-montserrat'>
           <tr>
             <th className='table-header capitalize'>
               <p>transaction</p>
@@ -39,7 +39,17 @@ const Table = ({ tableData }) => {
                   <p>{item.transaction_cost}</p>
                 </td>
                 <td className='table-data'>
-                  <p>{item.datetime}</p>
+                  <p>
+                    {new Date(item.datetime).toLocaleString("en-US", {
+                      weekday: "short",
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                      hour: "numeric",
+                      minute: "numeric",
+                      hour12: true,
+                    })}
+                  </p>
                 </td>
                 <td className='table-data'>
                   <p>{item.category}</p>

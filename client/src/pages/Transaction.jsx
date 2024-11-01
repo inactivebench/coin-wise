@@ -12,8 +12,6 @@ import { categories } from "../data";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-let PageSize = 10;
-
 const Transaction = () => {
   const GET_URL = "/transaction";
   const TRANSACTION_URL = "/transaction/add";
@@ -29,6 +27,7 @@ const Transaction = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [category, setCategory] = useState("");
+  const [pageSize, setPageSize] = useState(7);
 
   const transactionRef = useRef();
   const amountRef = useRef();
@@ -78,7 +77,7 @@ const Transaction = () => {
       throw err;
     }
   };
-  const submitTransaction = async (e) => {
+  const addNewTransaction = async (e) => {
     e.preventDefault();
     const decoded = auth?.accessToken ? jwtDecode(auth.accessToken) : undefined;
     const userId = decoded.userInfo.userId;
@@ -104,6 +103,7 @@ const Transaction = () => {
         setAmount("");
         setCost("");
         setDate(new Date());
+
         setIsOpen(false);
         setSuccess(true);
 
@@ -116,7 +116,7 @@ const Transaction = () => {
       throw err;
     }
   };
-  const submitFilter = async (e) => {
+  const filterTransaction = async (e) => {
     e.preventDefault();
     const decoded = auth?.accessToken ? jwtDecode(auth.accessToken) : undefined;
     const userId = decoded.userInfo.userId;
@@ -175,9 +175,24 @@ const Transaction = () => {
     isFilterOpen && amountRef.current.focus();
   }, [isOpen, isFilterOpen]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setPageSize(5);
+      } else {
+        setPageSize(7);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Initial check
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, [window.innerWidth]);
+
   const currentTableData = useMemo(() => {
-    const firstPageIndex = (currentPage - 1) * PageSize;
-    const lastPageIndex = firstPageIndex + PageSize;
+    const firstPageIndex = (currentPage - 1) * pageSize;
+    const lastPageIndex = firstPageIndex + pageSize;
     return filteredTransactions.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, filteredTransactions]);
 
@@ -185,8 +200,8 @@ const Transaction = () => {
     <div className=' grid-container'>
       <Sidebar pageTitle={"Transaction History"} />
       <div className=' main-content '>
-        <div className='container transaction-container flex'>
-          <h1>Transaction</h1>
+        <div className=' transaction-container flex'>
+          <h2>A Detailed Record of Your Financial Activity.</h2>
           <div className='flex transaction-filter-container'>
             <input
               className=' search-input'
@@ -221,7 +236,7 @@ const Transaction = () => {
           {/* add transaction form  */}
           <form
             className={`add-transaction-form ${!isOpen ? "hide" : "show"} flex`}
-            onSubmit={submitTransaction}
+            onSubmit={addNewTransaction}
           >
             <h2 className='capitalize'>add new transaction</h2>
             <div className='flex'>
@@ -261,6 +276,7 @@ const Transaction = () => {
                 timeFormat='HH:mm'
                 dateFormat='MMMM d, yyyy h:mm aa'
                 placeholderText='Select date and time'
+                required
               />
               <select
                 id='category'
@@ -292,7 +308,7 @@ const Transaction = () => {
             className={`add-transaction-form ${
               !isFilterOpen ? "hide" : "show"
             } flex`}
-            onSubmit={submitFilter}
+            onSubmit={filterTransaction}
           >
             <h2 className='capitalize'>filter transactions</h2>
             <div className='flex'>
@@ -363,14 +379,16 @@ const Transaction = () => {
             </span>
           </div>
           <Table tableData={currentTableData} />
-          <Pagination
-            className='pagination-bar'
-            currentPage={currentPage}
-            totalCount={tableData.length}
-            pageSize={PageSize}
-            onPageChange={(page) => setCurrentPage(page)}
-          />
         </div>
+      </div>
+      <div className='footer-main'>
+        <Pagination
+          className='pagination-bar'
+          currentPage={currentPage}
+          totalCount={tableData.length}
+          pageSize={pageSize}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
       </div>
     </div>
   );
