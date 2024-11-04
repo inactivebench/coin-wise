@@ -1,5 +1,5 @@
 import { useState } from "react";
-import facts from "../data";
+import facts from "../../data";
 import Flashcard from "./Flashcard";
 
 const FlashcardList = () => {

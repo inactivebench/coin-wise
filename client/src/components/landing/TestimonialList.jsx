@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { testimonials } from "../data";
+import { testimonials } from "../../data";
 import Testimonial from "./Testimonial";
 
 const TestimonialList = () => {

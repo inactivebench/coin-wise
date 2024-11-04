@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { howItWorks } from "../data";
+import { howItWorks } from "../../data";
 import Step from "./Step";
 
 const StepList = () => {

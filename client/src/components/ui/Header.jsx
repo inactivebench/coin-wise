@@ -1,6 +1,6 @@
 import { useState } from "react";
-import useAuth from "../hook/useAuth";
-import useLogout from "../hook/useLogout";
+import useAuth from "../../hook/useAuth";
+import useLogout from "../../hook/useLogout";
 import { jwtDecode } from "jwt-decode";
 import { Link, useNavigate } from "react-router-dom";
 import { TbLogout2 } from "react-icons/tb";
