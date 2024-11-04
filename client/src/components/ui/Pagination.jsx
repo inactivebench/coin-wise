@@ -1,5 +1,6 @@
 import usePagination from "../../hook/usePagination";
 import { DOTS } from "../../hook/usePagination";
+import "../../css/pagination.css";
 
 const Pagination = ({
   onPageChange,

@@ -1,0 +1,64 @@
+/* transaction  */
+.transaction-container {
+  flex-direction: column;
+  padding: 1em 2em;
+  margin-inline: auto;
+  max-width: 100rem;
+}
+.transaction-filter-container {
+  justify-content: space-between;
+}
+input[type="text"].search-input {
+  font-size: var(--fs-300);
+  border: 1.5px solid var(--tw-ring-color);
+  width: 100%;
+  max-width: 24rem;
+  --tw-ring-color: hsl(var(--clr-slateBlue) / 0.6);
+}
+
+.btn.filter,
+.btn.new-transaction {
+  align-items: center;
+}
+.btn.new-transaction {
+  background-color: hsl(var(--clr-darksalmon));
+}
+.btn.filter,
+.btn.cancel-btn {
+  background-color: hsl(var(--clr-white) / 0.9);
+  color: hsl(var(--clr-slateGrey) / 0.9);
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+/* add transaction form  */
+.add-transaction-form {
+  font-size: var(--fs-300);
+  flex-direction: column;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in-out;
+}
+.add-transaction-form.hide {
+  opacity: 0;
+}
+.add-transaction-form.show {
+  opacity: 1;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.btn-add-container {
+  justify-content: flex-end;
+}
+.btn.cancel-btn,
+.btn.submit-btn {
+  padding: 0.6rem 1rem;
+}

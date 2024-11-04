@@ -5,6 +5,7 @@ import FlashcardList from "../components/landing/FlashcardList";
 import TestimonialList from "../components/landing/TestimonialList";
 import StepList from "../components/landing/StepList";
 import Footer from "../components/ui/Footer";
+import "../css/landing.css";
 
 const Landing = () => {
   return (

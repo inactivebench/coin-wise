@@ -1,3 +1,5 @@
+import "../../css/table.css";
+
 const Table = ({ tableData }) => {
   return (
     <div className=' table-container '>

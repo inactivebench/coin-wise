@@ -6,6 +6,7 @@ import logo from "../../assets/images/coin.svg";
 import * as FaIcons from "react-icons/fa";
 import * as IoIcons from "react-icons/io";
 import Header from "./Header";
+import "../../css/sidebar.css";
 
 const sidebarMenuList = [
   { title: "home", icon: <FaIcons.FaHome size={28} />, path: "/home" },

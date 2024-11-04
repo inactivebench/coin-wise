@@ -1,4 +1,5 @@
 import { useEffect, useState, useMemo, useRef } from "react";
+import "../css/transaction.css";
 import Pagination from "../components/ui/Pagination";
 import Sidebar from "../components/ui/Sidebar";
 import Table from "../components/ui/Table";

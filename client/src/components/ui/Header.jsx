@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { TbLogout2 } from "react-icons/tb";
 import * as FaIcons from "react-icons/fa";
 import Modal from "./Modal";
+import "../../css/header.css";
 
 const Header = ({ pageTitle, location }) => {
   const [dropdown, setDropdown] = useState(false);

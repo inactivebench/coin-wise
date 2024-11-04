@@ -1,0 +1,112 @@
+/* sidebar  */
+.sidebar {
+  position: relative;
+  padding: 1.25rem;
+  padding-top: 2rem;
+  height: 100vh;
+  transition-duration: 300ms;
+  grid-area: sidebar;
+}
+.sidebar.close {
+  width: 6rem;
+}
+.sidebar.open {
+  width: 16rem;
+}
+
+.sidebar-toggle {
+  width: 2.5rem;
+  position: absolute;
+  right: -0.75rem;
+  top: 2.25rem;
+  border-radius: 9999px;
+  border: 3px solid hsl(var(--clr-slateGrey));
+  cursor: pointer;
+}
+.sidebar-toggle.open {
+  transition: rotate 1s ease-in-out;
+}
+.sidebar-toggle.close {
+  rotate: 180deg;
+  transition: rotate 1s ease-in-out;
+}
+.sidebar-header {
+  column-gap: 1rem;
+  align-items: center;
+}
+.sidebar-header > img {
+  width: 2.5rem;
+  transition-duration: 500ms;
+  cursor: pointer;
+}
+.sidebar-header > img.open {
+  rotate: 360deg;
+}
+.sidebar-header-title {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 500;
+  color: hsl(var(--clr-white));
+  transition-duration: 200ms;
+  transform-origin: left;
+}
+.sidebar-header-title.close {
+  transform: scaleX(0) scaleY(0);
+}
+.sidebar-menu {
+  position: relative;
+  padding: 0.5rem 0.2rem;
+  column-gap: 1rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  align-items: center;
+}
+.sidebar-menu.hidden {
+  width: 2.5rem;
+}
+.sidebar-menu > img {
+  width: 2rem;
+}
+
+.sidebar-menu > span {
+  transition-duration: 200ms;
+  transform-origin: left;
+}
+.sidebar-menu > span.hidden,
+.sidebar-menu > a > span.hidden {
+  display: none;
+}
+.sidebar-menu:hover {
+  background-color: hsl(var(--clr-white) / 0.2);
+}
+
+.sidebar-link {
+  width: 100%;
+}
+.sidebar-menu.hidden:before {
+  content: attr(data-hover);
+  visibility: hidden;
+  opacity: 0;
+  width: max-content;
+  background-color: hsl(var(--clr-white) / 0.9);
+  border: 2px solid hsl(var(--clr-slateGrey) / 0.9);
+  text-align: center;
+  color: black;
+  border-radius: 5px;
+  padding: 0.2rem 0.5rem;
+  font-size: var(--fs-300);
+  transition: opacity 1s ease-in-out;
+  position: absolute;
+  z-index: 1;
+  left: 3rem;
+}
+.sidebar-menu.hidden:hover:before {
+  opacity: 1;
+  visibility: visible;
+}
+.sidebar-menu.active {
+  background-color: hsl(var(--clr-white) / 0.9);
+}
+.sidebar-menu.active > a {
+  color: hsl(var(--clr-slateBlue) / 0.9);
+}

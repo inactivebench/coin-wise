@@ -1,0 +1,58 @@
+/* Modal  */
+.modal {
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: hsl(var(--clr-white));
+  border-radius: 1rem;
+  position: relative;
+  width: 23rem;
+  --gap: 1rem;
+}
+.modal-title {
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  background-color: hsl(0, 0%, 94%);
+}
+.modal-body {
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem;
+  border-bottom: 0.5px solid hsl(0, 0%, 90%);
+}
+.modal-btn {
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+.modal-btn .cancel {
+  border: 1px solid hsl(var(--clr-slateGrey) / 0.9);
+  background: none;
+  padding: 0.4rem;
+}
+
+.modal-btn .signout {
+  background-color: hsl(0, 100%, 45%);
+  font-weight: bold;
+  color: hsl(var(--clr-white));
+  padding: 0.4rem 0.5rem;
+  border: none;
+}
+.cancel:hover {
+  background-color: hsla(0, 0%, 0%, 0.1);
+}
+.signout:hover {
+  opacity: 0.8;
+}
