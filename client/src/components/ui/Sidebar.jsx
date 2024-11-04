@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import SidebarMenu from "./SidebarMenu";
-import control from "../assets/icons/control.png";
-import logo from "../assets/images/coin.svg";
+import control from "../../assets/icons/control.png";
+import logo from "../../assets/images/coin.svg";
 import * as FaIcons from "react-icons/fa";
 import * as IoIcons from "react-icons/io";
 import Header from "./Header";

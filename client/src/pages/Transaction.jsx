@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo, useRef } from "react";
-import Pagination from "../components/Pagination";
-import Sidebar from "../components/Sidebar";
-import Table from "../components/Table";
+import Pagination from "../components/ui/Pagination";
+import Sidebar from "../components/ui/Sidebar";
+import Table from "../components/ui/Table";
 import useAxiosPrivate from "../hook/useAxiosPrivate";
 import useAuth from "../hook/useAuth";
 import { jwtDecode } from "jwt-decode";
