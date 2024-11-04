@@ -1,0 +1,17 @@
+.header {
+  background-color: hsl(var(--clr-slateBlue) / 0.8);
+  color: hsl(var(--clr-white));
+  padding: var(--fs-300);
+}
+
+.nav {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.primary--nav {
+  margin: 0 auto;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}

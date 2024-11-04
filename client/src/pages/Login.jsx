@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import "../css/form.css";
 import useAuth from "../hook/useAuth";
 import logo from "../assets/images/coin.svg";
 import axios from "../api/axios";

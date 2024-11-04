@@ -43,7 +43,7 @@ const Sidebar = ({ pageTitle }) => {
             Coin-wise
           </h1>
         </div>
-        <ul>
+        <ul className='flex sidebar-menu-list '>
           {sidebarMenuList.map((menu, index) => {
             return <SidebarMenu menu={menu} key={index} isOpen={isOpen} />;
           })}

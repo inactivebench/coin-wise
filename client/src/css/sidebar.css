@@ -1,11 +1,20 @@
 /* sidebar  */
 .sidebar {
+  grid-area: sidebar;
   position: relative;
   padding: 1.25rem;
   padding-top: 2rem;
   height: 100vh;
   transition-duration: 300ms;
-  grid-area: sidebar;
+}
+
+.sidebar-link {
+  align-self: center;
+  color: hsl(var(--clr-white));
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
 }
 .sidebar.close {
   width: 6rem;
@@ -52,6 +61,9 @@
 }
 .sidebar-header-title.close {
   transform: scaleX(0) scaleY(0);
+}
+.sidebar-menu-list {
+  flex-direction: column;
 }
 .sidebar-menu {
   position: relative;

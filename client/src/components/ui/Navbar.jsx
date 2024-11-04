@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
+import "../../css/navbar.css";
 
 const Navbar = () => {
   return (
-    <header className='header '>
+    <header className='header'>
       <div className='nav container flex'>
         <Link to='/' className='logo '>
           coin-wise
