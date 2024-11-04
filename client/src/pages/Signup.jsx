@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaCheck } from "react-icons/fa6";
-import { FaTimes, FaInfoCircle } from "react-icons/fa";
+import { FaTimes, FaInfoCircle, FaCheckCircle } from "react-icons/fa";
+import Alert from "../components/ui/Alert";
 import axios from "../api/axios";
 import logo from "../assets/images/coin.svg";
 
@@ -74,10 +75,7 @@ const Signup = () => {
           withCredentials: true,
         }
       );
-      // TODO: remove console.logs before deployment
-      console.log(JSON.stringify(response?.data));
-      //console.log(JSON.stringify(response))
-      console.log(email, username, pwd);
+
       setSuccess(true);
       //clear state and controlled inputs
       setUsername("");
@@ -100,7 +98,7 @@ const Signup = () => {
       {success ? (
         setTimeout(() => {
           navigate("/login");
-        }, 1000)
+        }, 2000)
       ) : (
         <div className='sign-section-container'>
           <Link to='/' className='logo  sign-logo'>
@@ -259,6 +257,14 @@ const Signup = () => {
               </span>
             </p>
           </div>
+          <Alert
+            alertType={"success"}
+            icon={<FaCheckCircle size={80} />}
+            message={"You have successfully created an account"}
+            success={success}
+            setSuccess={setSuccess}
+          />
+          ;
         </div>
       )}
     </>

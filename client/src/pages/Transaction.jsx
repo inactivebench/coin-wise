@@ -3,11 +3,11 @@ import "../css/transaction.css";
 import Pagination from "../components/ui/Pagination";
 import Sidebar from "../components/ui/Sidebar";
 import Table from "../components/ui/Table";
+import Alert from "../components/ui/Alert";
 import useAxiosPrivate from "../hook/useAxiosPrivate";
 import useAuth from "../hook/useAuth";
 import { jwtDecode } from "jwt-decode";
 import { FaPlus, FaCheckCircle } from "react-icons/fa";
-import { MdClose } from "react-icons/md";
 import { IoFilterSharp } from "react-icons/io5";
 import { categories } from "../data";
 import DatePicker from "react-datepicker";
@@ -42,9 +42,6 @@ const Transaction = () => {
   const { auth } = useAuth();
   const axiosPrivate = useAxiosPrivate();
 
-  const onClose = () => {
-    setSuccess(false);
-  };
   const handleSearchInputChange = (e) => {
     const searchTerm = e.target.value;
     setSearchTerm(searchTerm);
@@ -372,13 +369,13 @@ const Transaction = () => {
               <button className='btn submit-btn capitalize'>filter</button>
             </div>
           </form>
-          <div className={`alert-card flex ${success ? "show" : ""} success `}>
-            <FaCheckCircle size={80} />
-            <p>You successfully added a new transaction</p>
-            <span onClick={onClose}>
-              <MdClose size={28} />
-            </span>
-          </div>
+          <Alert
+            alertType={"success"}
+            message={"You successfully added a new transaction"}
+            icon={<FaCheckCircle size={80} />}
+            success={success}
+            setSuccess={setSuccess}
+          />
           <Table tableData={currentTableData} />
         </div>
       </div>

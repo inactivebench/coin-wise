@@ -1,0 +1,46 @@
+/* alert  */
+
+.alert-card {
+  position: absolute;
+  background-color: hsl(var(--clr-white));
+  color: hsl(var(--clr-slateBlue));
+  font-size: var(--fs-300);
+  font-weight: 600;
+  align-items: center;
+  padding: 0.5rem 0.6rem;
+  max-width: 25rem;
+  width: 100%;
+  border-radius: 1rem;
+  border: 2px solid hsl(var(--clr-slateBlue));
+  top: 2rem;
+  right: 3rem;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 0.5s ease-in-out;
+  z-index: 2;
+}
+.alert-card.success {
+  background-color: rgba(62, 189, 97, 0.9);
+  border: 2px solid #3ebd61;
+  color: hsl(var(--clr-white));
+}
+.alert-card.danger {
+  background-color: rgba(236, 77, 43, 0.7);
+  border: 2px solid #ef9400;
+  color: hsl(var(--clr-white));
+}
+
+.alert-card p {
+  font-size: var(--fs-400);
+}
+
+.alert-card.success.show,
+.alert-card.danger.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+.alert-card.hidden {
+  opacity: 0;
+  transform: translateX(100%);
+  transition-delay: 500ms;
+}
