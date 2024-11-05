@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import SidebarMenu from "./SidebarMenu";
 import control from "@/assets/icons/control.png";
@@ -21,24 +21,41 @@ const sidebarMenuList = [
     path: "/transaction",
   },
 ];
+
 const Sidebar = ({ pageTitle }) => {
   const location = useLocation();
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 1040) {
+        setIsOpen(false);
+      } else {
+        setIsOpen(true);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Initial check
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <>
       <Header pageTitle={pageTitle} location={location} />
       <aside
-        className={`sidebar bg-grey  ${isOpen ? "open" : "close "} fs-400`}
+        className={` sidebar bg-grey  ${isOpen ? "open" : "close "} fs-400`}
         aria-label='sidebar'
       >
         <img
           src={control}
           className={`sidebar-toggle  ${isOpen ? "open" : "close "}`}
+          aria-label='sidebar-toggle'
           onClick={() => setIsOpen(!isOpen)}
         />
         <div className='flex sidebar-header '>
-          <img src={logo} className={`${open && "open"}`} />
+          <img src={logo} className={`${isOpen && "open"}`} />
           <h1 className={`sidebar-header-title ${!isOpen && "close"}`}>
             Coin-wise
           </h1>

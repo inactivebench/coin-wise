@@ -2,10 +2,11 @@
 .sidebar {
   grid-area: sidebar;
   position: relative;
-  padding: 1.25rem;
+  padding-inline: 0.5rem;
   padding-top: 2rem;
   height: 100vh;
   transition-duration: 300ms;
+  z-index: 10;
 }
 
 .sidebar-link {
@@ -17,7 +18,7 @@
   cursor: pointer;
 }
 .sidebar.close {
-  width: 6rem;
+  width: 4rem;
 }
 .sidebar.open {
   width: 16rem;
@@ -26,8 +27,8 @@
 .sidebar-toggle {
   width: 2.5rem;
   position: absolute;
-  right: -0.75rem;
-  top: 2.25rem;
+  right: -1rem;
+  top: 4.3rem;
   border-radius: 9999px;
   border: 3px solid hsl(var(--clr-slateGrey));
   cursor: pointer;
@@ -64,6 +65,7 @@
 }
 .sidebar-menu-list {
   flex-direction: column;
+  width: 100%;
 }
 .sidebar-menu {
   position: relative;
@@ -71,7 +73,6 @@
   column-gap: 1rem;
   border-radius: 0.375rem;
   cursor: pointer;
-  align-items: center;
 }
 .sidebar-menu.hidden {
   width: 2.5rem;
@@ -94,6 +95,9 @@
 
 .sidebar-link {
   width: 100%;
+}
+.sidebar.close > .sidebar-menu-list > .sidebar-menu > .sidebar-link > svg {
+  margin: 0 auto;
 }
 .sidebar-menu.hidden:before {
   content: attr(data-hover);
@@ -121,4 +125,16 @@
 }
 .sidebar-menu.active > a {
   color: hsl(var(--clr-slateBlue) / 0.9);
+}
+
+@media (min-width: 65em) {
+  .sidebar {
+    padding-inline: 1.25rem;
+  }
+  .sidebar-toggle {
+    display: none;
+  }
+  .sidebar-link > svg {
+    margin: 0;
+  }
 }

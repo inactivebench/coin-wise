@@ -159,13 +159,26 @@ select {
 .grid-container {
   display: grid;
   grid-template-rows: 4rem auto 6rem;
-  grid-template-columns: minmax(6rem, 16rem) auto;
+  grid-template-columns: 4rem auto;
 
   grid-template-areas:
-    "sidebar header"
-    "sidebar main"
-    "sidebar footer";
+    " sidebar header"
+    " . main"
+    " . footer";
 }
+@media (min-width: 65em) {
+  .grid-container {
+    display: grid;
+    grid-template-rows: 4rem auto 6rem;
+    grid-template-columns: 16rem auto;
+
+    grid-template-areas:
+      "sidebar header"
+      "sidebar main"
+      "sidebar footer";
+  }
+}
+
 .container {
   padding-inline: 2em;
   margin-inline: auto;
