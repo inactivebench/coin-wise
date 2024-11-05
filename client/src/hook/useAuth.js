@@ -1,5 +1,5 @@
 import { useDebugValue } from "react";
-import { useGlobalContext } from "../context";
+import { useGlobalContext } from "@/context";
 
 const useAuth = () => {
   const { auth, setAuth } = useGlobalContext();

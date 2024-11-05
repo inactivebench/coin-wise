@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaCheck } from "react-icons/fa6";
 import { FaTimes, FaInfoCircle, FaCheckCircle } from "react-icons/fa";
-import "../css/form.css";
-import Alert from "../components/ui/Alert";
-import axios from "../api/axios";
-import logo from "../assets/images/coin.svg";
+import "@/css/form.css";
+import Alert from "@/components/ui/Alert";
+import axios from "@/api/axios";
+import logo from "@/assets/images/coin.svg";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;

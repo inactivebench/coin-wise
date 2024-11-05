@@ -1,4 +1,4 @@
-import "../../css/alert.css";
+import "@/css/alert.css";
 import { MdClose } from "react-icons/md";
 
 const Alert = ({ icon, message, setSuccess, success, alertType }) => {

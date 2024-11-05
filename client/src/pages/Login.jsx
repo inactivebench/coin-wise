@@ -1,10 +1,10 @@
 import { useRef, useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import "../css/form.css";
-import useAuth from "../hook/useAuth";
-import logo from "../assets/images/coin.svg";
-import axios from "../api/axios";
-import useInput from "../hook/useInput";
+import "@/css/form.css";
+import useAuth from "@/hook/useAuth";
+import logo from "@/assets/images/coin.svg";
+import axios from "@/api/axios";
+import useInput from "@/hook/useInput";
 
 const Login = () => {
   const LOGIN_URL = "/auth/login";

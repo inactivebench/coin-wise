@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { MdClose } from "react-icons/md";
-import "../../css/modal.css";
+import "@/css/modal.css";
 
 const Modal = ({ isOpen, onClose, modalTitle, children }) => {
   useEffect(() => {

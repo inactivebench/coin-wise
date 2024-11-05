@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import useRefreshToken from "../../hook/useRefreshToken";
-import useAuth from "../../hook/useAuth";
-import { useGlobalContext } from "../../context";
-import Loading from "../ui/Loading";
+import useRefreshToken from "@/hook/useRefreshToken";
+import useAuth from "@/hook/useAuth";
+import { useGlobalContext } from "@/context";
+import Loading from "@/components/ui/Loading";
 
 const PersistLogin = () => {
   const { isLoading, setIsLoading } = useGlobalContext();

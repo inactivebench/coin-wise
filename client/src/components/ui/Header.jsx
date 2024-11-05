@@ -1,12 +1,12 @@
 import { useState } from "react";
-import useAuth from "../../hook/useAuth";
-import useLogout from "../../hook/useLogout";
+import useAuth from "@/hook/useAuth";
+import useLogout from "@/hook/useLogout";
 import { jwtDecode } from "jwt-decode";
 import { Link, useNavigate } from "react-router-dom";
 import { TbLogout2 } from "react-icons/tb";
 import * as FaIcons from "react-icons/fa";
 import Modal from "./Modal";
-import "../../css/header.css";
+import "@/css/header.css";
 
 const Header = ({ pageTitle, location }) => {
   const [dropdown, setDropdown] = useState(false);

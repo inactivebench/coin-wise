@@ -1,4 +1,4 @@
-import speechBubble from "../../assets/icons/speech-bubble.png";
+import speechBubble from "@/assets/icons/speech-bubble.png";
 
 const Testimonial = ({ comment }) => {
   const { name, img, backgroundColor, testimonial } = comment;

@@ -1,5 +1,5 @@
-import Users from "../components/home/Users";
-import Sidebar from "../components/ui/Sidebar";
+import Users from "@/components/home/Users";
+import Sidebar from "@/components/ui/Sidebar";
 
 const Home = () => {
   return (

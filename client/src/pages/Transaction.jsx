@@ -1,15 +1,15 @@
 import { useEffect, useState, useMemo, useRef } from "react";
-import "../css/transaction.css";
-import Pagination from "../components/ui/Pagination";
-import Sidebar from "../components/ui/Sidebar";
-import Table from "../components/ui/Table";
-import Alert from "../components/ui/Alert";
-import useAxiosPrivate from "../hook/useAxiosPrivate";
-import useAuth from "../hook/useAuth";
+import "@/css/transaction.css";
+import Pagination from "@/components/ui/Pagination";
+import Sidebar from "@/components/ui/Sidebar";
+import Table from "@/components/ui/Table";
+import Alert from "@/components/ui/Alert";
+import useAxiosPrivate from "@/hook/useAxiosPrivate";
+import useAuth from "@/hook/useAuth";
 import { jwtDecode } from "jwt-decode";
 import { FaPlus, FaCheckCircle } from "react-icons/fa";
 import { IoFilterSharp } from "react-icons/io5";
-import { categories } from "../data";
+import { categories } from "@/data";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 

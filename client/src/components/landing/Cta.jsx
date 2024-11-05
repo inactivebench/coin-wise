@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import ctaImg from "../../assets/images/Saving-money.svg";
+import ctaImg from "@/assets/images/Saving-money.svg";
 
 const Cta = () => {
   return (
