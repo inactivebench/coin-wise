@@ -237,7 +237,7 @@ const Transaction = () => {
             onSubmit={addNewTransaction}
           >
             <h2 className='capitalize'>add new transaction</h2>
-            <div className='flex'>
+            <div className=' form-input-grid'>
               <input
                 type='text'
                 ref={transactionRef}
@@ -267,6 +267,7 @@ const Transaction = () => {
                 required
               />
               <DatePicker
+                className='datepicker-input'
                 selected={date}
                 onChange={(date) => setDate(date)}
                 showTimeSelect
@@ -309,7 +310,7 @@ const Transaction = () => {
             onSubmit={filterTransaction}
           >
             <h2 className='capitalize'>filter transactions</h2>
-            <div className='flex'>
+            <div className='form-input-grid'>
               <input
                 type='number'
                 ref={amountRef}
@@ -328,6 +329,7 @@ const Transaction = () => {
                 placeholder='Transaction cost'
               />
               <DatePicker
+                className='datepicker-input'
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
                 showTimeSelect
@@ -337,6 +339,7 @@ const Transaction = () => {
                 placeholderText='Select start date'
               />
               <DatePicker
+                className='datepicker-input'
                 selected={endDate}
                 onChange={(date) => setEndDate(date)}
                 showTimeSelect

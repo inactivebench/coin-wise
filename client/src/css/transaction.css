@@ -30,6 +30,15 @@ input[type="text"].search-input {
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 /* add transaction form  */
+.form-input-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  gap: 0.5rem;
+  align-items: center;
+}
+.datepicker-input {
+  width: 100%;
+}
 .add-transaction-form {
   font-size: var(--fs-300);
   flex-direction: column;

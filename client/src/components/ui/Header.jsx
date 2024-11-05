@@ -68,7 +68,7 @@ const Header = ({ pageTitle, location }) => {
       )}
       <Modal isOpen={modalOpen} onClose={closeModal} modalTitle={"Sign out ?"}>
         <div className='flex modal-body'>
-          <h2>Do you want to want to sign out ?</h2>
+          <h2>Do you want to sign out ?</h2>
         </div>
         <div className='flex modal-btn'>
           <button className='capitalize cancel' onClick={closeModal}>
