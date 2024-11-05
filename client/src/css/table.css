@@ -47,3 +47,10 @@
   margin: 0;
   line-height: 1.5;
 }
+
+.table-data.red > p {
+  color: rgba(236, 77, 43, 0.7);
+}
+.table-data.green > p {
+  color: rgba(62, 189, 97, 0.9);
+}

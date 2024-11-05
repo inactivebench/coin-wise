@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo, useRef } from "react";
+import { useEffect, useState, useMemo } from "react";
 import "@/css/transaction.css";
 import Pagination from "@/components/ui/Pagination";
 import Sidebar from "@/components/ui/Sidebar";
@@ -10,6 +10,7 @@ import { jwtDecode } from "jwt-decode";
 import { FaPlus, FaCheckCircle } from "react-icons/fa";
 import { IoFilterSharp } from "react-icons/io5";
 import { categories } from "@/data";
+import { incomeCategories } from "@/data";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -28,10 +29,8 @@ const Transaction = () => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [category, setCategory] = useState("");
+  const [type, setType] = useState("");
   const [pageSize, setPageSize] = useState(7);
-
-  const transactionRef = useRef();
-  const amountRef = useRef();
 
   const [isOpen, setIsOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -86,7 +85,8 @@ const Transaction = () => {
       amount,
       cost,
       dateTime,
-      category: category || "Food",
+      type,
+      category,
     };
     try {
       const response = await axiosPrivate.post(
@@ -118,20 +118,21 @@ const Transaction = () => {
     e.preventDefault();
     const decoded = auth?.accessToken ? jwtDecode(auth.accessToken) : undefined;
     const userId = decoded.userInfo.userId;
-    const startDateTime = new Date(startDate)
-      .toISOString()
-      .slice(0, 19)
-      .replace("T", " ");
-    const endDateTime = new Date(endDate)
-      .toISOString()
-      .slice(0, 19)
-      .replace("T", " ");
+    const startDateTime =
+      startDate === ""
+        ? ""
+        : new Date(startDate).toISOString().slice(0, 19).replace("T", " ");
+    const endDateTime =
+      endDate === ""
+        ? ""
+        : new Date(endDate).toISOString().slice(0, 19).replace("T", " ");
     const filterData = {
       userId,
       amount: amount || "",
       cost: cost || "",
-      startDateTime: startDateTime || "",
-      endDateTime: endDateTime || "",
+      startDateTime: startDateTime,
+      endDateTime: endDateTime,
+      type: type || "",
       category: category || "",
     };
     try {
@@ -146,7 +147,7 @@ const Transaction = () => {
         .then((response) => {
           if (!response?.data) throw err;
           setTableData(response.data);
-          // setFilteredTransactions(response.data);
+          setFilteredTransactions(response.data);
         });
       if (response?.status === 201) {
         setAmount("");
@@ -167,11 +168,6 @@ const Transaction = () => {
   useEffect(() => {
     fetchTableData();
   }, []);
-
-  useEffect(() => {
-    isOpen && transactionRef.current.focus();
-    isFilterOpen && amountRef.current.focus();
-  }, [isOpen, isFilterOpen]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -240,7 +236,6 @@ const Transaction = () => {
             <div className=' form-input-grid'>
               <input
                 type='text'
-                ref={transactionRef}
                 id='transaction'
                 onChange={(e) => setTransaction(e.target.value)}
                 value={transaction}
@@ -278,19 +273,45 @@ const Transaction = () => {
                 required
               />
               <select
-                id='category'
+                id='type'
                 className='input'
-                onChange={(e) => setCategory(e.target.value)}
+                onChange={(e) => setType(e.target.value)}
                 required
               >
-                {categories.map((category, index) => {
-                  return (
-                    <option value={category} key={index}>
-                      {category}
-                    </option>
-                  );
-                })}
+                <option value='income'>income</option>
+                <option value='expense'>expense</option>
               </select>
+              {type === "income" ? (
+                <select
+                  id='category'
+                  className='input'
+                  onChange={(e) => setCategory(e.target.value)}
+                  required
+                >
+                  {incomeCategories.map((category, index) => {
+                    return (
+                      <option value={category} key={index}>
+                        {category}
+                      </option>
+                    );
+                  })}
+                </select>
+              ) : (
+                <select
+                  id='category'
+                  className='input'
+                  onChange={(e) => setCategory(e.target.value)}
+                  required
+                >
+                  {categories.map((category, index) => {
+                    return (
+                      <option value={category} key={index}>
+                        {category}
+                      </option>
+                    );
+                  })}
+                </select>
+              )}
             </div>
             <div className='flex btn-add-container'>
               <button
@@ -313,7 +334,6 @@ const Transaction = () => {
             <div className='form-input-grid'>
               <input
                 type='number'
-                ref={amountRef}
                 id='amount'
                 onChange={(e) => setAmount(e.target.value)}
                 value={amount}
@@ -349,18 +369,42 @@ const Transaction = () => {
                 placeholderText='Select end date'
               />
               <select
-                id='category'
+                id='type'
                 className='input'
-                onChange={(e) => setCategory(e.target.value)}
+                onChange={(e) => setType(e.target.value)}
               >
-                {categories.map((category, index) => {
-                  return (
-                    <option value={category} key={index}>
-                      {category}
-                    </option>
-                  );
-                })}
+                <option value='income'>income</option>
+                <option value='expense'>expense</option>
               </select>
+              {type === "income" ? (
+                <select
+                  id='category'
+                  className='input'
+                  onChange={(e) => setCategory(e.target.value)}
+                >
+                  {incomeCategories.map((category, index) => {
+                    return (
+                      <option value={category} key={index}>
+                        {category}
+                      </option>
+                    );
+                  })}
+                </select>
+              ) : (
+                <select
+                  id='category'
+                  className='input'
+                  onChange={(e) => setCategory(e.target.value)}
+                >
+                  {categories.map((category, index) => {
+                    return (
+                      <option value={category} key={index}>
+                        {category}
+                      </option>
+                    );
+                  })}
+                </select>
+              )}
             </div>
             <div className='flex btn-add-container'>
               <button

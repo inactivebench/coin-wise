@@ -30,11 +30,15 @@ const Table = ({ tableData }) => {
             </tr>
           ) : (
             tableData.map((item, index) => (
-              <tr key={index} className=''>
+              <tr key={index}>
                 <td className='table-data'>
                   <p>{item.transaction_description}</p>
                 </td>
-                <td className='table-data'>
+                <td
+                  className={`table-data ${
+                    item.type === "expense" ? "red" : "green"
+                  } `}
+                >
                   <p>{item.amount_spent}</p>
                 </td>
                 <td className='table-data'>

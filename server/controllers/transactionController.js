@@ -33,6 +33,7 @@ const addTransaction = (req, res) => {
     amount_spent: req.body.newData.amount,
     transaction_cost: req.body.newData.cost,
     datetime: new Date(req.body.newData.dateTime),
+    type: req.body.newData.type,
     category: req.body.newData.category,
   };
 
@@ -71,6 +72,7 @@ const filterTransaction = (req, res) => {
     transaction_cost: req.body.filterData.cost,
     startDateTime: formattedStartDate,
     endDateTime: formattedEndDate,
+    type: req.body.filterData.type,
     category: req.body.filterData.category,
   };
 
@@ -82,6 +84,9 @@ const filterTransaction = (req, res) => {
     }
     if (filterData.amount_spent !== "") {
       sql += ` AND amount_spent = ${filterData.amount_spent}`;
+    }
+    if (filterData.type !== "") {
+      sql += ` AND type = '${filterData.type}'`;
     }
     if (filterData.category !== "") {
       sql += ` AND category = '${filterData.category}'`;

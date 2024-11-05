@@ -117,4 +117,13 @@ export const categories = [
   "Rent",
   "Subscriptions",
 ];
+
+export const incomeCategories = [
+  "Salary",
+  "Investment Income",
+  "Sales",
+  "Refunds",
+  "Gifts",
+  "Other Income",
+];
 export default facts;

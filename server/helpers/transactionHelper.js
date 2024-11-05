@@ -94,18 +94,16 @@ function generateTransactions(userId, numTransactions, startDate, endDate) {
   const transactions = [];
   try {
     for (let i = 0; i < numTransactions; i++) {
-      // 30% chance of income transaction
-      const isIncome = Math.random() < 0.3;
+      // 40% chance of income transaction
+      const isIncome = Math.random() < 0.4;
 
       const categoryArray = isIncome ? incomeCategories : categories;
 
-      //random category
       const randomCategoryIndex = Math.floor(
         Math.random() * categoryArray.length
       );
       const randomCategory = categoryArray[randomCategoryIndex];
 
-      //random prefix
       const randomPrefixIndex = Math.floor(
         Math.random() * randomCategory.prefixes.length
       );
@@ -126,7 +124,6 @@ function generateTransactions(userId, numTransactions, startDate, endDate) {
       };
       transactions.push(transaction);
     }
-    console.log(transactions);
 
     return transactions;
   } catch (error) {
