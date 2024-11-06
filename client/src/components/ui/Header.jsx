@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import useAuth from "@/hook/useAuth";
 import useLogout from "@/hook/useLogout";
 import { jwtDecode } from "jwt-decode";
@@ -8,16 +8,18 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import * as FaIcons from "react-icons/fa";
 import Modal from "./Modal";
 import "@/css/header.css";
+import useClickAway from "@/hook/UseClickOutside";
 
 const Header = ({ pageTitle, location }) => {
   const [dropdown, setDropdown] = useState(false);
   const [notificationDropdown, setNotificationDropdown] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const notificationRef = useRef(null);
+  const profileRef = useRef(null);
 
   const navigate = useNavigate();
   const logout = useLogout();
   const { auth } = useAuth();
-
   const decoded = auth?.accessToken ? jwtDecode(auth.accessToken) : undefined;
   const user = decoded.userInfo.user;
 
@@ -32,6 +34,14 @@ const Header = ({ pageTitle, location }) => {
   const closeModal = () => {
     setModalOpen(false);
   };
+
+  const handleClickAway = () => {
+    notificationDropdown && setNotificationDropdown(false);
+    dropdown && setDropdown(false);
+  };
+
+  useClickAway(notificationRef, handleClickAway, notificationDropdown);
+  useClickAway(profileRef, handleClickAway, dropdown);
 
   return (
     <div className='header-main flex  fs-300 '>
@@ -55,7 +65,7 @@ const Header = ({ pageTitle, location }) => {
         </div>
       </div>
       {notificationDropdown && (
-        <div className='notification-dropdown'>
+        <div className='notification-dropdown' ref={notificationRef}>
           <div className='dropdown-header'>
             <h2 className='capitalize'>notification</h2>
           </div>
@@ -69,7 +79,7 @@ const Header = ({ pageTitle, location }) => {
         </div>
       )}
       {dropdown && (
-        <div className='dropdown-menu'>
+        <div className='dropdown-menu' ref={profileRef}>
           <div className='flex dropdown-header'>
             <div className='flex header-profile'>
               <h2 className='capitalize fs-300'>{user.slice(0, 1)}</h2>
