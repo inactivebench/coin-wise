@@ -24,7 +24,7 @@ const sidebarMenuList = [
 
 const Sidebar = ({ pageTitle }) => {
   const location = useLocation();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
     const handleResize = () => {

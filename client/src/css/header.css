@@ -13,3 +13,99 @@
   align-items: center;
   --gap: 1.5rem;
 }
+
+.header-profile {
+  padding: 0.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: orangered;
+  color: hsl(var(--clr-white));
+  align-items: center;
+  justify-content: center;
+}
+
+.header-profile h2 {
+  font-weight: 600;
+}
+
+.header-notification {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+}
+.header-notification:hover {
+  background-color: hsl(var(--clr-slateBlue) / 0.2);
+}
+/* notification dropdown  */
+.notification-dropdown {
+  max-width: 25rem;
+  max-height: 25rem;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 3.5rem;
+  right: 6rem;
+  border-radius: 0.5rem;
+  background-color: hsl(var(--clr-white));
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  z-index: 1;
+}
+.notification-container {
+  height: 80%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+/* profile dropdown  */
+.dropdown-menu {
+  max-width: 16rem;
+  width: 100%;
+  position: absolute;
+  top: 3.5rem;
+  right: 1rem;
+  border-radius: 0.5rem;
+  background-color: hsl(var(--clr-white));
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  z-index: 1;
+}
+.dropdown-menu > ul {
+  list-style: none;
+  flex-direction: column;
+  --gap: 0.5rem;
+}
+.dropdown-header,
+.dropdown-links {
+  padding: 0.8rem 1rem;
+}
+.dropdown-header {
+  align-items: center;
+  border-bottom: 2px solid hsl(var(--clr-slateGrey) / 0.15);
+}
+.dropdown-links {
+  margin: 0;
+}
+.dropdown-link {
+  padding: 0.5rem 0.3rem;
+}
+.dropdown-link > a,
+.dropdown-link {
+  --gap: 0.8rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  align-items: center;
+  color: hsl(var(--clr-slateBlue) / 0.9);
+}
+
+.dropdown-link:hover {
+  background-color: hsl(var(--clr-slateBlue) / 0.2);
+}
+
+.dropdown-link.active {
+  background-color: hsl(var(--clr-white) / 0.9);
+}
+.dropdown-link.active > a {
+  color: hsl(var(--clr-slateBlue) / 0.9);
+}
