@@ -1,0 +1,27 @@
+.analytics-container {
+  flex-direction: column;
+  padding: 1em 2em;
+  max-width: 100rem;
+}
+.analytics-nav-links {
+  padding: 0.8rem 0.5rem;
+  margin: 0;
+}
+
+.analytics-nav-link {
+  list-style: none;
+  cursor: pointer;
+}
+.analytics-nav-link a {
+  text-decoration: none;
+  color: hsl(var(--clr-slateGrey));
+  text-transform: capitalize;
+}
+
+.analytics-nav-link:hover {
+  border-bottom: 3px solid hsl(var(--clr-slateGrey) / 0.6);
+}
+
+.analytics-nav-link.active {
+  border-bottom: 4px solid blueviolet;
+}

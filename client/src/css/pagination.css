@@ -4,7 +4,7 @@
   list-style-type: none;
   width: 100%;
   max-width: 30rem;
-  margin: 0 auto;
+  margin: 2rem auto;
 }
 .pagination-container .pagination-item {
   padding: 0 1rem;

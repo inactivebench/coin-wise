@@ -1,15 +1,17 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Landing from "./pages/Landing";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import Error from "./pages/Error";
-import Home from "./pages/Home";
-import PersistLogin from "./components/auth/PersistLogin";
-import RequireAuth from "./components/auth/RequireAuth";
-import Unauthorized from "./components/auth/Unauthorized";
-import Dashboard from "./pages/Dashboard";
-import Profile from "./pages/Profile";
-import Transaction from "./pages/Transaction";
+import Landing from "@/pages/Landing";
+import Login from "@/pages/Login";
+import Signup from "@/pages/Signup";
+import Error from "@/pages/Error";
+import Home from "@/pages/Home";
+import PersistLogin from "@/components/auth/PersistLogin";
+import RequireAuth from "@/components/auth/RequireAuth";
+import Unauthorized from "@/components/auth/Unauthorized";
+import Dashboard from "@/pages/Dashboard";
+import Profile from "@/pages/Profile";
+import Analytics from "@/pages/Analytics";
+import TransactionHistory from "@/components/budget-tracking/TransactionHistory";
+import SpendingBreakdown from "@/components/budget-tracking/SpendingBreakdown";
 
 const ROLES = {
   User: 2001,
@@ -45,7 +47,10 @@ function App() {
           <Route
             element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}
           >
-            <Route path='/transaction' element={<Transaction />} />
+            <Route path='/analytics/' element={<Analytics />}>
+              <Route path='transaction' element={<TransactionHistory />} />
+              <Route path='spending' element={<SpendingBreakdown />} />
+            </Route>
           </Route>
         </Route>
 

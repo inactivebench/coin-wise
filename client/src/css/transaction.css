@@ -1,9 +1,6 @@
 /* transaction  */
 .transaction-container {
   flex-direction: column;
-  padding: 1em 2em;
-  margin-inline: auto;
-  max-width: 100rem;
 }
 .transaction-filter-container {
   justify-content: space-between;
