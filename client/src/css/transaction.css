@@ -68,3 +68,8 @@ input[type="text"].search-input {
 .btn.submit-btn {
   padding: 0.6rem 1rem;
 }
+
+.pie {
+  width: 100%;
+  max-width: 10rem;
+}

@@ -1,7 +1,9 @@
+import PieChart from "./spending/PieChart";
+
 const SpendingBreakdown = () => {
   return (
     <div>
-      <h2>SpendingBreakdown</h2>
+      <PieChart />
     </div>
   );
 };

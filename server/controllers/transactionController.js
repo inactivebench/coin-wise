@@ -1,6 +1,7 @@
 const db = require("../config/db");
 const jwt = require("jsonwebtoken");
 
+// Transaction history
 const getTransactions = (req, res) => {
   const authHeader =
     req.headers["authorization"] || req.headers["Authorization"];
@@ -107,4 +108,25 @@ const filterTransaction = (req, res) => {
   }
 };
 
-module.exports = { getTransactions, addTransaction, filterTransaction };
+// spending breakdown
+const categoryTransactions = (req, res) => {
+  try {
+    const sql =
+      "SELECT category, SUM(amount_spent) AS `total_amount` FROM transactions WHERE type = 'expense' GROUP BY category ";
+
+    let query = db.query(sql, (err, result) => {
+      if (err) res.status(400).send({ message: err });
+
+      res.status(201).send(result);
+    });
+  } catch (error) {
+    res.status(500).send();
+  }
+};
+
+module.exports = {
+  getTransactions,
+  addTransaction,
+  filterTransaction,
+  categoryTransactions,
+};
