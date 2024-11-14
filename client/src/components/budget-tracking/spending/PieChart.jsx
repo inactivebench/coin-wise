@@ -41,16 +41,16 @@ const CategoryPieChart = () => {
   return (
     <div>
       <h2>pie chart</h2>
-      <PieChart width={400} height={400}>
+      <PieChart width={500} height={500}>
         <Pie
           data={pieData}
           dataKey='total_amount'
           nameKey='category'
           cx='50%'
           cy='50%'
-          outerRadius={250}
-          fill='#8884d8'
-          label
+          innerRadius={60}
+          outerRadius={160}
+          fill='#000000'
         >
           {pieData.map((entry, index) => (
             <Cell

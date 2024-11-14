@@ -112,7 +112,7 @@ const filterTransaction = (req, res) => {
 const categoryTransactions = (req, res) => {
   try {
     const sql =
-      "SELECT category, SUM(amount_spent) AS `total_amount` FROM transactions WHERE type = 'expense' GROUP BY category ";
+      "SELECT category, CONVERT(SUM(amount_spent),  SIGNED) AS `total_amount` FROM transactions WHERE type = 'expense' GROUP BY category ";
 
     let query = db.query(sql, (err, result) => {
       if (err) res.status(400).send({ message: err });
