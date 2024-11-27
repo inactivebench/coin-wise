@@ -54,3 +54,22 @@
 .table-data.green > p {
   color: rgba(62, 189, 97, 0.9);
 }
+
+.table-spend {
+  border-radius: 0.75rem;
+  color: #000000;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  width: 100%;
+  min-width: min-content;
+  text-align: left;
+  table-layout: auto;
+}
+.table-spend th {
+  padding: 0.5rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+.table-spend td {
+  padding: 0.5rem;
+}
