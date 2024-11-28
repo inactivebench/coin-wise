@@ -69,7 +69,6 @@ input[type="text"].search-input {
   padding: 0.6rem 1rem;
 }
 
-.pie {
-  width: 100%;
-  max-width: 10rem;
+.pie-chart {
+  justify-content: space-between;
 }

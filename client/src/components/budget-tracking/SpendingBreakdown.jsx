@@ -1,9 +1,11 @@
+// import Breakdown from "./spending/Breakdown";
 import PieChart from "./spending/PieChart";
 
 const SpendingBreakdown = () => {
   return (
-    <div>
+    <div className='spending-breakdown'>
       <PieChart />
+      {/* <Breakdown /> */}
     </div>
   );
 };

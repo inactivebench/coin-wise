@@ -10,6 +10,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import Breakdown from "./Breakdown";
 
 const CategoryPieChart = () => {
   const CATEGORY_URL = "/transaction/category";
@@ -52,69 +53,45 @@ const CategoryPieChart = () => {
   }, []);
 
   return (
-    <div className='flex'>
-      <PieChart width={500} height={500}>
-        <Pie
-          data={pieData}
-          dataKey='total_amount'
-          nameKey='category'
-          cx='50%'
-          cy='50%'
-          innerRadius={100}
-          outerRadius={160}
-          fill='#000000'
-        >
-          {pieData.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
+    <div className='flex pie-chart'>
+      <ResponsiveContainer width={800} height={600}>
+        <PieChart>
+          <Pie
+            data={pieData}
+            dataKey='total_amount'
+            nameKey='category'
+            cx='50%'
+            cy='50%'
+            innerRadius={150}
+            outerRadius={200}
+            fill='#000000'
+          >
+            {pieData.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+              />
+            ))}
 
-          <Label
-            className='uppercase'
-            value='total spending'
-            position='centerBottom'
-          />
-          <Label
-            value={pieData.reduce((acc, curr) => {
-              let total = acc + curr.total_amount;
-              return total;
-            }, 0)}
-            position='centerTop'
-          />
-        </Pie>
-        <Tooltip nameKey='category' />
-        <Legend nameKey='category' />
-      </PieChart>
-      <div>
-        spending breakdown
-        <div>Total Spending</div>
-        <table className='table-spend'>
-          <thead>
-            <tr>
-              <th className='table-header'>
-                <p className='uppercase'>category</p>
-              </th>
-              <th className='table-header'>
-                <p className='uppercase'>spending</p>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {pieData.map((item, index) => {
-              const { category, total_amount } = item;
-              return (
-                <tr key={index}>
-                  <td>
-                    <p>{category}</p>
-                  </td>
-                  <td>
-                    <p>{total_amount}</p>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+            <Label
+              className='uppercase'
+              value='total spending'
+              position='centerBottom'
+            />
+            <Label
+              value={pieData.reduce((acc, curr) => {
+                let total = acc + curr.total_amount;
+                return total;
+              }, 0)}
+              position='centerTop'
+            />
+          </Pie>
+          <Tooltip nameKey='category' />
+          <Legend nameKey='category' />
+        </PieChart>
+      </ResponsiveContainer>
+
+      <Breakdown pieData={pieData} />
     </div>
   );
 };

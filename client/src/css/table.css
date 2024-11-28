@@ -55,21 +55,30 @@
   color: rgba(62, 189, 97, 0.9);
 }
 
-.table-spend {
-  border-radius: 0.75rem;
-  color: #000000;
-  background-color: #ffffff;
+/* spending breakdown  */
+.breakdown {
+  align-self: flex-end;
+  background: hsl(0, 0%, 94%);
+  max-width: 30rem;
+  width: 100%;
+  padding: 1rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.breakdown-section {
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 1px solid grey;
+}
+
+.table-spend {
+  padding-top: 0.5rem;
   width: 100%;
-  min-width: min-content;
   text-align: left;
-  table-layout: auto;
 }
 .table-spend th {
-  padding: 0.5rem;
-  border-bottom: 1px solid #e0e0e0;
+  padding: 0.2rem;
 }
 .table-spend td {
-  padding: 0.5rem;
+  padding: 0.2rem;
 }

@@ -1,7 +1,7 @@
 .analytics-container {
   flex-direction: column;
   padding: 1em 2em;
-  max-width: 100rem;
+  /* max-width: 100rem; */
 }
 .analytics-nav-links {
   padding: 0.8rem 0.5rem;
@@ -24,4 +24,9 @@
 
 .analytics-nav-link.active {
   border-bottom: 4px solid blueviolet;
+}
+
+/* spending breakdown  */
+.spending-breakdown {
+  position: relative;
 }
