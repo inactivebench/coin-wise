@@ -7,7 +7,6 @@ import {
   Cell,
   Tooltip,
   Label,
-  Legend,
   ResponsiveContainer,
 } from "recharts";
 import Breakdown from "./Breakdown";
@@ -54,7 +53,10 @@ const CategoryPieChart = () => {
 
   return (
     <div className='flex pie-chart'>
-      <ResponsiveContainer width={800} height={600}>
+      <ResponsiveContainer width='100%' height={600}>
+        <h1 className='capitalize fs-600'>
+          representation of spending category totals
+        </h1>
         <PieChart>
           <Pie
             data={pieData}
@@ -72,26 +74,40 @@ const CategoryPieChart = () => {
                 fill={COLORS[index % COLORS.length]}
               />
             ))}
-
             <Label
-              className='uppercase'
-              value='total spending'
-              position='centerBottom'
-            />
-            <Label
-              value={pieData.reduce((acc, curr) => {
-                let total = acc + curr.total_amount;
-                return total;
-              }, 0)}
-              position='centerTop'
+              content={({ viewBox }) => {
+                if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                  return (
+                    <text
+                      x={viewBox.cx}
+                      y={viewBox.cy}
+                      textAnchor='middle'
+                      dominantBaseline='middle'
+                    >
+                      <tspan x={viewBox.cx} y={viewBox.cy} className='fs-700'>
+                        {pieData.reduce((acc, curr) => {
+                          let total = acc + curr.total_amount;
+                          return total;
+                        }, 0)}
+                      </tspan>
+                      <tspan
+                        x={viewBox.cx}
+                        y={(viewBox.cy + 10 || 0) + 24}
+                        className='uppercase fs-300'
+                      >
+                        total spending
+                      </tspan>
+                    </text>
+                  );
+                }
+              }}
             />
           </Pie>
           <Tooltip nameKey='category' />
-          <Legend nameKey='category' />
         </PieChart>
       </ResponsiveContainer>
 
-      <Breakdown pieData={pieData} />
+      <Breakdown pieData={pieData} colors={COLORS} />
     </div>
   );
 };

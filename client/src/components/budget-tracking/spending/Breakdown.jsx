@@ -1,4 +1,4 @@
-const Breakdown = ({ pieData }) => {
+const Breakdown = ({ pieData, colors }) => {
   const sum = pieData.reduce((acc, curr) => {
     return acc + curr.total_amount;
   }, 0);
@@ -11,7 +11,7 @@ const Breakdown = ({ pieData }) => {
       </div>
       <div className='breakdown-section'>
         <h2 className='uppercase'>total spending</h2>
-        <p className=' fs-500'>{`$ ${sum}`}</p>
+        <p className=' fs-500 bold'>{`$ ${sum}`}</p>
       </div>
       <table className='table-spend'>
         <thead>
@@ -29,7 +29,16 @@ const Breakdown = ({ pieData }) => {
             const { category, total_amount } = item;
             return (
               <tr key={index}>
-                <td>
+                <td className='flex'>
+                  <div
+                    style={{
+                      backgroundColor: `${colors[index]}`,
+                      width: "20px",
+                      height: "20px",
+                      margin: "auto 0 ",
+                      borderRadius: "50%",
+                    }}
+                  ></div>
                   <p>{category}</p>
                 </td>
                 <td>

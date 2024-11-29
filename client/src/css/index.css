@@ -279,6 +279,9 @@ select {
 .capitalize {
   text-transform: capitalize;
 }
+.bold {
+  font-weight: bold;
+}
 
 .fs-900 {
   font-size: var(--fs-900);
