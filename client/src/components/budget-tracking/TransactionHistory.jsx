@@ -85,7 +85,7 @@ const TransactionHistory = () => {
       cost,
       dateTime,
       type,
-      category,
+      category: category || "food",
     };
     try {
       const response = await axiosPrivate.post(

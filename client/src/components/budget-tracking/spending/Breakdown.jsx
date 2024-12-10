@@ -42,7 +42,7 @@ const Breakdown = ({ pieData, colors }) => {
                   <p>{category}</p>
                 </td>
                 <td>
-                  <p>{total_amount}</p>
+                  <p>{`$ ${total_amount}`}</p>
                 </td>
               </tr>
             );

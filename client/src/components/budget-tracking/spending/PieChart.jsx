@@ -14,6 +14,7 @@ import Breakdown from "./Breakdown";
 const CategoryPieChart = () => {
   const CATEGORY_URL = "/transaction/category";
   const [pieData, setPieData] = useState([]);
+  const [date, setDate] = useState();
   const { auth } = useAuth();
   const COLORS = [
     "#003F5C",
