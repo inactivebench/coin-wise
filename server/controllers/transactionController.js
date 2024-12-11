@@ -124,9 +124,34 @@ const categoryTransactions = (req, res) => {
   }
 };
 
+const newCategoryTransaction = (req, res) => {
+  const authHeader =
+    req.headers["authorization"] || req.headers["Authorization"];
+  if (!authHeader?.startsWith("Bearer ")) return res.sendStatus(401);
+  const token = authHeader && authHeader.split(" ")[1];
+  try {
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+      if (err) return res.sendStatus(403);
+      req.userId = decoded.userInfo.userId;
+
+      const sql =
+        "SELECT category, type, datetime AS date, amount_spent FROM transactions WHERE user_id = ? ";
+
+      let query = db.query(sql, req.userId, (err, result) => {
+        if (err) res.status(400).send({ message: err });
+
+        res.status(201).send(result);
+      });
+    });
+  } catch (error) {
+    res.status(500).send();
+  }
+};
+
 module.exports = {
   getTransactions,
   addTransaction,
   filterTransaction,
   categoryTransactions,
+  newCategoryTransaction,
 };

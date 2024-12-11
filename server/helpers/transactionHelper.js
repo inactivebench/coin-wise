@@ -145,12 +145,15 @@ users.forEach((userId) => {
 const insertTransaction = (allTransactions, res) => {
   try {
     for (const transaction of allTransactions) {
+      const formattedDate = new Date(transaction.datetime)
+        .toISOString()
+        .split("T")[0];
       const values = {
         user_id: transaction.user_id,
         transaction_description: transaction.transaction_description,
         amount_spent: transaction.amount_spent,
         transaction_cost: transaction.transaction_cost,
-        datetime: transaction.datetime,
+        datetime: formattedDate,
         category: transaction.category,
         type: transaction.type,
       };

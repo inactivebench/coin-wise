@@ -18,6 +18,12 @@ router.get(
   verifyRoles(ROLES_LIST.Admin, ROLES_LIST.user),
   transactions.categoryTransactions
 );
+router.get(
+  "/newCategory",
+  verifyJWT,
+  verifyRoles(ROLES_LIST.Admin, ROLES_LIST.user),
+  transactions.newCategoryTransaction
+);
 router.post("/add", transactions.addTransaction);
 router.post("/filter", transactions.filterTransaction);
 
