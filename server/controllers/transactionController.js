@@ -110,14 +110,23 @@ const filterTransaction = (req, res) => {
 
 // spending breakdown
 const categoryTransactions = (req, res) => {
+  const authHeader =
+    req.headers["authorization"] || req.headers["Authorization"];
+  if (!authHeader?.startsWith("Bearer ")) return res.sendStatus(401);
+  const token = authHeader && authHeader.split(" ")[1];
   try {
-    const sql =
-      "SELECT category, CONVERT(SUM(amount_spent),  SIGNED) AS `total_amount` FROM transactions WHERE type = 'expense' GROUP BY category ";
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+      if (err) return res.sendStatus(403);
+      req.userId = decoded.userInfo.userId;
 
-    let query = db.query(sql, (err, result) => {
-      if (err) res.status(400).send({ message: err });
+      const sql =
+        "SELECT category, CONVERT(SUM(amount_spent),  SIGNED) AS `total_amount` FROM transactions WHERE type = 'expense' AND user_id  = ? GROUP BY category ";
 
-      res.status(201).send(result);
+      let query = db.query(sql, req.userId, (err, result) => {
+        if (err) res.status(400).send({ message: err });
+
+        res.status(201).send(result);
+      });
     });
   } catch (error) {
     res.status(500).send();

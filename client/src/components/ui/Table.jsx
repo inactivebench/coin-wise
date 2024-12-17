@@ -51,9 +51,6 @@ const Table = ({ tableData }) => {
                       month: "short",
                       day: "numeric",
                       year: "numeric",
-                      hour: "numeric",
-                      minute: "numeric",
-                      hour12: true,
                     })}
                   </p>
                 </td>
