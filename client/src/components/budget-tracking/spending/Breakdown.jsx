@@ -1,6 +1,6 @@
 const Breakdown = ({ pieData, colors }) => {
   const sum = pieData.reduce((acc, curr) => {
-    return acc + curr.total_amount;
+    return acc + curr.amount_spent;
   }, 0);
 
   return (
@@ -26,7 +26,7 @@ const Breakdown = ({ pieData, colors }) => {
         </thead>
         <tbody>
           {pieData.map((item, index) => {
-            const { category, total_amount } = item;
+            const { category, amount_spent } = item;
             return (
               <tr key={index}>
                 <td className='flex'>
@@ -42,7 +42,7 @@ const Breakdown = ({ pieData, colors }) => {
                   <p>{category}</p>
                 </td>
                 <td>
-                  <p>{`$ ${total_amount}`}</p>
+                  <p>{`$ ${amount_spent}`}</p>
                 </td>
               </tr>
             );

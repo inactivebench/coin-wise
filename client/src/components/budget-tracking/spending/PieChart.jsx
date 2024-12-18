@@ -12,8 +12,9 @@ import {
 import Breakdown from "./Breakdown";
 
 const CategoryPieChart = () => {
-  const CATEGORY_URL = "/transaction/category";
+  const CATEGORY_URL = "/transaction/newCategory";
   const [pieData, setPieData] = useState([]);
+  const [expenseTotals, setExpenseTotals] = useState([]);
   const { auth } = useAuth();
   const COLORS = [
     "#003F5C",
@@ -51,6 +52,31 @@ const CategoryPieChart = () => {
     fetchCategories();
   }, []);
 
+  useEffect(() => {
+    const calculateTotals = () => {
+      const categoryTotals = [];
+      pieData.forEach((transaction) => {
+        const { category, type, amount_spent } = transaction;
+        if (type === "expense") {
+          const existingCategory = categoryTotals.find(
+            (item) => item.category === category
+          );
+          if (existingCategory) {
+            existingCategory.amount_spent += amount_spent;
+          } else {
+            categoryTotals.push({
+              category: category,
+              amount_spent: amount_spent,
+            });
+          }
+        }
+      });
+      setExpenseTotals(categoryTotals);
+      console.log(categoryTotals);
+    };
+
+    calculateTotals();
+  }, [pieData]);
   return (
     <div className='flex pie-chart'>
       <ResponsiveContainer width='100%' height={600}>
@@ -59,8 +85,8 @@ const CategoryPieChart = () => {
         </h1>
         <PieChart>
           <Pie
-            data={pieData}
-            dataKey='total_amount'
+            data={expenseTotals}
+            dataKey='amount_spent'
             nameKey='category'
             cx='50%'
             cy='50%'
@@ -86,7 +112,7 @@ const CategoryPieChart = () => {
                     >
                       <tspan x={viewBox.cx} y={viewBox.cy} className='fs-700'>
                         {pieData.reduce((acc, curr) => {
-                          let total = acc + curr.total_amount;
+                          let total = acc + curr.amount_spent;
                           return total;
                         }, 0)}
                       </tspan>
@@ -107,7 +133,7 @@ const CategoryPieChart = () => {
         </PieChart>
       </ResponsiveContainer>
 
-      <Breakdown pieData={pieData} colors={COLORS} />
+      <Breakdown pieData={expenseTotals} colors={COLORS} />
     </div>
   );
 };

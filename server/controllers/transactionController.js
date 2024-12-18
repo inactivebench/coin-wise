@@ -144,7 +144,7 @@ const newCategoryTransaction = (req, res) => {
       req.userId = decoded.userInfo.userId;
 
       const sql =
-        "SELECT category, type, datetime AS date, amount_spent FROM transactions WHERE user_id = ? ";
+        "SELECT category, type, datetime AS date, CONVERT(amount_spent,SIGNED) AS amount_spent FROM transactions WHERE user_id = ? ";
 
       let query = db.query(sql, req.userId, (err, result) => {
         if (err) res.status(400).send({ message: err });
