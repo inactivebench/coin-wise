@@ -10,10 +10,12 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import Breakdown from "./Breakdown";
+import { useTransition } from "react";
 
 const CategoryPieChart = () => {
   const CATEGORY_URL = "/transaction/newCategory";
   const [pieData, setPieData] = useState([]);
+  const [filteredPieDate, setFilteredPieDate] = useState([]);
   const [expenseTotals, setExpenseTotals] = useState([]);
   const { auth } = useAuth();
   const COLORS = [
@@ -41,6 +43,7 @@ const CategoryPieChart = () => {
             throw err;
           } else {
             setPieData(response.data);
+            console.log(pieData);
           }
         });
     } catch (err) {
@@ -48,6 +51,21 @@ const CategoryPieChart = () => {
       throw err;
     }
   };
+
+  const filterDate = () => {
+    const filteredData = pieData.filter((item) => {
+      const newDate = new Date(item.date);
+
+      const thisMonth = new Date().getMonth() + 1;
+      console.log(thisMonth);
+
+      return newDate.getMonth() + 1 === thisMonth;
+    });
+    setFilteredPieDate(filteredData);
+
+    console.log(filteredData);
+  };
+
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -72,17 +90,28 @@ const CategoryPieChart = () => {
         }
       });
       setExpenseTotals(categoryTotals);
-      console.log(categoryTotals);
     };
 
+    filterDate();
     calculateTotals();
   }, [pieData]);
   return (
     <div className='flex pie-chart'>
       <ResponsiveContainer width='100%' height={600}>
-        <h1 className='capitalize fs-600'>
-          representation of spending category totals
-        </h1>
+        <div className='flex'>
+          <h1 className='capitalize fs-600'>
+            representation of spending category totals
+          </h1>
+
+          <select name='dates' id='dates-select'>
+            <option value='this month'>this month</option>
+            <option value='last 3 months'>last 3 months</option>
+            <option value='last 6 months'>last 6 months</option>
+            <option value='last 12 months'>last 12 months</option>
+            <option value='last year'>last year</option>
+            <option value='all dates'>all dates</option>
+          </select>
+        </div>
         <PieChart>
           <Pie
             data={expenseTotals}

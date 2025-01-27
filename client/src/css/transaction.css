@@ -73,6 +73,19 @@ input[type="text"].search-input {
   align-items: center;
   flex-direction: column;
 }
+#dates-select {
+  max-width: 100%;
+  width: 12rem;
+  border: none;
+  padding: 0.4em;
+  border-radius: 0.5em;
+  text-align: center;
+  text-transform: capitalize;
+  background-color: hsl(208, 100%, 97%);
+}
+#dates-select:hover {
+  background-color: hsl(207, 83%, 91%);
+}
 
 @media (min-width: 55em) {
   .pie-chart {
