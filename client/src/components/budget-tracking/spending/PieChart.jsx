@@ -15,7 +15,8 @@ import { useTransition } from "react";
 const CategoryPieChart = () => {
   const CATEGORY_URL = "/transaction/newCategory";
   const [pieData, setPieData] = useState([]);
-  const [filteredPieDate, setFilteredPieDate] = useState([]);
+  const [filteredPieData, setFilteredPieData] = useState([]);
+  const [duration, setDuration] = useState("");
   const [expenseTotals, setExpenseTotals] = useState([]);
   const { auth } = useAuth();
   const COLORS = [
@@ -43,7 +44,6 @@ const CategoryPieChart = () => {
             throw err;
           } else {
             setPieData(response.data);
-            console.log(pieData);
           }
         });
     } catch (err) {
@@ -53,15 +53,39 @@ const CategoryPieChart = () => {
   };
 
   const filterDate = () => {
-    const filteredData = pieData.filter((item) => {
-      const newDate = new Date(item.date);
-
+    if (duration === "all dates") {
+      setFilteredPieData(pieData);
+      return;
+    }
+    const filteredData = pieData.filter((transaction) => {
+      const newDate = new Date(transaction.date).getMonth() + 1;
       const thisMonth = new Date().getMonth() + 1;
-      console.log(thisMonth);
 
-      return newDate.getMonth() + 1 === thisMonth;
+      if (duration === "this month") {
+        return newDate === thisMonth;
+      } else if (duration === "last 3 months") {
+        const threeMonthsAgo = thisMonth - 3;
+        let adjustedMonths =
+          threeMonthsAgo <= 0 ? 12 + threeMonthsAgo : threeMonthsAgo;
+        return newDate >= adjustedMonths || newDate <= thisMonth;
+      } else if (duration === "last 6 months") {
+        const sixMonthsAgo = thisMonth - 6;
+        let adjustedMonths =
+          sixMonthsAgo <= 0 ? 12 + sixMonthsAgo : sixMonthsAgo;
+        return newDate >= adjustedMonths || newDate <= thisMonth;
+      } else if (duration === "last 12 months") {
+        const twelveMonthsAgo = thisMonth - 12;
+        let adjustedMonths =
+          twelveMonthsAgo <= 0 ? 12 + twelveMonthsAgo : twelveMonthsAgo;
+        return newDate >= adjustedMonths || newDate <= thisMonth;
+      } else if (duration === "last year") {
+        const lastYear = new Date().getFullYear() - 1;
+        const year = new Date(transaction.date).getFullYear();
+        return year === lastYear;
+      }
     });
-    setFilteredPieDate(filteredData);
+    setFilteredPieData(filteredData);
+    setPieData(filteredPieData);
 
     console.log(filteredData);
   };
@@ -69,6 +93,9 @@ const CategoryPieChart = () => {
   useEffect(() => {
     fetchCategories();
   }, []);
+  useEffect(() => {
+    filterDate();
+  }, [duration]);
 
   useEffect(() => {
     const calculateTotals = () => {
@@ -91,8 +118,6 @@ const CategoryPieChart = () => {
       });
       setExpenseTotals(categoryTotals);
     };
-
-    filterDate();
     calculateTotals();
   }, [pieData]);
   return (
@@ -103,7 +128,14 @@ const CategoryPieChart = () => {
             representation of spending category totals
           </h1>
 
-          <select name='dates' id='dates-select'>
+          <select
+            name='dates'
+            id='dates-select'
+            defaultValue={"all dates"}
+            onChange={(e) => {
+              setDuration(e.target.value);
+            }}
+          >
             <option value='this month'>this month</option>
             <option value='last 3 months'>last 3 months</option>
             <option value='last 6 months'>last 6 months</option>
