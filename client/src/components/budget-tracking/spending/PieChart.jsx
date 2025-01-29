@@ -98,6 +98,42 @@ const CategoryPieChart = () => {
     setFilteredPieData(filteredData);
   };
 
+  const SectorLabel = ({
+    cx,
+    cy,
+    midAngle,
+    outerRadius,
+    percent,
+    name,
+    value,
+  }) => {
+    const RADIAN = Math.PI / 180;
+    const radius = outerRadius + 60;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const yOffset = midAngle > 180 ? 15 : -15;
+    const y = cy + radius * Math.sin(-midAngle * RADIAN) + yOffset;
+
+    return (
+      <text
+        x={x}
+        y={y}
+        textAnchor={x > cx ? "start" : x < cx ? "end" : "middle"}
+        fontSize='1.5rem'
+        fill='#000'
+      >
+        <tspan fontWeight='bold'>{name}</tspan>
+        <tspan x={x} dy='25' fontSize='1rem'>
+          {new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+            maximumFractionDigits: 0,
+          }).format(value)}{" "}
+          ({(percent * 100).toFixed(0)}%)
+        </tspan>
+      </text>
+    );
+  };
+
   useEffect(() => {
     const calculateTotals = () => {
       const categoryTotals = [];
@@ -159,6 +195,7 @@ const CategoryPieChart = () => {
                 innerRadius={150}
                 outerRadius={200}
                 fill='#000000'
+                label={SectorLabel}
               >
                 {expenseTotals.map((entry, index) => (
                   <Cell
@@ -199,7 +236,15 @@ const CategoryPieChart = () => {
                   }}
                 />
               </Pie>
-              <Tooltip nameKey='category' />
+              <Tooltip
+                formatter={(value) =>
+                  `${new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                    maximumFractionDigits: 0,
+                  }).format(value)}`
+                }
+              />
             </PieChart>
           </ResponsiveContainer>
 
