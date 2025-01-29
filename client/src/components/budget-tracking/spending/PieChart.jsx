@@ -45,6 +45,7 @@ const CategoryPieChart = () => {
           } else {
             const data = response?.data;
             setPieData(data);
+            setFilteredPieData(data);
           }
         });
     } catch (err) {
@@ -59,7 +60,7 @@ const CategoryPieChart = () => {
   }, []);
 
   useEffect(() => {
-    filterDate();
+    if (pieData.length > 0) filterDate();
   }, [pieData, duration]);
 
   const filterDate = () => {
@@ -118,7 +119,7 @@ const CategoryPieChart = () => {
       });
       setExpenseTotals(categoryTotals);
     };
-    calculateTotals();
+    if (filteredPieData.length > 0) calculateTotals();
   }, [filteredPieData]);
   return (
     <>
