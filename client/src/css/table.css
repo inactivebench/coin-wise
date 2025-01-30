@@ -54,30 +54,3 @@
 .table-data.green > p {
   color: rgba(62, 189, 97, 0.9);
 }
-
-/* spending breakdown  */
-.breakdown {
-  background: hsl(0, 0%, 94%);
-  max-width: 30rem;
-  width: 100%;
-  padding: 1rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-.breakdown-section {
-  padding: 1rem;
-  text-align: center;
-  border-bottom: 1px solid grey;
-}
-
-.table-spend {
-  padding-top: 0.5rem;
-  width: 100%;
-  text-align: left;
-}
-.table-spend th {
-  padding: 0.2rem;
-}
-.table-spend td {
-  padding: 0.2rem;
-}

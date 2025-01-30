@@ -73,6 +73,10 @@ input[type="text"].search-input {
   align-items: center;
   flex-direction: column;
 }
+.chart-title-container {
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
 #dates-select {
   max-width: 100%;
   width: 12rem;
@@ -92,4 +96,18 @@ input[type="text"].search-input {
     flex-direction: row;
     justify-content: space-between;
   }
+}
+
+/* spending breakdown  */
+.breakdown {
+  background: hsl(0, 0%, 94%);
+  max-width: 23rem;
+  width: 100%;
+  padding: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.breakdown-section {
+  padding: 0.5rem;
+  text-align: left;
 }

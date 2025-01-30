@@ -138,7 +138,7 @@ const CategoryPieChart = () => {
     const calculateTotals = () => {
       const categoryTotals = [];
       filteredPieData.forEach((transaction) => {
-        const { category, type, amount_spent } = transaction;
+        const { category, type, amount_spent, date } = transaction;
         if (type === "expense") {
           const existingCategory = categoryTotals.find(
             (transaction) => transaction.category === category
@@ -149,6 +149,7 @@ const CategoryPieChart = () => {
             categoryTotals.push({
               category: category,
               amount_spent: amount_spent,
+              date: date,
             });
           }
         }
@@ -164,7 +165,7 @@ const CategoryPieChart = () => {
       ) : (
         <div className='flex pie-chart'>
           <ResponsiveContainer width='100%' height={600}>
-            <div className='flex'>
+            <div className='flex chart-title-container'>
               <h1 className='capitalize fs-600'>
                 representation of spending category totals
               </h1>
@@ -248,7 +249,7 @@ const CategoryPieChart = () => {
             </PieChart>
           </ResponsiveContainer>
 
-          <Breakdown pieData={expenseTotals} colors={COLORS} />
+          <Breakdown pieData={expenseTotals} filteredData={filteredPieData} />
         </div>
       )}
     </>
