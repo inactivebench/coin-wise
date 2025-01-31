@@ -9,6 +9,7 @@ import {
   Label,
   ResponsiveContainer,
 } from "recharts";
+import { COLORS } from "@/data";
 import Breakdown from "./Breakdown";
 
 const CategoryPieChart = () => {
@@ -19,17 +20,6 @@ const CategoryPieChart = () => {
   const [expenseTotals, setExpenseTotals] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { auth } = useAuth();
-  const COLORS = [
-    "#003F5C",
-    "#58508d",
-    "#9B3192",
-    "#bc5090",
-    "#ff6361",
-    "#ffa600",
-    "#F7B7A3",
-    "#939b90",
-    "#cde492",
-  ];
 
   const fetchCategories = async () => {
     try {
@@ -55,13 +45,6 @@ const CategoryPieChart = () => {
       setIsLoading(false);
     }
   };
-  useEffect(() => {
-    fetchCategories();
-  }, []);
-
-  useEffect(() => {
-    if (pieData.length > 0) filterDate();
-  }, [pieData, duration]);
 
   const filterDate = () => {
     if (duration === "all dates") {
@@ -96,6 +79,28 @@ const CategoryPieChart = () => {
       }
     });
     setFilteredPieData(filteredData);
+  };
+
+  const calculateTotals = () => {
+    const categoryTotals = [];
+    filteredPieData.forEach((transaction) => {
+      const { category, type, amount_spent, date } = transaction;
+      if (type === "expense") {
+        const existingCategory = categoryTotals.find(
+          (transaction) => transaction.category === category
+        );
+        if (existingCategory) {
+          existingCategory.amount_spent += amount_spent;
+        } else {
+          categoryTotals.push({
+            category: category,
+            amount_spent: amount_spent,
+            date: date,
+          });
+        }
+      }
+    });
+    setExpenseTotals(categoryTotals);
   };
 
   const SectorLabel = ({
@@ -133,29 +138,15 @@ const CategoryPieChart = () => {
       </text>
     );
   };
+  useEffect(() => {
+    fetchCategories();
+  }, []);
 
   useEffect(() => {
-    const calculateTotals = () => {
-      const categoryTotals = [];
-      filteredPieData.forEach((transaction) => {
-        const { category, type, amount_spent, date } = transaction;
-        if (type === "expense") {
-          const existingCategory = categoryTotals.find(
-            (transaction) => transaction.category === category
-          );
-          if (existingCategory) {
-            existingCategory.amount_spent += amount_spent;
-          } else {
-            categoryTotals.push({
-              category: category,
-              amount_spent: amount_spent,
-              date: date,
-            });
-          }
-        }
-      });
-      setExpenseTotals(categoryTotals);
-    };
+    if (pieData.length > 0) filterDate();
+  }, [pieData, duration]);
+
+  useEffect(() => {
     if (filteredPieData.length > 0) calculateTotals();
   }, [filteredPieData]);
   return (
@@ -166,7 +157,7 @@ const CategoryPieChart = () => {
         <div className='flex pie-chart'>
           <ResponsiveContainer width='100%' height={600}>
             <div className='flex chart-title-container'>
-              <h1 className='capitalize fs-600'>
+              <h1 className='capitalize fs-500'>
                 representation of spending category totals
               </h1>
 
@@ -178,12 +169,12 @@ const CategoryPieChart = () => {
                   setDuration(e.target.value);
                 }}
               >
-                <option value='this month'>this month</option>
-                <option value='last 3 months'>last 3 months</option>
-                <option value='last 6 months'>last 6 months</option>
-                <option value='last 12 months'>last 12 months</option>
-                <option value='last year'>last year</option>
-                <option value='all dates'>all dates</option>
+                <option value='this month'>This Month</option>
+                <option value='last 3 months'>Last 3 Months</option>
+                <option value='last 6 months'>Last 6 Months</option>
+                <option value='last 12 months'>Last 12 Months</option>
+                <option value='last year'>Last Year</option>
+                <option value='all dates'>All Dates</option>
               </select>
             </div>
             <PieChart>
@@ -248,7 +239,6 @@ const CategoryPieChart = () => {
               />
             </PieChart>
           </ResponsiveContainer>
-
           <Breakdown pieData={expenseTotals} filteredData={filteredPieData} />
         </div>
       )}

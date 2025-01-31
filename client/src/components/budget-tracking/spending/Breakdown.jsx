@@ -6,11 +6,14 @@ const Breakdown = ({ pieData, filteredData }) => {
   const [averageSpend, setAverageSpend] = useState();
   const [frequentCategory, setFrequentCategory] = useState({});
 
+  const expenseData = filteredData.filter(
+    (transaction) => transaction.type === "expense"
+  );
   const average = () => {
-    const sum = pieData.reduce((acc, curr) => {
+    const sum = expenseData.reduce((acc, curr) => {
       return acc + curr.amount_spent;
     }, 0);
-    const sortedData = [...filteredData].sort(
+    const sortedData = [...expenseData].sort(
       (a, b) => new Date(a.date) - new Date(b.date)
     );
     const lastEl = sortedData.length - 1;
@@ -19,12 +22,9 @@ const Breakdown = ({ pieData, filteredData }) => {
     const months = lastMonth - firstMonth;
     const avg = sum / months;
     setAverageSpend(avg);
-    console.log({ sortedData });
-
-    console.log({ sum, months });
   };
   const findDate = () => {
-    const sortedData = [...filteredData].sort(
+    const sortedData = [...expenseData].sort(
       (a, b) => new Date(a.date) - new Date(b.date)
     );
     const lastEl = sortedData.length - 1;
@@ -48,7 +48,7 @@ const Breakdown = ({ pieData, filteredData }) => {
   };
 
   const mostFrequent = () => {
-    const categoryCount = filteredData.reduce((acc, curr) => {
+    const categoryCount = expenseData.reduce((acc, curr) => {
       acc[curr.category] = (acc[curr.category] || 0) + 1;
       return acc;
     }, {});
@@ -61,8 +61,8 @@ const Breakdown = ({ pieData, filteredData }) => {
         mostFrequentCategory = category;
       }
     }
-    const category = filteredData.find(
-      (obj) => obj.category === mostFrequentCategory
+    const category = expenseData.find(
+      (transaction) => transaction.category === mostFrequentCategory
     );
     setFrequentCategory(category);
   };
@@ -76,9 +76,9 @@ const Breakdown = ({ pieData, filteredData }) => {
   useEffect(() => {
     if (filteredData.length > 0) {
       findDate();
+      average();
       mostFrequent();
     }
-    if (filteredData.length > 0 && pieData.length > 0) average();
   }, [pieData, filteredData]);
   return (
     <div className='breakdown'>

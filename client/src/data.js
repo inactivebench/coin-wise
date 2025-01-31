@@ -126,4 +126,16 @@ export const incomeCategories = [
   "Gifts",
   "Other Income",
 ];
+
+export const COLORS = [
+  "#003F5C",
+  "#58508d",
+  "#9B3192",
+  "#bc5090",
+  "#ff6361",
+  "#ffa600",
+  "#F7B7A3",
+  "#939b90",
+  "#cde492",
+];
 export default facts;
