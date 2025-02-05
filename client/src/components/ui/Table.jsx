@@ -39,10 +39,22 @@ const Table = ({ tableData }) => {
                     item.type === "expense" ? "red" : "green"
                   } `}
                 >
-                  <p>{item.amount_spent}</p>
+                  <p>
+                    {new Intl.NumberFormat("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                      maximumFractionDigits: 2,
+                    }).format(item.amount_spent)}
+                  </p>
                 </td>
                 <td className='table-data'>
-                  <p>{item.transaction_cost}</p>
+                  <p>
+                    {new Intl.NumberFormat("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                      maximumFractionDigits: 2,
+                    }).format(item.transaction_cost)}
+                  </p>
                 </td>
                 <td className='table-data'>
                   <p>
