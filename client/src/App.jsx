@@ -12,6 +12,7 @@ import Profile from "@/pages/Profile";
 import Analytics from "@/pages/Analytics";
 import TransactionHistory from "@/components/budget-tracking/TransactionHistory";
 import SpendingBreakdown from "@/components/budget-tracking/SpendingBreakdown";
+import Budgets from "./pages/Budgets";
 
 const ROLES = {
   User: 2001,
@@ -40,6 +41,13 @@ function App() {
             element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}
           >
             <Route path='/dashboard' element={<Dashboard />} />
+          </Route>
+        </Route>
+        <Route element={<PersistLogin />}>
+          <Route
+            element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}
+          >
+            <Route path='/budgets' element={<Budgets />} />
           </Route>
         </Route>
 

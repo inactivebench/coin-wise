@@ -3,11 +3,12 @@ import { useLocation } from "react-router-dom";
 import SidebarMenu from "./SidebarMenu";
 import control from "@/assets/icons/control.png";
 import logo from "@/assets/images/coin.svg";
-import { FaHome } from "react-icons/fa";
+import { FaHome, FaCoins } from "react-icons/fa";
 import { IoMdAnalytics } from "react-icons/io";
 import { IoBarChartSharp } from "react-icons/io5";
 import Header from "./Header";
 import "@/css/sidebar.css";
+import { FaC } from "react-icons/fa6";
 
 const sidebarMenuList = [
   { title: "home", icon: <FaHome size={28} />, path: "/home" },
@@ -15,6 +16,11 @@ const sidebarMenuList = [
     title: "dashboard",
     icon: <IoMdAnalytics size={28} />,
     path: "/dashboard",
+  },
+  {
+    title: "budgets",
+    icon: <FaCoins size={28} />,
+    path: "/budgets",
   },
   {
     title: "analytics",
