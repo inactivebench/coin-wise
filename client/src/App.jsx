@@ -10,8 +10,8 @@ import Unauthorized from "@/components/auth/Unauthorized";
 import Dashboard from "@/pages/Dashboard";
 import Profile from "@/pages/Profile";
 import Analytics from "@/pages/Analytics";
-import TransactionHistory from "@/components/budget-tracking/TransactionHistory";
-import SpendingBreakdown from "@/components/budget-tracking/SpendingBreakdown";
+import TransactionHistory from "@/components/transaction/TransactionHistory";
+import SpendingBreakdown from "@/components/transaction/SpendingBreakdown";
 import Budgets from "./pages/Budgets";
 
 const ROLES = {

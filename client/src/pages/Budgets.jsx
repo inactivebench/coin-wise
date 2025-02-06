@@ -1,12 +1,45 @@
 import Sidebar from "@/components/ui/Sidebar";
 import "@/css/budgets.css";
-
+import { FaPlus } from "react-icons/fa";
+import { BsThreeDots } from "react-icons/bs";
+import { SlCalender } from "react-icons/sl";
+import ProgressBar from "@/components/budget-tracking/ProgressBar";
 const Budgets = () => {
   return (
     <div className=' grid-container'>
       <Sidebar pageTitle={"budgets"} />
       <div className=' main-content'>
-        <h1>Budgets</h1>
+        <div className='flex budgets-container '>
+          <div className='flex'>
+            <h1>Budgets</h1>
+            <button className='new-btn'>
+              <FaPlus size={12} />
+            </button>
+          </div>
+          <div className='flex info-banner'>
+            <p>options</p>
+            <p>
+              date{" "}
+              <span>
+                <SlCalender />
+              </span>
+            </p>
+          </div>
+          <div className='budget-list-container'>
+            <div className=' budget-card'>
+              <p className='options'>
+                <BsThreeDots />
+              </p>
+              <h2 className='capitalize budget-title'>title</h2>
+              <ProgressBar label='Phone' current={10} total={100} />
+              <div className='progress-amount-container'>
+                <p className='amount-top'>$10</p>
+                <h2 className='amount-slash'>/</h2>
+                <p className='amount-bottom'>100</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
