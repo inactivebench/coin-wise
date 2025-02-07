@@ -15,7 +15,7 @@ const Cta = () => {
             CHRIS BROGAN”
           </p>
           <Link to='/signup' className='link '>
-            <button className=' btn capitalize'>get strated</button>
+            <button className=' btn capitalize'>get started</button>
           </Link>
         </article>
       </div>
