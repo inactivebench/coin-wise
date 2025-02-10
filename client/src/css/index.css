@@ -163,7 +163,7 @@ select {
 
   grid-template-areas:
     " sidebar header"
-    " . main"
+    " sidebar main"
     " . footer";
 }
 @media (min-width: 65em) {
@@ -334,6 +334,7 @@ textarea {
   font-family: "Nunito", sans-serif;
   padding: 0.25rem;
   border-radius: 0.5rem;
+  cursor: pointer;
 }
 
 .offscreen {

@@ -3,9 +3,10 @@ import "@/css/budgets.css";
 import { FaPlus } from "react-icons/fa";
 import { BsThreeDots } from "react-icons/bs";
 import { SlCalender } from "react-icons/sl";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ProgressBar from "@/components/budget-tracking/ProgressBar";
 const Budgets = () => {
+  const navigate = useNavigate();
   return (
     <div className=' grid-container'>
       <Sidebar pageTitle={"budgets"} />
@@ -13,7 +14,12 @@ const Budgets = () => {
         <div className='flex budgets-container '>
           <div className='flex'>
             <h1>Budgets</h1>
-            <button className='new-btn'>
+            <button
+              className='new-btn'
+              onClick={() => {
+                navigate("/createBudget");
+              }}
+            >
               <FaPlus size={12} />
             </button>
           </div>

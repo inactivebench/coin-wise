@@ -14,6 +14,7 @@ import TransactionHistory from "@/components/transaction/TransactionHistory";
 import SpendingBreakdown from "@/components/transaction/SpendingBreakdown";
 import Budgets from "./pages/Budgets";
 import BudgetInfo from "./components/budget-tracking/BudgetInfo";
+import CreateBudget from "./components/budget-tracking/CreateBudget";
 
 const ROLES = {
   User: 2001,
@@ -50,6 +51,7 @@ function App() {
           >
             <Route path='/budgets' element={<Budgets />} />
             <Route path='/budgetInfo' element={<BudgetInfo />} />
+            <Route path='/createBudget' element={<CreateBudget />} />
           </Route>
         </Route>
 
