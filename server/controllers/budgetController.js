@@ -3,22 +3,22 @@ const jwt = require("jsonwebtoken");
 
 // add new budget
 const addBudget = (req, res) => {
-  // const budget = {
-  //   user_id: req.body.budgetData.userId,
-  //   budget_title: req.body.budgetData.title,
-  //   budget_amount: req.body.budgetData.amount,
-  //   budget_description: req.body.budgetData.description,
-  //   start_date: new Date(req.body.budgetData.startDate),
-  //   end_date: new Date(req.body.budgetData.endDate),
-  // };
   const budget = {
-    user_id: req.body.userId,
-    budget_title: req.body.title,
-    budget_amount: req.body.amount,
-    budget_description: req.body.description,
-    start_date: new Date(req.body.startDate),
-    end_date: new Date(req.body.endDate),
+    user_id: req.body.budgetData.userId,
+    budget_title: req.body.budgetData.title,
+    budget_amount: req.body.budgetData.amount,
+    budget_description: req.body.budgetData.description,
+    start_date: new Date(req.body.budgetData.startDate),
+    end_date: new Date(req.body.budgetData.endDate),
   };
+  // const budget = {
+  //   user_id: req.body.userId,
+  //   budget_title: req.body.title,
+  //   budget_amount: req.body.amount,
+  //   budget_description: req.body.description,
+  //   start_date: new Date(req.body.startDate),
+  //   end_date: new Date(req.body.endDate),
+  // };
 
   try {
     const sql = "INSERT INTO budgets SET ?";

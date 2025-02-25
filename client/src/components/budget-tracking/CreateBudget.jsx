@@ -15,12 +15,13 @@ const CreateBudget = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const values = {
+
+    const budgetData = {
       title,
       amount,
       description,
-      period: selected || "daily",
-      date,
+      startDate: date,
+      endDate: endDate,
     };
     setDate("");
     setTitle("");
