@@ -11,14 +11,6 @@ const addBudget = (req, res) => {
     start_date: new Date(req.body.budgetData.startDate),
     end_date: new Date(req.body.budgetData.endDate),
   };
-  // const budget = {
-  //   user_id: req.body.userId,
-  //   budget_title: req.body.title,
-  //   budget_amount: req.body.amount,
-  //   budget_description: req.body.description,
-  //   start_date: new Date(req.body.startDate),
-  //   end_date: new Date(req.body.endDate),
-  // };
 
   try {
     const sql = "INSERT INTO budgets SET ?";

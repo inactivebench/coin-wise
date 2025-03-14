@@ -3,33 +3,79 @@ import { useNavigate } from "react-router-dom";
 import { IoChevronBack } from "react-icons/io5";
 import Sidebar from "../ui/Sidebar";
 import DatePicker from "react-datepicker";
+import useAxiosPrivate from "@/hook/useAxiosPrivate";
+import useAuth from "@/hook/useAuth";
 import "react-datepicker/dist/react-datepicker.css";
+import { jwtDecode } from "jwt-decode";
 
 const CreateBudget = () => {
   const [date, setDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [selected, setSelected] = useState("daily");
-  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const CREATE_BUDGET_URL = "/budget/add";
+  const navigate = useNavigate();
+  const { auth } = useAuth();
+  const axiosPrivate = useAxiosPrivate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const decoded = auth?.accessToken ? jwtDecode(auth.accessToken) : undefined;
+    const userId = decoded.userInfo.userId;
+    if (selected === "daily") {
+      const day = 1;
+      const newDate = new Date(date);
+      newDate.setDate(date.getDate() + day);
+      setEndDate(newDate);
+    } else if (selected === "weekly") {
+      const days = 7;
+      const newDate = new Date(date);
+      newDate.setDate(date.getDate() + days);
+      setEndDate(newDate);
+    } else if (selected === "monthly") {
+      const month = 1;
+      const newDate = new Date(date);
+      newDate.setMonth(date.getMonth() + month);
+      setEndDate(newDate);
+    } else if (selected === "yearly") {
+      const year = 1;
+      const newDate = new Date(date);
+      newDate.setFullYear(date.getFullYear() + year);
+      setEndDate(newDate);
+    }
 
     const budgetData = {
+      userId,
       title,
       amount,
       description,
       startDate: date,
       endDate: endDate,
     };
-    setDate("");
-    setTitle("");
-    setAmount("");
-    setDescription("");
-    setSelected("daily");
+    console.log({ budgetData });
 
-    console.log(values);
+    try {
+      const response = await axiosPrivate.post(
+        CREATE_BUDGET_URL,
+        { budgetData },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      if (response?.status === 201) {
+        setDate(new Date());
+        setTitle("");
+        setAmount("");
+        setDescription("");
+        setSelected("daily");
+      }
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
   };
   return (
     <div className='grid-container'>
