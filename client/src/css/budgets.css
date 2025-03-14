@@ -20,6 +20,12 @@
   color: hsl(var(--clr-white));
   border-radius: 1.5rem;
 }
+.budget-list-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+  gap: 1.4rem;
+  align-items: center;
+}
 .budget-card-container {
   max-width: 100%;
   width: 18rem;

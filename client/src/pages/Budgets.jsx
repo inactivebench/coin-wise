@@ -1,12 +1,44 @@
+import { useEffect, useState } from "react";
 import Sidebar from "@/components/ui/Sidebar";
 import "@/css/budgets.css";
 import { FaPlus } from "react-icons/fa";
-import { BsThreeDots } from "react-icons/bs";
 import { SlCalender } from "react-icons/sl";
-import { Link, useNavigate } from "react-router-dom";
-import ProgressBar from "@/components/budget-tracking/ProgressBar";
+import { useNavigate } from "react-router-dom";
+import useAxiosPrivate from "@/hook/useAxiosPrivate";
+import useAuth from "@/hook/useAuth";
+import Budget from "@/components/budget-tracking/Budget";
 const Budgets = () => {
+  const BUDGET_URL = "/budget";
   const navigate = useNavigate();
+  const { auth } = useAuth();
+  const axiosPrivate = useAxiosPrivate();
+  const [budgetData, setBudgetData] = useState([]);
+
+  const handleFetch = async () => {
+    try {
+      const response = await axiosPrivate
+        .get(BUDGET_URL, {
+          headers: {
+            Authorization: `Bearer ${auth?.accessToken}`,
+          },
+        })
+        .then((response) => {
+          if (!response?.data) {
+            throw err;
+          } else {
+            setBudgetData(response.data);
+            console.log(budgetData);
+          }
+        });
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
+  };
+
+  useEffect(() => {
+    handleFetch();
+  }, []);
   return (
     <div className=' grid-container'>
       <Sidebar pageTitle={"budgets"} />
@@ -32,23 +64,10 @@ const Budgets = () => {
               </span>
             </p>
           </div>
-          <div className='budget-list-container'>
-            <div className=' budget-card-container'>
-              <Link to='/budgetInfo' className='budget-link'>
-                <div className='budget-card'>
-                  <p className='options'>
-                    <BsThreeDots />
-                  </p>
-                  <h2 className='capitalize budget-title'>title</h2>
-                  <ProgressBar label='Phone' current={10} total={100} />
-                  <div className='progress-amount-container'>
-                    <p className='amount-top'>$10</p>
-                    <h2 className='amount-slash'>/</h2>
-                    <p className='amount-bottom'>100</p>
-                  </div>
-                </div>
-              </Link>
-            </div>
+          <div className='budget-list-container '>
+            {budgetData.map((budget) => {
+              return <Budget budget={budget} key={budget.budget_id} />;
+            })}
           </div>
         </div>
       </div>
