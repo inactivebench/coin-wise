@@ -64,18 +64,45 @@ const BudgetInfo = () => {
               </div>
               <div className='date-start fs-300'>
                 <h2 className='capitalize bold'>start date</h2>
-                <p>{budget[0].start_date}</p>
+                <p>
+                  {new Date(budget[0].start_date).toLocaleString("en-US", {
+                    weekday: "short",
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
+                </p>
               </div>
               <div className='date-end fs-300'>
                 <h2 className='capitalize bold'>end date</h2>
-                <p>{budget[0].end_date}</p>
+                <p>
+                  {new Date(budget[0].end_date).toLocaleString("en-US", {
+                    weekday: "short",
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
+                </p>
               </div>
               <div className='viewing-date-container fs-300'>
                 <p className='capitalize bold '>viewing dates</p>
                 <div className='date-range flex'>
-                  <h3>date</h3>
+                  <h3>
+                    {new Date(budget[0].start_date).toLocaleString("en-US", {
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "numeric",
+                    })}
+                  </h3>
                   <p>to</p>
-                  <h3>date</h3>
+                  <h3>
+                    {" "}
+                    {new Date(budget[0].end_date).toLocaleString("en-US", {
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "numeric",
+                    })}
+                  </h3>
                 </div>
               </div>
               <div className='chart-container'>

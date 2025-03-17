@@ -27,7 +27,6 @@ const Budgets = () => {
             throw err;
           } else {
             setBudgetData(response.data);
-            console.log(budgetData);
           }
         });
     } catch (err) {
