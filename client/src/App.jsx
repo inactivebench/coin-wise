@@ -50,7 +50,7 @@ function App() {
             element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}
           >
             <Route path='/budgets' element={<Budgets />} />
-            <Route path='/budgetInfo' element={<BudgetInfo />} />
+            <Route path='/budgetInfo/:budgetId' element={<BudgetInfo />} />
             <Route path='/createBudget' element={<CreateBudget />} />
           </Route>
         </Route>

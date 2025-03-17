@@ -12,6 +12,13 @@ router.get(
   budgets.getBudgets
 );
 
+router.get(
+  "/:id",
+  verifyJWT,
+  verifyRoles(ROLES_LIST.Admin, ROLES_LIST.user),
+  budgets.getBudgetInfo
+);
+
 router.post("/add", budgets.addBudget);
 
 module.exports = router;

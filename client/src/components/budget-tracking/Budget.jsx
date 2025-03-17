@@ -6,7 +6,7 @@ const Budget = ({ budget }) => {
   const { budget_title, budget_amount } = budget;
   return (
     <div className=' budget-card-container'>
-      <Link to='/budgetInfo' className='budget-link'>
+      <Link to={`/budgetInfo/${budget.budget_id}`} className='budget-link'>
         <div className='budget-card'>
           <p className='options'>
             <BsThreeDots />
