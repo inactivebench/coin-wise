@@ -129,8 +129,12 @@ const BudgetInfo = () => {
               <div className='stat-info'>
                 <h3>You are within your budget! nice job!</h3>
                 <p>
-                  You have amount left in this budget. Don't forget to take into
-                  account your upcoming expenses.
+                  You have{" "}
+                  <span className='bold'>
+                    ${budget[0].budget_amount - budget[0].current_amount}
+                  </span>{" "}
+                  left in this budget. Don't forget to take into account your
+                  upcoming expenses.
                 </p>
               </div>
             </div>
