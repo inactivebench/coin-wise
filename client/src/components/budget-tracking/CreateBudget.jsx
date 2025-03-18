@@ -7,14 +7,15 @@ import useAxiosPrivate from "@/hook/useAxiosPrivate";
 import useAuth from "@/hook/useAuth";
 import "react-datepicker/dist/react-datepicker.css";
 import { jwtDecode } from "jwt-decode";
+import Alert from "../ui/Alert";
 
 const CreateBudget = () => {
   const [date, setDate] = useState("");
-  const [endDate, setEndDate] = useState("");
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [selected, setSelected] = useState("daily");
+  const [success, setSuccess] = useState(false);
 
   const CREATE_BUDGET_URL = "/budget/add";
   const navigate = useNavigate();
@@ -25,26 +26,27 @@ const CreateBudget = () => {
     e.preventDefault();
     const decoded = auth?.accessToken ? jwtDecode(auth.accessToken) : undefined;
     const userId = decoded.userInfo.userId;
+    let endDate = "";
     if (selected === "daily") {
       const day = 1;
       const newDate = new Date(date);
       newDate.setDate(date.getDate() + day);
-      setEndDate(newDate);
+      endDate = newDate;
     } else if (selected === "weekly") {
       const days = 7;
       const newDate = new Date(date);
       newDate.setDate(date.getDate() + days);
-      setEndDate(newDate);
+      endDate = newDate;
     } else if (selected === "monthly") {
       const month = 1;
       const newDate = new Date(date);
       newDate.setMonth(date.getMonth() + month);
-      setEndDate(newDate);
+      endDate = newDate;
     } else if (selected === "yearly") {
       const year = 1;
       const newDate = new Date(date);
       newDate.setFullYear(date.getFullYear() + year);
-      setEndDate(newDate);
+      endDate = newDate;
     }
 
     const budgetData = {
@@ -71,6 +73,11 @@ const CreateBudget = () => {
         setAmount("");
         setDescription("");
         setSelected("daily");
+        setSuccess(true);
+
+        setTimeout(() => {
+          setSuccess(false);
+        }, 3800);
       }
     } catch (err) {
       console.log(err);
@@ -135,7 +142,17 @@ const CreateBudget = () => {
                 required
               />
             </div>
-
+            <div className='flex'>
+              <p className='capitalize'>budget start date : </p>
+              <DatePicker
+                showIcon
+                className='budget-datepicker'
+                selected={date}
+                onChange={(date) => setDate(date)}
+                placeholderText=' mm / dd / yy'
+                required
+              />
+            </div>
             <p>Choose how long your budget period will be:</p>
             <div className='period-div flex'>
               <input
@@ -184,17 +201,15 @@ const CreateBudget = () => {
                 one year
               </label>
             </div>
-            <DatePicker
-              showIcon
-              className='budget-datepicker'
-              selected={date}
-              onChange={(date) => setDate(date)}
-              placeholderText=' mm / dd / yy'
-              required
-            />
             <button className='capitalize submit-btn fs-300'>submit</button>
           </form>
         </div>
+        <Alert
+          alertType={"success"}
+          message={"New Budget item successfully created"}
+          success={success}
+          setSuccess={setSuccess}
+        />
       </div>
     </div>
   );

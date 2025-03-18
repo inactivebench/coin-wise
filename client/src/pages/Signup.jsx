@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaCheck } from "react-icons/fa6";
-import { FaTimes, FaInfoCircle, FaCheckCircle } from "react-icons/fa";
+import { FaTimes, FaInfoCircle } from "react-icons/fa";
 import "@/css/form.css";
 import Alert from "@/components/ui/Alert";
 import axios from "@/api/axios";
@@ -260,7 +260,6 @@ const Signup = () => {
           </div>
           <Alert
             alertType={"success"}
-            icon={<FaCheckCircle size={80} />}
             message={"You have successfully created an account"}
             success={success}
             setSuccess={setSuccess}

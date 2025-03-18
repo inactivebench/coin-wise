@@ -6,7 +6,7 @@ import Alert from "@/components/ui/Alert";
 import useAxiosPrivate from "@/hook/useAxiosPrivate";
 import useAuth from "@/hook/useAuth";
 import { jwtDecode } from "jwt-decode";
-import { FaPlus, FaCheckCircle } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 import { IoFilterSharp } from "react-icons/io5";
 import { categories } from "@/data";
 import { incomeCategories } from "@/data";
@@ -416,7 +416,6 @@ const TransactionHistory = () => {
         <Alert
           alertType={"success"}
           message={"You successfully added a new transaction"}
-          icon={<FaCheckCircle size={80} />}
           success={success}
           setSuccess={setSuccess}
         />

@@ -29,7 +29,6 @@ const BudgetInfo = () => {
           } else {
             setBudget(response.data);
             setLoading(false);
-            console.log(budget);
           }
         });
     } catch (err) {
