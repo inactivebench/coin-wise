@@ -12,4 +12,11 @@ router.get(
   showUserController.handleShowUsers
 );
 
+router.delete(
+  "/delete",
+  verifyJWT,
+  verifyRoles(ROLES_LIST.Admin, ROLES_LIST.user),
+  showUserController.handleDeleteUser
+);
+
 module.exports = router;

@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import Sidebar from "../ui/Sidebar";
 import useAuth from "@/hook/useAuth";
+import useAxiosPrivate from "@/hook/useAxiosPrivate";
+import { useNavigate } from "react-router-dom";
 import "@/css/profile.css";
 import { jwtDecode } from "jwt-decode";
 import { FaInfoCircle } from "react-icons/fa";
 
 const User = () => {
   const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+  const DELETE_USER = "/users/delete";
 
   const [pwd, setPwd] = useState("");
   const [newPwd, setNewPwd] = useState("");
@@ -20,15 +23,34 @@ const User = () => {
   const [validPwd, setValidPwd] = useState(false);
   const [validMatch, setValidMatch] = useState(false);
 
+  const [success, setSuccess] = useState(false);
+
   const { auth } = useAuth();
+  const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate();
   const decoded = auth?.accessToken ? jwtDecode(auth.accessToken) : undefined;
 
   const handleUpdate = (e) => {
     e.preventDefault();
   };
 
-  const handleDelete = (e) => {
+  const handleDelete = async (e) => {
     e.preventDefault();
+    try {
+      const response = await axiosPrivate.delete(DELETE_USER, {
+        Authorization: `Bearer ${auth?.accessToken}`,
+      });
+      if (response?.status === 201) {
+        setSuccess(true);
+        setTimeout(() => {
+          setSuccess(false);
+          navigate("/");
+        }, 2000);
+      }
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
   };
 
   useEffect(() => {
