@@ -1,0 +1,61 @@
+.profile-img {
+  background-color: orangered;
+  max-width: 8rem;
+  height: 8rem;
+  width: 100%;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  color: hsl(var(--clr-white));
+  margin: 0 auto;
+}
+
+.user-container {
+  flex-direction: column;
+  max-width: 35rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+  --gap: 1.5rem;
+}
+
+.user-info {
+  --gap: 2rem;
+}
+
+.currency-info {
+  align-items: center;
+}
+.update-password-form {
+  flex-direction: column;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.update-password-form.hide {
+  opacity: 0;
+}
+.update-password-form.show {
+  opacity: 1;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.btn-container {
+  justify-content: flex-end;
+  --gap: 2rem;
+}
+
+.btn.cancel,
+.btn.delete {
+  background-color: hsl(0, 100%, 50%, 0.8);
+}

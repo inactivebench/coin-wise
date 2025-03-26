@@ -1,13 +1,6 @@
-import Sidebar from "@/components/ui/Sidebar";
+import User from "@/components/profile/User";
 
 const Profile = () => {
-  return (
-    <div className=' grid-container'>
-      <Sidebar pageTitle={"profile"} />
-      <div className=' main-content'>
-        <h1>Tuko kwenye profile</h1>
-      </div>
-    </div>
-  );
+  return <User />;
 };
 export default Profile;
