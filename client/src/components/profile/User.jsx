@@ -9,7 +9,8 @@ import { FaInfoCircle } from "react-icons/fa";
 
 const User = () => {
   const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-  const DELETE_USER = "/users/delete";
+  const DELETE_USER_URL = "/users/delete";
+  const UPDATE_PWD_URL = "users/update";
 
   const [pwd, setPwd] = useState("");
   const [newPwd, setNewPwd] = useState("");
@@ -30,14 +31,44 @@ const User = () => {
   const navigate = useNavigate();
   const decoded = auth?.accessToken ? jwtDecode(auth.accessToken) : undefined;
 
-  const handleUpdate = (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
+    const userData = {
+      currentPassword: pwd,
+      password: matchPwd,
+    };
+    try {
+      const response = await axiosPrivate.put(
+        UPDATE_PWD_URL,
+        { userData },
+        {
+          Authorization: `Bearer ${auth?.accessToken}`,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      if (response?.status === 201) {
+        setPwd("");
+        setNewPwd("");
+        setMatchPwd("");
+        setIsOpen(false);
+        setSuccess(true);
+
+        setTimeout(() => {
+          setSuccess(false);
+        }, 3000);
+      }
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
   };
 
   const handleDelete = async (e) => {
     e.preventDefault();
     try {
-      const response = await axiosPrivate.delete(DELETE_USER, {
+      const response = await axiosPrivate.delete(DELETE_USER_URL, {
         Authorization: `Bearer ${auth?.accessToken}`,
       });
       if (response?.status === 201) {
@@ -54,9 +85,9 @@ const User = () => {
   };
 
   useEffect(() => {
-    setValidPwd(PWD_REGEX.test(pwd));
+    setValidPwd(PWD_REGEX.test(newPwd));
     setValidMatch(newPwd === matchPwd);
-  }, [pwd, matchPwd]);
+  }, [newPwd, matchPwd]);
 
   return (
     <div className=' grid-container'>
@@ -167,7 +198,11 @@ const User = () => {
               >
                 cancel
               </button>
-              <button className='capitalize btn' onClick={handleUpdate}>
+              <button
+                className='capitalize btn'
+                onClick={handleUpdate}
+                disabled={!validMatch || !validPwd ? true : false}
+              >
                 update password
               </button>
             </div>

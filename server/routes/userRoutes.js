@@ -11,6 +11,12 @@ router.get(
   verifyRoles(ROLES_LIST.Admin, ROLES_LIST.user),
   showUserController.handleShowUsers
 );
+router.put(
+  "/update",
+  verifyJWT,
+  verifyRoles(ROLES_LIST.Admin, ROLES_LIST.user),
+  showUserController.handlePasswordUpdate
+);
 
 router.delete(
   "/delete",
