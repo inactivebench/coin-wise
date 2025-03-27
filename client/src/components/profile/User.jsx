@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import Sidebar from "../ui/Sidebar";
 import useAuth from "@/hook/useAuth";
 import useAxiosPrivate from "@/hook/useAxiosPrivate";
@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import "@/css/profile.css";
 import { jwtDecode } from "jwt-decode";
 import { FaInfoCircle } from "react-icons/fa";
+import Alert from "../ui/Alert";
 
 const User = () => {
   const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -25,6 +26,7 @@ const User = () => {
   const [validMatch, setValidMatch] = useState(false);
 
   const [success, setSuccess] = useState(false);
+  const passwordRef = useRef();
 
   const { auth } = useAuth();
   const axiosPrivate = useAxiosPrivate();
@@ -83,6 +85,9 @@ const User = () => {
       throw err;
     }
   };
+  useEffect(() => {
+    if (isOpen) return passwordRef.current.focus();
+  }, [isOpen]);
 
   useEffect(() => {
     setValidPwd(PWD_REGEX.test(newPwd));
@@ -123,18 +128,19 @@ const User = () => {
               id='password'
               onChange={(e) => setPwd(e.target.value)}
               value={pwd}
+              ref={passwordRef}
               className='input'
               required
               aria-describedby='pwdnote'
               onFocus={() => setPwdFocus(true)}
               onBlur={() => setPwdFocus(false)}
             />
-            <label htmlFor='password' className='label'>
+            <label htmlFor='newPassword' className='label'>
               New Password:
             </label>
             <input
               type='password'
-              id='password'
+              id='newPassword'
               onChange={(e) => setNewPwd(e.target.value)}
               value={newPwd}
               className='input'
@@ -192,7 +198,7 @@ const User = () => {
                 onClick={() => {
                   setPwd("");
                   setNewPwd("");
-                  setMatchFocus("");
+                  setMatchPwd("");
                   setIsOpen(false);
                 }}
               >
@@ -219,6 +225,7 @@ const User = () => {
             delete account
           </button>
         </div>
+        <Alert />
       </div>
     </div>
   );
