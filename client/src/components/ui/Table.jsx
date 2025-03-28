@@ -1,6 +1,8 @@
+import { useGlobalContext } from "@/context";
 import "@/css/table.css";
 
 const Table = ({ tableData }) => {
+  const { convertAmount } = useGlobalContext();
   return (
     <div className=' table-container '>
       <table className='table '>
@@ -39,22 +41,10 @@ const Table = ({ tableData }) => {
                     item.type === "expense" ? "red" : "green"
                   } `}
                 >
-                  <p>
-                    {new Intl.NumberFormat("en-US", {
-                      style: "currency",
-                      currency: "USD",
-                      maximumFractionDigits: 2,
-                    }).format(item.amount_spent)}
-                  </p>
+                  <p>{convertAmount(item.amount_spent)}</p>
                 </td>
                 <td className='table-data'>
-                  <p>
-                    {new Intl.NumberFormat("en-US", {
-                      style: "currency",
-                      currency: "USD",
-                      maximumFractionDigits: 2,
-                    }).format(item.transaction_cost)}
-                  </p>
+                  <p>{convertAmount(item.transaction_cost)}</p>
                 </td>
                 <td className='table-data'>
                   <p>

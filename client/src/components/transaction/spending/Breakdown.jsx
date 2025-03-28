@@ -1,3 +1,4 @@
+import { useGlobalContext } from "@/context";
 import { useState, useEffect } from "react";
 
 const Breakdown = ({ pieData, filteredData }) => {
@@ -5,6 +6,8 @@ const Breakdown = ({ pieData, filteredData }) => {
   const [lastDate, setLastDate] = useState({});
   const [averageSpend, setAverageSpend] = useState();
   const [frequentCategory, setFrequentCategory] = useState({});
+
+  const { convertAmount } = useGlobalContext();
 
   const expenseData = filteredData.filter(
     (transaction) => transaction.type === "expense"
@@ -89,13 +92,7 @@ const Breakdown = ({ pieData, filteredData }) => {
       </div>
       <div className='breakdown-section'>
         <h2 className='fs-400 capitalize'>average monthly spending</h2>
-        <p className='fs-500 bold'>
-          {new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD",
-            maximumFractionDigits: 2,
-          }).format(averageSpend)}
-        </p>
+        <p className='fs-500 bold'>{convertAmount(averageSpend)}</p>
       </div>
       <div className='breakdown-section'>
         <h2 className='fs-400 capitalize'>most frequent category</h2>
@@ -104,13 +101,7 @@ const Breakdown = ({ pieData, filteredData }) => {
       <div className='breakdown-section'>
         <h2 className='fs-400 capitalize'>largest outflow</h2>
         <p className='fs-500 bold'>{largestSpend.category}</p>
-        <p>
-          {new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD",
-            maximumFractionDigits: 0,
-          }).format(largestSpend.amount_spent)}
-        </p>
+        <p>{convertAmount(largestSpend.amount_spent)}</p>
       </div>
     </div>
   );

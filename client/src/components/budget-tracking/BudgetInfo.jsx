@@ -4,6 +4,7 @@ import useAxiosPrivate from "@/hook/useAxiosPrivate";
 import useAuth from "@/hook/useAuth";
 import { useNavigate, useParams } from "react-router-dom";
 import { IoChevronBack } from "react-icons/io5";
+import { useGlobalContext } from "@/context";
 
 const BudgetInfo = () => {
   const params = useParams();
@@ -13,6 +14,7 @@ const BudgetInfo = () => {
   const navigate = useNavigate();
   const { auth } = useAuth();
   const axiosPrivate = useAxiosPrivate();
+  const { convertAmount } = useGlobalContext();
 
   const fetchBudgetInfo = async () => {
     try {
@@ -130,7 +132,10 @@ const BudgetInfo = () => {
                 <p>
                   You have{" "}
                   <span className='bold'>
-                    ${budget[0].budget_amount - budget[0].current_amount}
+                    {convertAmount(
+                      budget[0].budget_amount - budget[0].current_amount,
+                      0
+                    )}
                   </span>{" "}
                   left in this budget. Don't forget to take into account your
                   upcoming expenses.

@@ -11,6 +11,7 @@ import {
 } from "recharts";
 import { COLORS } from "@/data";
 import Breakdown from "./Breakdown";
+import { useGlobalContext } from "@/context";
 
 const CategoryPieChart = () => {
   const CATEGORY_URL = "/transaction/newCategory";
@@ -20,6 +21,7 @@ const CategoryPieChart = () => {
   const [expenseTotals, setExpenseTotals] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { auth } = useAuth();
+  const { convertAmount } = useGlobalContext();
 
   const fetchCategories = async () => {
     try {
@@ -128,12 +130,7 @@ const CategoryPieChart = () => {
       >
         <tspan fontWeight='bold'>{name}</tspan>
         <tspan x={x} dy='25' fontSize='1rem'>
-          {new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD",
-            maximumFractionDigits: 0,
-          }).format(value)}{" "}
-          ({(percent * 100).toFixed(0)}%)
+          {convertAmount(value)} ({(percent * 100).toFixed(0)}%)
         </tspan>
       </text>
     );
@@ -210,10 +207,12 @@ const CategoryPieChart = () => {
                             y={viewBox.cy}
                             className='fs-700'
                           >
-                            {expenseTotals.reduce((acc, curr) => {
-                              let total = acc + curr.amount_spent;
-                              return total;
-                            }, 0)}
+                            {convertAmount(
+                              expenseTotals.reduce((acc, curr) => {
+                                let total = acc + curr.amount_spent;
+                                return total;
+                              }, 0)
+                            )}
                           </tspan>
                           <tspan
                             x={viewBox.cx}

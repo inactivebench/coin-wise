@@ -7,6 +7,7 @@ import "@/css/profile.css";
 import { jwtDecode } from "jwt-decode";
 import { FaInfoCircle } from "react-icons/fa";
 import Alert from "../ui/Alert";
+import { useGlobalContext } from "@/context";
 
 const User = () => {
   const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -31,6 +32,7 @@ const User = () => {
   const { auth } = useAuth();
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
+  const { rates, ratesFetched, currency, setCurrency } = useGlobalContext();
   const decoded = auth?.accessToken ? jwtDecode(auth.accessToken) : undefined;
 
   const handleUpdate = async (e) => {
@@ -115,6 +117,29 @@ const User = () => {
           <div className='currency-info flex'>
             <h2>currency: </h2>
             <p>$</p>
+          </div>
+          <div>
+            <label htmlFor='currency-select'>
+              Choose your preferred currency
+            </label>
+            <select
+              name='currency-select'
+              id='currency-select'
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value)}
+            >
+              {ratesFetched ? (
+                Object.keys(rates).map((curr, index) => {
+                  return (
+                    <option key={index} value={curr}>
+                      {curr}
+                    </option>
+                  );
+                })
+              ) : (
+                <option defaultValue>USD</option>
+              )}
+            </select>
           </div>
           <form
             className={`update-password-form ${!isOpen ? "hide" : "show"} flex`}
